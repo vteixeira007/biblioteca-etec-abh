@@ -4,7 +4,7 @@
 
 <h2><span class="emoji">&#x2139;</span> Descrição</h2>
 
-<p>Este é o repositório do projeto do site do <strong>Biblioteca ETEC ABH</strong>, que fornece serviços voluntários de empréstismos de livros. O site tem como objetivo criar um sistema de facilitação e organização para o empréstimos de livros necessários.</p>
+<p>Este é o repositório do projeto do site da <strong>Biblioteca ETEC ABH</strong>, que fornece serviços voluntários de empréstismos de livros. O site tem como objetivo criar um sistema de facilitação e organização para o empréstimos de livros necessários.</p>
 
 <h2><span class="emoji">&#x1F6E0;</span> Tecnologias utilizadas</h2>
 
