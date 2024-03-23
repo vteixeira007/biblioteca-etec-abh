@@ -47,7 +47,7 @@
 	<li>Dayane Oliveira Lima - Apoio Desenvolvimento Back-end</li>
   	<li>Leticia Francolino Nogueira - Apoio Desenvolvimento Front-end</li>
 	<li>Marcelo Scarponi - Apoio Desenvolvimento Back-end</li>
-  <li>Paola Regina Cordeiro - Apoio Desenvolvimento Front-end</li>
-  <li>Vinicius De Lira Teixeira - Apoio Desenvolvimento Front-end</li>
-	<li>Willian Monteiro -  Responsável pelo Desenvolvevimento Front-end e Design</li>
+        <li>Paola Regina Cordeiro - Apoio Desenvolvimento Front-end</li>
+        <li>Vinicius De Lira Teixeira - Apoio Desenvolvimento Front-end</li>
+	<li>Willian Monteiro dos Santos -  Responsável pelo Desenvolvevimento Front-end e Design</li>
 </ul>
