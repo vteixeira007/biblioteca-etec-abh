@@ -1,0 +1,54 @@
+@import '../globals/config';
+
+.example {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    font-size: 4rem;
+    font-weight: 600;
+    color: lightblue;
+    font-family: $mainfont;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: lightblue;
+    font-family: $mainfont;
+    margin: 20px 0 15px 0;
+  }
+
+  span {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: lightcoral;
+    font-family: $mainfont;
+    margin-top: 20px;
+
+    span {
+      font-weight: 600;
+      color: #fff;
+      opacity: 0.9;
+      text-transform: uppercase;
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    li {
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: #fff;
+      font-family: $mainfont;
+      margin-top: 20px;
+    }
+  }
+
+  $self: #{&};
+}

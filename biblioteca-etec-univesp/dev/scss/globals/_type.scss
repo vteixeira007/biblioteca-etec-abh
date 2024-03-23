@@ -1,0 +1,66 @@
+$mainfont: 'Roboto', sans-serif;
+$secondfont: 'Inter', sans-serif;
+
+@mixin type-text() {
+  @include definedefineFont(
+    'text',
+    $fontSizePx: 16,
+    $lineHeight: normal,
+    $letterSpacing: normal,
+    $root: true,
+    $responsive: false
+  );
+}
+
+$types: (
+  'title-l': (
+    (
+      'break': false,
+      'responsive': false,
+      'font-size': 48,
+      'line-height': 22,
+      'font-weight': 800,
+      'font-family': $mainfont,
+    ),
+  ),
+  'title-md': (
+    (
+      'break': false,
+      'responsive': false,
+      'font-size': 24,
+      'line-height': 22,
+      'font-weight': 500,
+      'font-family': $mainfont,
+    ),
+  ),
+  'title-xs': (
+    (
+      'break': false,
+      'responsive': false,
+      'font-size': 20,
+      'line-height': 22,
+      'font-weight': 500,
+      'font-family': $mainfont,
+    ),
+  ),
+  'text-regular': (
+    (
+      'break': false,
+      'responsive': false,
+      'font-size': 16,
+      'line-height': 22,
+      'font-weight': 400,
+      'font-family': $secondfont,
+    ),
+  ),
+  'text-small': (
+    (
+      'break': false,
+      'responsive': false,
+      'font-size': 12,
+      'line-height': 22,
+      'font-weight': 400,
+      'font-family': $secondfont,
+    ),
+  ),
+) !default;
