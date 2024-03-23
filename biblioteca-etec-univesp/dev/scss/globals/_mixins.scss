@@ -1,0 +1,370 @@
+//MIXINS
+
+// Mixin de media-queries
+$l-device: 1200px;
+$m-device: 760px;
+$s-device: 480px;
+
+// Mixin de media-queries
+@mixin d($size) {
+  @if $size == l {
+    @media screen and (min-width: #{$l-device}) {
+      @content;
+    }
+  } @else if $size == m {
+    @media screen and (min-width: #{$m-device}) and (max-width: #{$l-device - 1}) {
+      @content;
+    }
+  } @else if $size == s {
+    @media screen and (max-width: #{$m-device - 1}) {
+      @content;
+    }
+  }
+}
+
+//varname: gera uma variável no escopo css ao adicionar o tamanho
+@mixin fontSize($px, $varname: false, $root: false, $responsive: false) {
+  @if ($varname == false) {
+    font-size: $px * 1px;
+    font-size: pxToRem($px);
+    @if ($responsive == true) {
+      font-size: pxToVw($px);
+    }
+  } @else {
+    @if ($root != false) {
+      #{--type-#{$varname}-fs-px}: $px * 1px;
+      #{--type-#{$varname}-fs-rem}: pxToRem($px);
+      @if ($responsive == true) {
+        #{--type-#{$varname}-fs-vw}: pxToVw($px);
+      }
+    } @else {
+      font-size: $px * 1px;
+      font-size: var(--type-#{$varname}-fs-px, $px * 1px);
+      font-size: var(--type-#{$varname}-fs-rem, pxToRem($px));
+      @if ($responsive == true) {
+        font-size: var(--type-#{$varname}-fs-vw, pxToVw($px));
+      }
+    }
+  }
+}
+
+@mixin lineHeight($px, $varname: false, $root: false, $responsive: false) {
+  @if ($varname == false) {
+    line-height: $px * 1px;
+    line-height: pxToRem($px);
+    @if ($responsive == true) {
+      line-height: pxToVw($px);
+    }
+  } @else {
+    @if ($root != false) {
+      #{--type-#{$varname}-lh-px}: $px * 1px;
+      #{--type-#{$varname}-lh-rem}: pxToRem($px);
+      @if ($responsive == true) {
+        #{--type-#{$varname}-lh-vw}: pxToVw($px);
+      }
+    } @else {
+      line-height: $px * 1px;
+      line-height: var(--type-#{$varname}-lh-px, $px * 1px);
+      line-height: var(--type-#{$varname}-lh-rem, pxToRem($px));
+      @if ($responsive == true) {
+        line-height: var(--type-#{$varname}-lh-vw, pxToVw($px));
+      }
+    }
+  }
+}
+//insira a porcentagem conforme XD, aceita negativos
+@mixin letterSpacing(
+  $fontSizeInPx,
+  $letterSpacingPercentage,
+  $varname: false,
+  $root: false,
+  $responsive: false
+) {
+  $ls: calc($fontSizeInPx / 100) * $letterSpacingPercentage;
+
+  @if ($varname == false) {
+    letter-spacing: $ls * 1px;
+    letter-spacing: pxToRem($ls);
+    @if ($responsive == true) {
+      letter-spacing: pxToVw($ls);
+    }
+  } @else {
+    @if ($root != false) {
+      #{--type-#{$varname}-ls-px}: $ls * 1px;
+      #{--type-#{$varname}-ls-rem}: pxToRem($ls);
+      @if ($responsive == true) {
+        #{--type-#{$varname}-ls-vw}: pxToVw($ls);
+      }
+    } @else {
+      letter-spacing: $ls * 1px;
+      letter-spacing: var(--type-#{$varname}-ls-px, $ls * 1px);
+      letter-spacing: var(--type-#{$varname}-ls-rem, pxToRem($ls));
+      @if ($responsive == true) {
+        letter-spacing: var(--type-#{$varname}-ls-vw, pxToVw($ls));
+      }
+    }
+  }
+}
+
+@mixin defineFont(
+  $varName: false,
+  $fontSizePx: false,
+  $lineHeight: false,
+  $letterSpacing: false,
+  $root: false,
+  $responsive: false
+) {
+  @if ($fontSizePx != false) {
+    @include fontSize($fontSizePx, $varName, $root, $responsive);
+  }
+  @if ($lineHeight != false) {
+    @include lineHeight($lineHeight, $varName, $root, $responsive);
+  }
+  @if ($letterSpacing != false and $fontSizePx != false) {
+    @include letterSpacing(
+      $fontSizePx,
+      $letterSpacing,
+      $varName,
+      $root,
+      $responsive
+    );
+  }
+}
+
+//renderiza variáveis de acordo com objeto types no root
+@mixin rootTypeVars($types) {
+  :root {
+    @each $type, $rows in $types {
+      $varName: $type;
+
+      @each $row in $rows {
+        $fontSize: false;
+        $lineHeight: false;
+        $letterSpacing: false;
+        $responsive: false;
+
+        @if (map-get($map: $row, $key: "font-size")) {
+          $fontSize: map-get(
+            $map: $row,
+            $key: "font-size",
+          );
+        }
+        @if (map-get($map: $row, $key: "line-height")) {
+          $lineHeight: map-get(
+            $map: $row,
+            $key: "line-height",
+          );
+        }
+        @if (map-get($map: $row, $key: "letter-spacing")) {
+          $letterSpacing: map-get(
+            $map: $row,
+            $key: "letter-spacing",
+          );
+        }
+        @if (map-get($map: $row, $key: "responsive")) {
+          $responsive: map-get(
+            $map: $row,
+            $key: "responsive",
+          );
+        }
+
+        @if (map-get($map: $row, $key: "break") == false) {
+          @include defineFont(
+            $varName,
+            $fontSize,
+            $lineHeight,
+            $letterSpacing,
+            true,
+            $responsive
+          );
+        } @else {
+          $break: map-get(
+            $map: $row,
+            $key: "break",
+          );
+          $varNameSufix: $varName +
+            "-" +
+            map-get(
+              $map: $break,
+              $key: "mixin",
+            ) +
+            "-" +
+            str-replace(
+              map-get(
+                $map: $break,
+                $key: "point",
+              ),
+              ",",
+              "-"
+            );
+          @include defineFont(
+            $varNameSufix,
+            $fontSize,
+            $lineHeight,
+            $letterSpacing,
+            true,
+            $responsive
+          );
+        }
+      }
+    }
+  }
+}
+
+//usado para definir fontes
+@mixin type($name) {
+  $type: map-get(
+    $map: $types,
+    $key: $name,
+  );
+
+  @if ($type == null) {
+    @error '-> "' + #{$name} + '" not defined at globals/type.scss';
+  }
+
+  @each $row in $type {
+    $fontSize: false;
+    $lineHeight: false;
+    $letterSpacing: false;
+    $responsive: false;
+
+    @if (map-get($map: $row, $key: "font-size")) {
+      $fontSize: map-get(
+        $map: $row,
+        $key: "font-size",
+      );
+    }
+    @if (map-get($map: $row, $key: "line-height")) {
+      $lineHeight: map-get(
+        $map: $row,
+        $key: "line-height",
+      );
+    }
+    @if (map-get($map: $row, $key: "letter-spacing")) {
+      $letterSpacing: map-get(
+        $map: $row,
+        $key: "letter-spacing",
+      );
+    }
+    @if (map-get($map: $row, $key: "responsive")) {
+      $responsive: map-get(
+        $map: $row,
+        $key: "responsive",
+      );
+    }
+
+    $break: map-get(
+      $map: $row,
+      $key: "break",
+    );
+    @if ($break == false) {
+      @include defineFont(
+        $name,
+        $fontSize,
+        $lineHeight,
+        $letterSpacing,
+        false,
+        $responsive
+      );
+      @include typeValues($row);
+    }
+
+    @if ($break != false and map-get($map: $break, $key: "mixin") == "down") {
+      @include media-breakpoint-down(map-get($map: $break, $key: "point")) {
+        $varNameSufix: $name + "-" +
+          map-get(
+            $map: $break,
+            $key: "mixin",
+          ) + "-" +
+          map-get(
+            $map: $break,
+            $key: "point",
+          );
+        @include defineFont(
+          $varNameSufix,
+          $fontSize,
+          $lineHeight,
+          $letterSpacing,
+          false,
+          $responsive
+        );
+        @include typeValues($row);
+      }
+    }
+
+    @if ($break != false and map-get($map: $break, $key: "mixin") == "up") {
+      @include media-breakpoint-up(map-get($map: $break, $key: "point")) {
+        $varNameSufix: $name + "-" +
+          map-get(
+            $map: $break,
+            $key: "mixin",
+          ) + "-" +
+          map-get(
+            $map: $break,
+            $key: "point",
+          );
+        @include defineFont(
+          $varNameSufix,
+          $fontSize,
+          $lineHeight,
+          $letterSpacing,
+          false,
+          $responsive
+        );
+        @include typeValues($row);
+      }
+    }
+
+    @if (
+      $break != false and map-get($map: $break, $key: "mixin") == "between"
+    ) {
+      @include media-breakpoint-between(
+        nth(str-split(map-get($map: $break, $key: "point"), ","), 1),
+        nth(str-split(map-get($map: $break, $key: "point"), ","), 2)
+      ) {
+        $varNameSufix: $name + "-" +
+          map-get(
+            $map: $break,
+            $key: "mixin",
+          ) + "-" +
+          str-replace(
+            map-get(
+              $map: $break,
+              $key: "point",
+            ),
+            ",",
+            "-"
+          );
+        @include defineFont(
+          $varNameSufix,
+          $fontSize,
+          $lineHeight,
+          $letterSpacing,
+          false,
+          $responsive
+        );
+        @include typeValues($row);
+      }
+    }
+  }
+}
+
+//usado para pegar valores de type
+@mixin typeValues($row) {
+  @each $key, $val in $row {
+    @if (
+      $key !=
+        "font-size" and
+        $key !=
+        "line-height" and
+        $key !=
+        "letter-spacing" and
+        $key !=
+        "break" and
+        $key !=
+        "responsive"
+    ) {
+      #{$key}: $val;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+//Global configuration
+
+@import './globals/config';
+
+body {
+  background: $black;
+}
+
+//Modules
+@import './modules/example';
+
+//Pages
