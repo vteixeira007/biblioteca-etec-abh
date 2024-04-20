@@ -1,0 +1,15 @@
+.button {
+  background: $primary;
+  padding: 10px 20px;
+  @include type('title-xs');
+  font-weight: 600;
+  color: $primary-colorButton;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background: $primary-hover;
+    color: $black;
+  }
+}

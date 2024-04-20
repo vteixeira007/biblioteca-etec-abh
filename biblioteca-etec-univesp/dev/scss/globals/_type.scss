@@ -37,9 +37,9 @@ $types: (
     (
       'break': false,
       'responsive': false,
-      'font-size': 20,
-      'line-height': 22,
-      'font-weight': 500,
+      'font-size': 16,
+      'line-height': 20,
+      'font-weight': 400,
       'font-family': $mainfont,
     ),
   ),
@@ -50,7 +50,7 @@ $types: (
       'font-size': 16,
       'line-height': 22,
       'font-weight': 400,
-      'font-family': $secondfont,
+      'font-family': $mainfont,
     ),
   ),
   'text-small': (
@@ -60,7 +60,7 @@ $types: (
       'font-size': 12,
       'line-height': 22,
       'font-weight': 400,
-      'font-family': $secondfont,
+      'font-family': $mainfont,
     ),
   ),
 ) !default;

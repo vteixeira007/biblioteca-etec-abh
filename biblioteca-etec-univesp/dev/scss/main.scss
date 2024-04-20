@@ -2,11 +2,9 @@
 
 @import './globals/config';
 
-body {
-  background: $black;
-}
-
 //Modules
 @import './modules/example';
+@import './modules/menu';
+@import './modules/button';
 
 //Pages
