@@ -6,5 +6,11 @@
 @import './modules/example';
 @import './modules/menu';
 @import './modules/button';
+@import './modules/home';
 
 //Pages
+
+body {
+  display: grid;
+  grid-template-columns: 235px 2fr;
+}

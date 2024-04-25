@@ -1,5 +1,4 @@
 $mainfont: 'Roboto', sans-serif;
-$secondfont: 'Inter', sans-serif;
 
 @mixin type-text() {
   @include definedefineFont(
@@ -28,7 +27,7 @@ $types: (
       'break': false,
       'responsive': false,
       'font-size': 24,
-      'line-height': 22,
+      'line-height': 28,
       'font-weight': 500,
       'font-family': $mainfont,
     ),
@@ -47,8 +46,8 @@ $types: (
     (
       'break': false,
       'responsive': false,
-      'font-size': 16,
-      'line-height': 22,
+      'font-size': 14,
+      'line-height': 21,
       'font-weight': 400,
       'font-family': $mainfont,
     ),
