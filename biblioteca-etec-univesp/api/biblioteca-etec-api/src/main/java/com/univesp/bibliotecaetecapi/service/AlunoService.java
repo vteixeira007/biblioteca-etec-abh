@@ -1,6 +1,9 @@
 package com.univesp.bibliotecaetecapi.service;
 
 
+import com.univesp.bibliotecaetecapi.dto.AlunoRequisicao;
+import com.univesp.bibliotecaetecapi.dto.AlunoResposta;
+import com.univesp.bibliotecaetecapi.mapper.Mapeador;
 import com.univesp.bibliotecaetecapi.model.AlunoEntity;
 import com.univesp.bibliotecaetecapi.repository.AlunoRepository;
 import jakarta.transaction.Transactional;
@@ -19,22 +22,29 @@ public class AlunoService {
     @Autowired
     private AlunoRepository alunoRepository;
 
-    public List<AlunoEntity> buscaTodos() {
-        List<AlunoEntity> listaAlunos = alunoRepository.findAll();
+    @Autowired
+    private Mapeador mapper;
 
-        return listaAlunos;
+    public List<AlunoResposta> buscaTodos() {
+        List<AlunoEntity> listaAlunos = alunoRepository.findAll();
+   List<AlunoResposta> listaAlunoResposta =listaAlunos.stream()
+           .map(aluno -> mapper.entityToDto(aluno)).toList();
+
+        return listaAlunoResposta;
     }
 
 
-    public AlunoEntity cadastraAluno(AlunoEntity alunoEntity) {
-        alunoEntity.setDataCriacao(LocalDateTime.now());
+    public AlunoEntity cadastraAluno(AlunoRequisicao requisicao) {
+        requisicao.setDataCriacao(LocalDateTime.now());
+        AlunoEntity alunoEntity = mapper.dtoToEntity(requisicao);
         return alunoRepository.save(alunoEntity);
     }
 
 
-    public Optional<AlunoEntity> buscaAluno(Long idAluno) {
+    public AlunoResposta buscaAluno(Long idAluno) {
         Optional<AlunoEntity> alunoEntity = alunoRepository.findById(idAluno);
-        return alunoEntity;
+        AlunoResposta resposta = mapper.entityToDto(alunoEntity.get());
+        return resposta;
     }
 
     public void deleteAluno(Long idAluno) {
