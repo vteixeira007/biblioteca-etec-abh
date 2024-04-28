@@ -1,6 +1,7 @@
 package com.univesp.bibliotecaetecapi.dto;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +11,7 @@ public class AlunoResposta {
     private Long idAluno;
     private String nome;
     private Integer matricula;
+    @CPF
     private Integer cpf;
     private Integer email;
     private Integer telefone;

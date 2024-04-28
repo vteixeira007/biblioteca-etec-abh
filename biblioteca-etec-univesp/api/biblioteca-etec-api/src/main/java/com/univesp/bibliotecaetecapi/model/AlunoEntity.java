@@ -20,15 +20,15 @@ public class AlunoEntity implements Serializable {
     @Column
     private Integer matricula;
     @Column
-    private Integer cpf;
+    private String cpf;
     @Column
-    private Integer email;
+    private String email;
     @Column
-    private Integer telefone;
+    private String telefone;
     @Column
-    private Integer curso;
+    private String curso;
     @Column
-    private Integer turma;
+    private String turma;
     @Column
     private LocalDateTime DataCriacao;
     @Column

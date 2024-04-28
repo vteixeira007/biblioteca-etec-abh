@@ -3,6 +3,8 @@ package com.univesp.bibliotecaetecapi.service;
 
 import com.univesp.bibliotecaetecapi.dto.AlunoRequisicao;
 import com.univesp.bibliotecaetecapi.dto.AlunoResposta;
+import com.univesp.bibliotecaetecapi.exception_handler.exceptions.CpfAlreadyExistsException;
+import com.univesp.bibliotecaetecapi.exception_handler.exceptions.StudentNotFound;
 import com.univesp.bibliotecaetecapi.mapper.Mapeador;
 import com.univesp.bibliotecaetecapi.model.AlunoEntity;
 import com.univesp.bibliotecaetecapi.repository.AlunoRepository;
@@ -27,28 +29,39 @@ public class AlunoService {
 
     public List<AlunoResposta> buscaTodos() {
         List<AlunoEntity> listaAlunos = alunoRepository.findAll();
-   List<AlunoResposta> listaAlunoResposta =listaAlunos.stream()
-           .map(aluno -> mapper.entityToDto(aluno)).toList();
+        List<AlunoResposta> listaAlunoResposta = listaAlunos.stream()
+                .map(aluno -> mapper.entityToDto(aluno)).toList();
 
         return listaAlunoResposta;
     }
 
 
     public AlunoEntity cadastraAluno(AlunoRequisicao requisicao) {
-        requisicao.setDataCriacao(LocalDateTime.now());
-        AlunoEntity alunoEntity = mapper.dtoToEntity(requisicao);
-        return alunoRepository.save(alunoEntity);
+        Optional<AlunoEntity> aluno = alunoRepository.findByCpf(requisicao.getCpf());
+        if (aluno.isPresent()) {
+            throw new CpfAlreadyExistsException();
+        } else {
+            requisicao.setDataCriacao(LocalDateTime.now());
+            AlunoEntity alunoEntity = mapper.dtoToEntity(requisicao);
+            return alunoRepository.save(alunoEntity);
+        }
     }
 
 
     public AlunoResposta buscaAluno(Long idAluno) {
         Optional<AlunoEntity> alunoEntity = alunoRepository.findById(idAluno);
+        if (alunoEntity.isEmpty()) {
+            throw new StudentNotFound();
+        }
         AlunoResposta resposta = mapper.entityToDto(alunoEntity.get());
         return resposta;
     }
 
     public void deleteAluno(Long idAluno) {
         Optional<AlunoEntity> alunoOptional = alunoRepository.findById(idAluno);
+        if (alunoOptional.isEmpty()) {
+            throw new StudentNotFound();
+        }
         AlunoEntity aluno = alunoOptional.get();
         alunoRepository.delete(aluno);
 
@@ -56,6 +69,9 @@ public class AlunoService {
 
     public void update(AlunoEntity alunoAtualizado, Long idAluno) {
         Optional<AlunoEntity> alunoOptional = alunoRepository.findById(idAluno);
+        if (alunoOptional.isEmpty()) {
+            throw new StudentNotFound();
+        }
         AlunoEntity alunoExistente = alunoOptional.get();
         alunoExistente.setNome(alunoAtualizado.getNome());
         alunoExistente.setMatricula(alunoAtualizado.getMatricula());

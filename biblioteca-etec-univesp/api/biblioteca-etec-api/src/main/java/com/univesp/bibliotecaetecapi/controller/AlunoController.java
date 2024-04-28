@@ -4,6 +4,7 @@ import com.univesp.bibliotecaetecapi.dto.AlunoRequisicao;
 import com.univesp.bibliotecaetecapi.dto.AlunoResposta;
 import com.univesp.bibliotecaetecapi.model.AlunoEntity;
 import com.univesp.bibliotecaetecapi.service.AlunoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class AlunoController {
     }
 
     @PostMapping
-    public ResponseEntity<AlunoEntity> cadastraAluno(@RequestBody AlunoRequisicao aluno) {
+    public ResponseEntity<AlunoEntity> cadastraAluno(@RequestBody @Valid AlunoRequisicao aluno) {
         AlunoEntity alunoEntity = alunoService.cadastraAluno(aluno);
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoEntity);
     }
