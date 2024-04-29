@@ -7,28 +7,16 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "aluno_entity")
+@Table(name = "category_entity")
 @Data
-public class AlunoEntity implements Serializable {
+public class CategoryEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idAluno;
+    private Long idCategoria;
     @Column
     private String nome;
-    @Column
-    private Integer matricula;
-    @Column
-    private String cpf;
-    @Column
-    private String email;
-    @Column
-    private String telefone;
-    @Column
-    private String curso;
-    @Column
-    private String turma;
     @Column
     private LocalDateTime DataCriacao;
     @Column

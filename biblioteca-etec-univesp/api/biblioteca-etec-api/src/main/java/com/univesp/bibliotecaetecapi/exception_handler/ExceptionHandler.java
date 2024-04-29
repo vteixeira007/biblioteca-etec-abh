@@ -45,6 +45,24 @@ public class ExceptionHandler {
         return ResponseEntity.status(httpStatus).body(standardError);
     }
 
+    @org.springframework.web.bind.annotation.ExceptionHandler(CategoryNotFound.class)
+    public ResponseEntity<StandardError> resourceNotFoundCategory(CategoryNotFound categoryNotFound) {
+        HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+        StandardError standardError = new StandardError(Instant.now(), httpStatus.value(), categoryNotFound.getMessage());
+        log.error("Exception resourceNotFoundException message {}", categoryNotFound.getMessage());
+        return ResponseEntity.status(httpStatus).body(standardError);
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(CategoryAlreadyExistsException.class)
+    public ResponseEntity<StandardError> categoryAlreadyExistsException(CategoryAlreadyExistsException catetoryAlreadyExistsException) {
+        HttpStatus httpStatus = HttpStatus.CONFLICT;
+        StandardError standardError = new StandardError(Instant.now(), httpStatus.value(), catetoryAlreadyExistsException.getMessage());
+        log.error("Exception CategoryAlreadyExistsException message {}", catetoryAlreadyExistsException.getMessage());
+        return ResponseEntity.status(httpStatus).body(standardError);
+    }
+
+
+
     @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity FixError400(MethodArgumentNotValidException e) {
         var err = e.getFieldErrors();
@@ -58,10 +76,9 @@ public class ExceptionHandler {
         }
     }
     @org.springframework.web.bind.annotation.ExceptionHandler(ValidationBadRequest.class)
-    public ResponseEntity<StandardErrorbad> resourceWithWrongData(ValidationBadRequest e) {
-        String error = "Prencha os campos corretamente";
+    public ResponseEntity<StandardError> resourceWithWrongData(ValidationBadRequest e) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
-        StandardErrorbad err = new StandardErrorbad(Instant.now(), status.value(),error, e.getMessage());
+        StandardError err = new StandardError(Instant.now(), status.value(),e.getMessage());
         return ResponseEntity.status(status).body(err);
 
     }
