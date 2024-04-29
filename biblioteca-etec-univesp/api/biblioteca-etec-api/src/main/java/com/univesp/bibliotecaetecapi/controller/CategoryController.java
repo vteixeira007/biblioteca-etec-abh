@@ -24,7 +24,7 @@ public class CategoryController {
     public CategoryService categoryService;
 
     @GetMapping
-    public ResponseEntity<List<CategoryResponse>> getAllStudents() {
+    public ResponseEntity<List<CategoryResponse>> getAllBooks() {
         return ResponseEntity.ok(categoryService.getAllCategories());
     }
 

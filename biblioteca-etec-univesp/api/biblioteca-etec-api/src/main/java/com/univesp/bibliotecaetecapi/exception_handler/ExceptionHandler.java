@@ -61,6 +61,23 @@ public class ExceptionHandler {
         return ResponseEntity.status(httpStatus).body(standardError);
     }
 
+    @org.springframework.web.bind.annotation.ExceptionHandler(BookNotFound.class)
+    public ResponseEntity<StandardError> resourceNotFoundBook(BookNotFound bookNotFound) {
+        HttpStatus httpStatus = HttpStatus.NOT_FOUND;
+        StandardError standardError = new StandardError(Instant.now(), httpStatus.value(), bookNotFound.getMessage());
+        log.error("Exception resourceNotFoundException message {}", bookNotFound.getMessage());
+        return ResponseEntity.status(httpStatus).body(standardError);
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(BookAlreadyExistsException.class)
+    public ResponseEntity<StandardError> bookAlreadyExistsException(BookAlreadyExistsException bookAlreadyExistsException) {
+        HttpStatus httpStatus = HttpStatus.CONFLICT;
+        StandardError standardError = new StandardError(Instant.now(), httpStatus.value(), bookAlreadyExistsException.getMessage());
+        log.error("Exception BookAlreadyExistsException message {}", bookAlreadyExistsException.getMessage());
+        return ResponseEntity.status(httpStatus).body(standardError);
+    }
+
+
 
 
     @org.springframework.web.bind.annotation.ExceptionHandler(MethodArgumentNotValidException.class)

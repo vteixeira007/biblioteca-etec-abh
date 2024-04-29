@@ -2,6 +2,7 @@ package com.univesp.bibliotecaetecapi.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
@@ -12,12 +13,13 @@ public class StudentRequest {
 
     private Long idAluno;
     @NotNull
+    @Size(max = 10, min = 2)
     private String nome;
     @NotNull
     private Integer matricula;
     @NotNull
     @NotBlank
-    @CPF(message = "CPF inválido ")
+    @CPF(message = "Invalid CPF ")
     private String cpf;
     @NotNull
     @NotBlank

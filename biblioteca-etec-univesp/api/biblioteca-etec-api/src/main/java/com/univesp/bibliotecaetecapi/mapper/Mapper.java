@@ -1,10 +1,8 @@
 package com.univesp.bibliotecaetecapi.mapper;
 
 
-import com.univesp.bibliotecaetecapi.dto.CategoryRequest;
-import com.univesp.bibliotecaetecapi.dto.CategoryResponse;
-import com.univesp.bibliotecaetecapi.dto.StudentRequest;
-import com.univesp.bibliotecaetecapi.dto.StudentResponse;
+import com.univesp.bibliotecaetecapi.dto.*;
+import com.univesp.bibliotecaetecapi.model.BookEntity;
 import com.univesp.bibliotecaetecapi.model.CategoryEntity;
 import com.univesp.bibliotecaetecapi.model.StudentEntity;
 
@@ -18,4 +16,7 @@ public interface Mapper {
     CategoryEntity dtoToEntityCategory(CategoryRequest categoryRequest);
     CategoryResponse entityToDtoCategory(CategoryEntity categoryEntity);
 
+    BookResponse entityToDtoBook(BookEntity book);
+
+    BookEntity dtoToEntityBook(BookRequest request);
 }
