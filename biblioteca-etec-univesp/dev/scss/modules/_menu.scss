@@ -12,8 +12,10 @@ header {
 }
 
 .navbar {
+  width: 235px;
   display: flex;
   flex-direction: column;
+  position: fixed;
 
   @include d(s) {
     flex-direction: row;
@@ -170,7 +172,7 @@ header {
     margin-top: 160px;
 
     button {
-      width: 80%;
+      width: 195px;
     }
   }
 
