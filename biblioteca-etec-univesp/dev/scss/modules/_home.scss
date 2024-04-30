@@ -6,6 +6,7 @@ main {
   display: flex;
   flex-direction: column;
   margin-right: 50px;
+  margin-bottom: 68px;
 }
 
 .home-menu_icon {
@@ -90,4 +91,99 @@ main {
     width: 18px;
     height: 12px;
   }
+}
+
+//Conteúdo
+
+.home-content {
+  &_letra {
+    span {
+      @include type('title-md');
+      color: $secondary;
+      font-weight: 600;
+    }
+
+    div {
+      width: 100%;
+      height: 1px;
+      background: $gray-c3;
+      margin-top: 10px;
+    }
+  }
+
+  &_livros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 68px;
+  }
+
+  &_livro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 32px;
+    transition: all 0.3s ease-in-out; /* Para suavizar a transição */
+
+    &-titulo {
+      @include type('text-regular');
+      color: $gray-c9;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    &-descricao {
+      @include type('text-small');
+      color: $gray-c9;
+    }
+  }
+
+  &_capa {
+    position: relative;
+    display: inline-block;
+    width: 130px;
+    height: 170px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    overflow: hidden; /* Para evitar qualquer conteúdo que ultrapasse a área do div */
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s ease-in-out;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0); /* Transparente por padrão */
+  transition: all 0.3s ease-in-out; /* Transição para suavizar o efeito */
+}
+
+.home-content_capa:hover .overlay {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Aumenta a opacidade para escurecimento */
+}
+
+.home-content_capa-link:hover ~ .home-content_livro {
+  border: 1px solid #000; /* Sombra mais intensa no hover */
 }
