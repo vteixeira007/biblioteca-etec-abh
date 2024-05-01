@@ -1,0 +1,8 @@
+.titulo.addColecao {
+  margin-bottom: 24px;
+}
+
+.input-titulo.addColecao {
+  @include type('title-md');
+  margin-bottom: 18px;
+}

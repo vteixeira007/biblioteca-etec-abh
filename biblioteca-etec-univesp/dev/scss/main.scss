@@ -3,18 +3,25 @@
 @import './globals/config';
 
 //Modules
+
 @import './modules/example';
 @import './modules/menu';
 @import './modules/button';
-@import './modules/home';
-@import './modules/page-addLivro';
 
 //Pages
+
+@import './modules/home';
+@import './modules/page-addLivro';
+@import './modules/page-addColecao';
+
+//Estilização Geral
 
 body {
   display: grid;
   grid-template-columns: 235px 2fr;
 }
+
+//Linha
 
 .line {
   width: 90%;
@@ -22,6 +29,8 @@ body {
   background: $gray-c3;
   margin-top: 10px;
 }
+
+//Select
 
 select {
   background-color: $gray-c1;
@@ -49,6 +58,56 @@ select {
   }
 }
 
+//Títulos
+
+.titulo {
+  @include type('title-l');
+  color: $black;
+  margin-bottom: 44px;
+}
+
+//Subtitulo
+.subtitulo {
+  margin-bottom: 44px;
+  &-text {
+    @include type('title-md');
+    border-bottom: 3px solid $secondary;
+    padding-bottom: 19px;
+    color: $black;
+
+    &.default {
+      border-bottom: none;
+      color: $gray-c6;
+
+      &:hover {
+        border-bottom: 3px solid $secondary;
+        color: $black;
+        transition: 0.1s ease-in-out;
+      }
+    }
+  }
+
+  &.line {
+    margin-top: 22px;
+  }
+}
+
+.subtitulo-menu {
+  display: flex;
+  gap: 44px;
+}
+
+//Legendas
+
+.legenda {
+  @include type('text-small');
+  font-style: italic;
+  font-size: 13px;
+  color: $gray-c12;
+}
+
+//Input
+
 .input,
 textarea {
   width: 59%;
@@ -67,5 +126,57 @@ textarea {
     border: 1px solid $gray-c3;
     background-color: $gray-c2;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.div_input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+
+  &-row {
+    display: flex;
+    flex-direction: row;
+
+    input {
+      width: calc(100% - 16px);
+    }
+  }
+
+  &.split {
+    display: grid;
+    width: 60%;
+    gap: 40px;
+
+    &.half {
+      grid-template-columns: 0.5fr;
+      gap: 0;
+    }
+
+    &.three {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    &.three--broken {
+      grid-template-columns: 4fr 1fr 4fr;
+    }
+
+    &.two {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  &.space {
+    margin-bottom: 7.5rem;
+  }
+}
+
+.input-titulo {
+  @include type('title-xs-2');
+  color: $black;
+  margin-bottom: 8px;
+
+  &.alunoAtualizacao {
+    @include type('title-md');
+    margin-bottom: 12px;
   }
 }

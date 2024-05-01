@@ -27,9 +27,9 @@
       </button>
       <ul id="menu" role="menu">
         <li class="li-biblioteca"><a href="./index.html">Biblioteca</a></li>
-        <li class="li-livros active"><a href="">Adicionar Livros</a></li>
+        <li class="li-livros "><a href="./add-livro.html">Adicionar Livros</a></li>
         <li class="li-colecao"><a href="./add-colecao.html">Adicionar Coleção</a></li>
-        <li class="li-alunos"><a href="./cadastro-alunos.html">Cadastrar Alunos</a></li>
+        <li class="li-alunos active"><a href="">Cadastrar Alunos</a></li>
         <div class="navbar-space">
           <li class="li-config"><a href="">Configurações</a></li>
           <li class="li-suporte"><a href="">Suporte</a></li>
@@ -42,113 +42,127 @@
   </header>
 
 
+
   <main>
-    <h1 class="titulo">Adicinar Livro</h1>
+    <h1 class="titulo addColecao">Cadastrar Aluno</h1>
 
     <div class="subtitulo">
-      <span class="subtitulo-text">Preencher Manualmente</span>
+      <ul class="subtitulo-menu">
+        <li> <a class="subtitulo-text" href="">Novo Cadastro</a></li>
+        <li> <a class="subtitulo-text default" href="./aluno-atualizacao.html">Atualizar Cadastro </a></li>
+      </ul>
       <div class="line subtitulo"></div>
     </div>
 
+
     <form action="">
-
-      <div class="addLivro_select">
-        <h2 class="addLivro_select-titulo">Selecionar Coleção</h2>
-        <select class="select" name="Teste" id="">
-          <option class="option" value="">Teste</option>
-          <option class="option" value="">Teste 2</option>
-          <option class="option" value="">Teste 3</option>
-          <option class="option" value="">Teste 4</option>
-        </select>
-        <span class="legenda">Escolha à qual coleção esse livro pertencerá.</span>
-      </div>
-
-      <div class="subtitulo">
-        <span class="subtitulo-text">Item</span>
-        <div class="line subtitulo"></div>
-      </div>
-
-
-
       <div class="div_input">
-        <label class="input-titulo">Título</label>
+        <label class="input-titulo">Nome</label>
         <input class="input" type="text">
       </div>
 
       <div class="div_input">
-        <label class="input-titulo">Autores</label>
+        <label class="input-titulo">CPF</label>
         <input class="input" type="text">
-        <span class="legenda">Separar os autores com uma vírgula. <br> Os apelidos com espaços devem ser colocados entre aspas. (ex. Piers Anthony, Walter "De la Mare").</span>
+        <span class="legenda">Apenas números.</span>
       </div>
-
-      <div class="div_input">
-        <label class="input-titulo">Descrição</label>
-        <textarea class="textarea" cols="30" rows="10"></textarea>
-      </div>
-
-      <div class="div_input">
-        <label class="input-titulo">Publisher</label>
-        <input class="input" type="text">
-      </div>
-
-      <h3 class="input-titulo">Data de Publicação</h3>
-
-      <div class="div_input-row">
-        <div class="div_input split three">
-          <div class="div_input">
-            <label class="input-titulo">Dia</label>
-            <input class="input" type="text" placeholder="DD">
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">Mês</label>
-            <input class="input" type="text" placeholder="MM">
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">Ano</label>
-            <input class="input" type="text" placeholder="AAAA">
-          </div>
-        </div>
-      </div>
-
 
       <div class="div_input-row">
         <div class="div_input split two">
           <div class="div_input">
-            <label class="input-titulo">ISBN 13</label>
-            <input class="input" type="text">
-            <span class="legenda">Apenas números. Máximo de 13 digítos.</span>
+            <label class="input-titulo">E-mail</label>
+            <input class="input" type="email">
           </div>
           <div class="div_input">
-            <label class="input-titulo">ISBN 10</label>
-            <input class="input" type="text">
-            <span class="legenda">Máximo de 12 caracteres.</span>
+            <label class="input-titulo">Telefone</label>
+            <input class="input" type="tel">
+            <span class="legenda">Apenas Números.</span>
           </div>
         </div>
       </div>
 
 
-      <div class="div_input split half space">
-        <label class="input-titulo">Páginas</label>
-        <input class="input" type="number">
+      <div class="subtitulo">
+        <span class="subtitulo-text">Endereço</span>
+        <div class="line subtitulo"></div>
+      </div>
+
+      <div class="div_input">
+        <label class="input-titulo">Bairro</label>
+        <input class="input" type="text">
+      </div>
+
+      <div class="div_input">
+        <label class="input-titulo">CEP</label>
+        <input class="input" type="text">
         <span class="legenda">Apenas números.</span>
       </div>
 
-      <div class="addLivro_form-button">
-        <button class="button" type="submit">Adicionar Livro</button>
+
+      <div class="div_input-row">
+        <div class="div_input split three--broken">
+          <div class="div_input">
+            <label class="input-titulo">Rua</label>
+            <input class="input" type="text">
+          </div>
+          <div class="div_input">
+            <label class="input-titulo">Número</label>
+            <input class="input" type="number">
+          </div>
+          <div class="div_input">
+            <label class="input-titulo">Complemento</label>
+            <input class="input" type="text">
+          </div>
+        </div>
       </div>
 
 
+      <div class="subtitulo">
+        <span class="subtitulo-text">Informações da Matrícula</span>
+        <div class="line subtitulo"></div>
+      </div>
+
+      <div class="div_input">
+        <label class="input-titulo">Número da matrícula</label>
+        <input class="input" type="text">
+      </div>
+
+      <div class="div_input-row">
+        <div class="div_input split two">
+          <div class="div_input">
+            <label class="input-titulo">Curso</label>
+            <input class="input" type="text">
+          </div>
+          <div class="div_input">
+            <label class="input-titulo">Turma</label>
+            <input class="input" type="text">
+          </div>
+        </div>
+      </div>
+
+      <div class="div_input space">
+        <label class="input-titulo">Anotações</label>
+        <textarea cols="30" rows="10"></textarea>
+      </div>
+
+      <div class="addLivro_form-button">
+        <button class="button" type="submit">Cadastrar Aluno</button>
+      </div>
+
     </form>
 
-
-
   </main>
+
+
+
+
+
+
 
 
   <script src="./assets/js/main.js"></script>
 
 
 </body>
-
 
 </html>

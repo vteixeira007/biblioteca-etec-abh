@@ -1,23 +1,4 @@
 .addLivro {
-  &_titulo {
-    @include type('title-l');
-    color: $black;
-    margin-bottom: 44px;
-  }
-
-  &_subtitulo {
-    margin-bottom: 44px;
-    &-text {
-      @include type('title-md');
-      border-bottom: 3px solid $secondary;
-      padding-bottom: 19px;
-    }
-
-    &.line {
-      margin-top: 22px;
-    }
-  }
-
   &_select {
     display: flex;
     flex-direction: column;
@@ -33,46 +14,9 @@
     }
   }
 
-  &_input {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 18px;
-    &-titulo {
-      @include type('title-xs-2');
-      color: $black;
-      margin-bottom: 8px;
-    }
-
-    &-row {
-      display: flex;
-      flex-direction: row;
-
-      input {
-        width: calc(100% - 16px);
-      }
-    }
-
-    &.number {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      width: 60%;
-      gap: 40px;
-
-      &.space {
-        margin-bottom: 7.5rem;
-      }
-    }
-  }
   &_form-button {
-    padding: 30px 40px;
+    padding: 30px 50px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
     margin-left: -50px;
   }
-}
-
-.legenda {
-  @include type('text-small');
-  font-style: italic;
-  font-size: 13px;
-  color: $gray-c12;
 }
