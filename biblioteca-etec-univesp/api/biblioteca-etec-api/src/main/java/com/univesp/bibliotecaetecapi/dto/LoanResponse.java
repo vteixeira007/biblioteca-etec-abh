@@ -15,7 +15,6 @@ public class LoanResponse {
 
     private LocalDate dataDevolucao;
 
-    private Long idLivro;
-
-    private Long idAluno;
+    private BookEntity bookEntity;
+    private StudentEntity studentEntity;
 }
