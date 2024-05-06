@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class BookRequest {
@@ -19,4 +21,7 @@ public class BookRequest {
     private Status status;
     private LocalDateTime DataCriacao;
     private LocalDateTime DataAtuallizacao;
+    private Long idCategoria;
+    List<LoanRequest> loan = new ArrayList<>();
+
 }

@@ -3,7 +3,7 @@ spring:
 
     name: biblioteca-etec-api
   datasource:
-    url: jdbc:mysql://localhost/db_biblioteca
+    url: jdbc:mysql://localhost:3306/db_biblioteca
     username: root
     password: root
   jpa:

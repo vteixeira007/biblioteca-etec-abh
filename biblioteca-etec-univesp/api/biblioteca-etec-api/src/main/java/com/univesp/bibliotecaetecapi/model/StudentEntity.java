@@ -1,10 +1,13 @@
 package com.univesp.bibliotecaetecapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "aluno_entity")
@@ -33,5 +36,11 @@ public class StudentEntity implements Serializable {
     private LocalDateTime DataCriacao;
     @Column
     private LocalDateTime DataAtuallizacao;
+
+    @PrimaryKeyJoinColumn
+    @OneToMany(mappedBy = "studentEntity", cascade = CascadeType.ALL)
+    @JsonIgnore
+    List<LoanEntity> loan = new ArrayList<>();
+
 
 }

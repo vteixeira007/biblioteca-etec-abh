@@ -4,6 +4,8 @@ import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class StudentResponse {
@@ -18,4 +20,6 @@ public class StudentResponse {
     private String turma;
     private LocalDateTime DataCriacao;
     private LocalDateTime DataAtuallizacao;
+    List<LoanResponse> loan = new ArrayList<>();
+
 }
