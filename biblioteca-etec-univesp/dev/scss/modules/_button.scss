@@ -9,9 +9,11 @@
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
 
   &:hover {
     background: $primary-hover;
     color: $black;
+    transition: all 0.2s ease-in-out;
   }
 }

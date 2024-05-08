@@ -62,6 +62,7 @@ header {
       margin-bottom: 2px;
       gap: 10px;
       list-style: none;
+      transition: all 0.3s ease-in-out;
 
       @include d(s) {
         padding: 22px 34px;
@@ -71,12 +72,13 @@ header {
       &.active,
       &:hover {
         background: $white;
-        transition: 0.2s ease-in-out;
+        transition: all 0.3s ease-in-out;
       }
 
       a {
         @include type('title-xs');
         color: $black;
+        transition: all 0.3s ease-in-out;
       }
 
       //Icons-list

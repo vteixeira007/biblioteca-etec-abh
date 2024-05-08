@@ -13,6 +13,7 @@
 @import './modules/home';
 @import './modules/page-addLivro';
 @import './modules/page-addColecao';
+@import './modules/page-livro';
 
 //Estilização Geral
 
@@ -28,6 +29,10 @@ body {
   height: 1px;
   background: $gray-c3;
   margin-top: 10px;
+
+  &.alunoAtualizacao {
+    margin-top: 18px;
+  }
 }
 
 //Select
