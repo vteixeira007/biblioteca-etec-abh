@@ -90,10 +90,16 @@ select {
         transition: 0.1s ease-in-out;
       }
     }
+
+   
   }
 
   &.line {
     margin-top: 22px;
+  }
+
+  &.page-livro {
+    margin-bottom: 0px;
   }
 }
 
@@ -184,4 +190,24 @@ textarea {
     @include type('title-md');
     margin-bottom: 12px;
   }
+}
+
+
+
+.subtitulo-text.square {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.number-square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  background: $gray-c3;
+  @include type('text-small');
+  color: $black;
+  border-radius: 5px;
 }

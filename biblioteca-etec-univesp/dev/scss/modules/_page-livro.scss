@@ -90,3 +90,177 @@
     }
   }
 }
+
+.livro-content {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  margin-top: 40px;
+
+  &_banner {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &_image {
+    width: 100%;
+    height: 260px;
+
+    img {
+      object-fit: cover;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &_tag {
+    width: 50%;
+    background: $green-g1;
+    padding: 4px 16px;
+    text-align: center;
+    border-radius: 6px;
+
+    span {
+      @include type('title-md');
+      font-size: 18px;
+      color: $green-g9;
+    }
+  }
+
+  //Texto
+
+  &_text {
+    display: flex;
+    flex-direction: column;
+
+    &-categoria {
+      display: flex;
+      align-items: center;
+      margin-bottom: 22px;
+      gap: 20px;
+      h3 {
+        display: flex;
+        align-items: center;
+        @include type('title-md');
+        font-size: 22px;
+        color: $black;
+        gap: 8px;
+
+        &::before {
+          content: ' ';
+          display: block;
+          background-image: url('data:image/svg+xml,<svg width="22" height="19" viewBox="0 0 22 19" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(%23clip0_2361_5)"><path d="M1.13208 0.600525V18.9015" stroke="%23853688" stroke-width="1.89451" stroke-miterlimit="10"/><path d="M5.53906 4.07458V18.9015" stroke="%23853688" stroke-width="1.89451" stroke-miterlimit="10"/><path d="M10.1047 2.63245V18.9016" stroke="%23853688" stroke-width="1.89451" stroke-miterlimit="10"/><path d="M11.9685 0.420593L21.1545 18.5818" stroke="%23853688" stroke-width="1.89451" stroke-miterlimit="10"/></g><defs><clipPath id="clip0_2361_5"><rect width="22" height="19.0161" fill="white" transform="translate(0 -0.00805664)"/></clipPath></defs></svg>');
+          width: 22px;
+          height: 19px;
+        }
+      }
+
+      span {
+        background: $gray-c3;
+        @include type('text-small');
+        font-weight: 700;
+        color: $gray-c11;
+        padding: 2px 18px;
+        border-radius: 5px;
+      }
+    }
+
+    //Título e Subtítulo
+
+    h1 {
+      @include type('title-l');
+      color: $black;
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      @include type('title-md');
+      color: $gray-c8;
+      font-weight: 400;
+      margin-bottom: 16px;
+    }
+
+    &-description {
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      @include type('title-xs');
+      font-weight: 400;
+      margin-bottom: 48px;
+      gap: 38px;
+
+    }
+  }
+
+  &_submenu {
+    display: flex;
+    flex-direction: column;
+
+    &-numbers {
+      display: flex;
+      align-items: center;
+      margin-bottom: 4px;
+      gap: 8px;
+
+      &-ano,
+      &-pages,
+      &-editora {
+        @include type('text-regular');
+        color: $black;
+      }
+
+      &-ano {
+        font-weight: 700;
+      }
+    }
+
+    &-codes {
+      display: flex;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 8px;
+
+      &-isbn13,
+      &-isbn10 {
+        @include type('text-regular');
+        color: $black;
+
+        span {
+          text-transform: uppercase;
+          font-weight: 700;
+        }
+      }
+    }
+
+    &-data {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 28px;
+
+      &-add, &-att {
+          @include type('text-regular');
+          font-weight: 700;
+          color: $black;
+      }
+    }
+
+    &-copias {
+      @include type('text-regular');
+      font-weight: 700;
+      color: $black;
+      margin-bottom: 40px;
+
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+
