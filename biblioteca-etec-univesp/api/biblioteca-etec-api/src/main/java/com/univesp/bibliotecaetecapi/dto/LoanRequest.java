@@ -1,5 +1,6 @@
 package com.univesp.bibliotecaetecapi.dto;
 
+import com.univesp.bibliotecaetecapi.enums.Status;
 import com.univesp.bibliotecaetecapi.model.BookEntity;
 import com.univesp.bibliotecaetecapi.model.StudentEntity;
 import jakarta.persistence.*;
@@ -15,6 +16,8 @@ public class LoanRequest {
     private LocalDate dataEmprestimo;
 
     private LocalDate dataDevolucao;
+
+    private Status status;
 
     private Long idLivro;
 

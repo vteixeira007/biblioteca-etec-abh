@@ -2,12 +2,14 @@ package com.univesp.bibliotecaetecapi.service;
 
 
 import com.univesp.bibliotecaetecapi.dto.*;
+import com.univesp.bibliotecaetecapi.enums.Status;
 import com.univesp.bibliotecaetecapi.exception_handler.exceptions.CpfAlreadyExistsException;
 import com.univesp.bibliotecaetecapi.exception_handler.exceptions.StudentNotFound;
 import com.univesp.bibliotecaetecapi.mapper.Mapper;
 import com.univesp.bibliotecaetecapi.model.BookEntity;
 import com.univesp.bibliotecaetecapi.model.LoanEntity;
 import com.univesp.bibliotecaetecapi.model.StudentEntity;
+import com.univesp.bibliotecaetecapi.repository.BookRepository;
 import com.univesp.bibliotecaetecapi.repository.LoanRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -34,11 +36,27 @@ public class LoanService {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private BookRepository bookRepository;
+
     // MÉTODO EMPRESTAR LIVRO
     public LoanEntity Loan(LoanRequest loanRequest) {
         loanRequest.setDataEmprestimo(LocalDate.now());
+        loanRequest.setStatus(Status.EMPRESTADO);
 
         LoanEntity loanEntity = mapper.dtoToEntityLoan(loanRequest);
+        Optional<BookEntity> bookEntityOptional = bookRepository.findById(loanRequest.getIdLivro());
+        bookEntityOptional.ifPresent(bookEntity -> {
+            if (bookEntity.getQuantidade() <= 0) {
+                throw new RuntimeException("NÃO PODE PEGAR EMPRESTADO: Não há cópias disponíveis.");
+            }
+
+            // Diminuir a quantidade em 1
+            int newQuantity = bookEntity.getQuantidade() - 1;
+            bookEntity.setQuantidade(newQuantity);
+            bookEntity.setStatus(Status.EMPRESTADO);
+            bookRepository.save(bookEntity);
+        });
 
         return loanRepository.save(loanEntity);
 
@@ -53,6 +71,7 @@ public class LoanService {
 
     //PESQUISA DE EMPRÉTIMOS POR USUÁRIO
     //REGISTRO DE DEVOLUÇÃO
+
 
 
 

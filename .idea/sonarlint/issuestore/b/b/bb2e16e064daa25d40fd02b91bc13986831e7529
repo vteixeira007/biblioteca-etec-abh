@@ -1,0 +1,7 @@
+
+j	java:S116"VRename this field "DataCriacao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¿Šä
+p	java:S116"[Rename this field "DataAtuallizacao" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ø‘Ì£
+F
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ
+F
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ

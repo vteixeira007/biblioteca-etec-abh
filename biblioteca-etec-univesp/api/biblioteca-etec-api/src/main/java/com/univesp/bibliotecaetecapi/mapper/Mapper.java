@@ -25,6 +25,7 @@ public interface Mapper{
     BookEntity dtoToEntityBook(BookRequest request);
     @Mapping(target = "studentEntity.idAluno", source = "idAluno")
     @Mapping(target = "bookEntity.idLivro", source = "idLivro")
+    @Mapping(target = "bookEntity.status", source = "status")
     LoanEntity dtoToEntityLoan(LoanRequest loanRequest);
 
     LoanResponse entityToDtoLoan(LoanEntity loanEntity);

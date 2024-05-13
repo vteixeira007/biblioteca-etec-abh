@@ -21,7 +21,6 @@ public class StudentRequest {
     private Integer matricula;
     @NotNull
     @NotBlank
-    @CPF(message = "Invalid CPF ")
     private String cpf;
     @NotNull
     @NotBlank

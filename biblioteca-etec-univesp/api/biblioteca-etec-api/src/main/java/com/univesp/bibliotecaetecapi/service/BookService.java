@@ -5,6 +5,7 @@ import com.univesp.bibliotecaetecapi.dto.BookRequest;
 import com.univesp.bibliotecaetecapi.dto.BookResponse;
 import com.univesp.bibliotecaetecapi.dto.CategoryRequest;
 import com.univesp.bibliotecaetecapi.dto.CategoryResponse;
+import com.univesp.bibliotecaetecapi.enums.Status;
 import com.univesp.bibliotecaetecapi.exception_handler.exceptions.BookAlreadyExistsException;
 import com.univesp.bibliotecaetecapi.exception_handler.exceptions.BookNotFound;
 import com.univesp.bibliotecaetecapi.exception_handler.exceptions.CategoryAlreadyExistsException;
@@ -48,6 +49,12 @@ public class BookService {
             throw new BookAlreadyExistsException();
         } else {
             request.setDataCriacao(LocalDateTime.now());
+            request.setDataCriacao(LocalDateTime.now());
+            if(request.getQuantidade() < 1) {
+                request.setStatus(Status.INDISPONIVEL);
+            } else {
+                request.setStatus(Status.DISPONIVEL);
+            }
             BookEntity bookEntity = mapper.dtoToEntityBook(request);
             return bookRepository.save(bookEntity);
         }

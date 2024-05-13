@@ -20,6 +20,6 @@ public class BookResponse {
     private LocalDateTime DataCriacao;
     private LocalDateTime DataAtuallizacao;
     private Long idCategoria;
-    List<LoanResponse> loan = new ArrayList<>();
+
 
 }
