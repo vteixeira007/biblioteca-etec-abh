@@ -42,18 +42,14 @@ public class LoanService {
     // MÉTODO EMPRESTAR LIVRO
     public LoanEntity Loan(LoanRequest loanRequest) {
         loanRequest.setDataEmprestimo(LocalDate.now());
+        loanRequest.setDataDevolucao(LocalDate.now().plusDays(7) );
         loanRequest.setStatus(Status.EMPRESTADO);
-
         LoanEntity loanEntity = mapper.dtoToEntityLoan(loanRequest);
         Optional<BookEntity> bookEntityOptional = bookRepository.findById(loanRequest.getIdLivro());
         bookEntityOptional.ifPresent(bookEntity -> {
             if (bookEntity.getQuantidade() <= 0) {
                 throw new RuntimeException("NÃO PODE PEGAR EMPRESTADO: Não há cópias disponíveis.");
             }
-
-            // Diminuir a quantidade em 1
-            int newQuantity = bookEntity.getQuantidade() - 1;
-            bookEntity.setQuantidade(newQuantity);
             bookEntity.setStatus(Status.EMPRESTADO);
             bookRepository.save(bookEntity);
         });
@@ -68,13 +64,5 @@ public class LoanService {
 
         return listLoanResponses;
     }
-
-    //PESQUISA DE EMPRÉTIMOS POR USUÁRIO
-    //REGISTRO DE DEVOLUÇÃO
-
-
-
-
-
 
 }
