@@ -1,18 +1,0 @@
-
-‡
-java:S1488&"lImmediately return this expression instead of assigning it to the temporary variable "listCategoryResponse".(‹ÇÈþøÿÿÿÿ
-ƒ
-java:S1488>"hImmediately return this expression instead of assigning it to the temporary variable "categoryResponse".(ë¹¡Åûÿÿÿÿ
-h
-java:S1128"MRemove this unused import 'com.univesp.bibliotecaetecapi.dto.StudentRequest'.(µ¾Ôßüÿÿÿÿ
-d
-java:S1128"NRemove this unused import 'com.univesp.bibliotecaetecapi.dto.StudentResponse'.(˜Û¿ß
-Œ
-java:S1128
-"qRemove this unused import 'com.univesp.bibliotecaetecapi.exception_handler.exceptions.CpfAlreadyExistsException'.(Ûý–þþÿÿÿÿ
-‚
-java:S1128"gRemove this unused import 'com.univesp.bibliotecaetecapi.exception_handler.exceptions.StudentNotFound'.(Š·Ùôþÿÿÿÿ
-i
-java:S1128"NRemove this unused import 'com.univesp.bibliotecaetecapi.model.StudentEntity'.(å¼éùþÿÿÿÿ
-r
-java:S1128"WRemove this unused import 'com.univesp.bibliotecaetecapi.repository.StudentRepository'.(¿æŠšùÿÿÿÿ
