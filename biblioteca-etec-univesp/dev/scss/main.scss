@@ -22,6 +22,11 @@
 body {
   display: grid;
   grid-template-columns: 235px 2fr;
+
+  @include d(m) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 //Linha
