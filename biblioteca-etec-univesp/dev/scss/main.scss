@@ -105,6 +105,10 @@ select {
       font-size: 18px;
     }
 
+    @include d(s) {
+      font-size: 16px;
+    }
+
     &.default {
       border-bottom: none;
       color: $gray-c6;
@@ -131,6 +135,11 @@ select {
 .subtitulo-menu {
   display: flex;
   gap: 44px;
+
+  @media (max-width: 375px) {
+    gap: 0;
+    justify-content: space-between;
+  }
 }
 
 //Legendas
