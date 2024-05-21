@@ -1,16 +1,0 @@
-
-`
-java:S1854 ">Remove this useless assignment to local variable "loanEntity".(Á™Ùüÿÿÿÿ8ÔÛÛô1
-Q
-java:S1481 "/Remove this unused "loanEntity" local variable.(Á™Ùüÿÿÿÿ8ÕÛÛô1
-h
-java:S1128"KRemove this unused import 'com.univesp.bibliotecaetecapi.dto.BookResponse'.(™³óÄ8¥ŒÚ÷1
-o
-java:S1128"MRemove this unused import 'com.univesp.bibliotecaetecapi.dto.StudentRequest'.(µ¾Ôßüÿÿÿÿ8¥ŒÚ÷1
-p
-java:S1128"NRemove this unused import 'com.univesp.bibliotecaetecapi.model.StudentEntity'.(å¼éùşÿÿÿÿ8¦ŒÚ÷1
-W
-java:S1128
-"5Remove this unused import 'jakarta.validation.Valid'.(ÀãÅ”ûÿÿÿÿ8¦ŒÚ÷1
-b
-java:S1128"@Remove this unused import 'org.springframework.http.HttpStatus'.(íŸ¤Šúÿÿÿÿ8¦ŒÚ÷1
