@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca ETEC | PI UNIVESP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="dev/css/main-min.css" />
+  <!--Style Dev  -->
+</head>
+
+<body>
+  <header>
+    <nav id="nav" class="navbar">
+      <div class="navbar-image">
+        <img src="/assets/images/logo.svg" alt="" />
+      </div>
+      <button aria-label="Abrir Menu" id="btn-mobile" class="navbar-btnMobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+        <span class="navbar-hamburguer"></span>
+      </button>
+      <ul id="menu" role="menu">
+        <li class="li-biblioteca"><a href="./index.html">Biblioteca</a></li>
+        <li class="li-livros active"><a href="">Adicionar Livros</a></li>
+        <li class="li-colecao">
+          <a href="./add-colecao.html">Adicionar Coleção</a>
+        </li>
+        <li class="li-alunos">
+          <a href="./cadastro-alunos.html">Cadastrar Alunos</a>
+        </li>
+        <div class="navbar-space">
+          <li class="li-suporte"><a href="">Suporte</a></li>
+        </div>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="titulo">Atualizar informações do Livro</h1>
+
+    <div class="subtitulo">
+      <ul class="subtitulo-menu">
+        <li>
+          <a class="subtitulo-text default" href="./add-livro.html">Novo Cadastro</a>
+        </li>
+        <li>
+          <a class="subtitulo-text" href="./livro-atualizacao.html">Atualizar Cadastro</a>
+        </li>
+      </ul>
+      <div class="line subtitulo"></div>
+    </div>
+
+    <form action="">
+      <div class="div_input">
+        <label class="input-titulo alunoAtualizacao">Pesquisar Livro</label>
+        <input class="home-pesquisa_input" type="search" />
+      </div>
+
+      <div class="subtitulo">
+        <span class="subtitulo-text">Item</span>
+        <div class="line subtitulo"></div>
+      </div>
+
+      <div class="div_input">
+        <label class="input-titulo">Título</label>
+        <input class="input" type="text" />
+      </div>
+
+      <div class="div_input">
+        <label class="input-titulo">Autores</label>
+        <input class="input" type="text" />
+        <span class="legenda">Separar os autores com uma vírgula. <br />
+          Os apelidos com espaços devem ser colocados entre aspas. (ex. Piers
+          Anthony, Walter "De la Mare").</span>
+      </div>
+
+      <div class="div_input">
+        <label class="input-titulo">Descrição</label>
+        <textarea class="textarea" cols="30" rows="10"></textarea>
+      </div>
+
+      <div class="div_input">
+        <label class="input-titulo">Publisher</label>
+        <input class="input" type="text" />
+      </div>
+
+      <h3 class="input-titulo">Data de Publicação</h3>
+
+      <div class="div_input-row">
+        <div class="div_input split three">
+          <div class="div_input">
+            <label class="input-titulo">Dia</label>
+            <input class="input" type="text" placeholder="DD" />
+          </div>
+          <div class="div_input">
+            <label class="input-titulo">Mês</label>
+            <input class="input" type="text" placeholder="MM" />
+          </div>
+          <div class="div_input">
+            <label class="input-titulo">Ano</label>
+            <input class="input" type="text" placeholder="AAAA" />
+          </div>
+        </div>
+      </div>
+
+      <div class="div_input-row">
+        <div class="div_input split two">
+          <div class="div_input">
+            <label class="input-titulo">ISBN 13</label>
+            <input class="input" type="text" />
+            <span class="legenda">Apenas números. Máximo de 13 digítos.</span>
+          </div>
+          <div class="div_input">
+            <label class="input-titulo">ISBN 10</label>
+            <input class="input" type="text" />
+            <span class="legenda">Máximo de 12 caracteres.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="div_input split half space">
+        <label class="input-titulo">Páginas</label>
+        <input class="input" type="number" />
+        <span class="legenda">Apenas números.</span>
+      </div>
+
+      <div class="addLivro_form-button">
+        <button class="button" type="submit">Atualizar Livro</button>
+      </div>
+    </form>
+  </main>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

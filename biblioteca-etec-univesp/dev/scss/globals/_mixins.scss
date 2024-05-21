@@ -2,8 +2,8 @@
 
 // Mixin de media-queries
 $l-device: 1200px;
-$m-device: 760px;
-$s-device: 480px;
+$m-device: 1021px;
+$s-device: 320px;
 
 // Mixin de media-queries
 @mixin d($size) {
@@ -12,11 +12,11 @@ $s-device: 480px;
       @content;
     }
   } @else if $size == m {
-    @media screen and (min-width: #{$m-device}) and (max-width: #{$l-device - 1}) {
+    @media screen and (max-width: #{$m-device}) {
       @content;
     }
   } @else if $size == s {
-    @media screen and (max-width: #{$m-device - 1}) {
+    @media screen and (max-width: #{$s-device}) {
       @content;
     }
   }

@@ -1,0 +1,19 @@
+.button {
+  display: flex;
+  align-items: center;
+  background: $primary;
+  padding: 10px 20px;
+  @include type('title-xs');
+  font-weight: 600;
+  color: $primary-colorButton;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background: $primary-hover;
+    color: $black;
+    transition: all 0.2s ease-in-out;
+  }
+}

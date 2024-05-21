@@ -1,0 +1,13 @@
+
+[	java:S1123"FDefine and throw a dedicated exception instead of using a generic one.(Ñ½ç™
+„
+java:S1488B"iImmediately return this expression instead of assigning it to the temporary variable "listLoanResponses".(ê¤ ıÿÿÿÿ
+h	java:S100+"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Ö±øµùÿÿÿÿ
+Œ
+java:S1128"qRemove this unused import 'com.univesp.bibliotecaetecapi.exception_handler.exceptions.CpfAlreadyExistsException'.(Ûı–şşÿÿÿÿ
+‚
+java:S1128"gRemove this unused import 'com.univesp.bibliotecaetecapi.exception_handler.exceptions.StudentNotFound'.(Š·Ùôşÿÿÿÿ
+i
+java:S1128"NRemove this unused import 'com.univesp.bibliotecaetecapi.model.StudentEntity'.(å¼éùşÿÿÿÿ
+O
+java:S1128"4Remove this unused import 'java.time.LocalDateTime'.(æÃ§ƒüÿÿÿÿ

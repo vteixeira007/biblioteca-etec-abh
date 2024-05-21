@@ -2,11 +2,257 @@
 
 @import './globals/config';
 
-body {
-  background: $black;
-}
-
 //Modules
+
 @import './modules/example';
+@import './modules/menu';
+@import './modules/button';
 
 //Pages
+
+@import './modules/home';
+@import './modules/page-addLivro';
+@import './modules/page-addColecao';
+@import './modules/page-livro';
+@import './modules/page-attColecao';
+
+
+//Estilização Geral
+
+body {
+  display: grid;
+  grid-template-columns: 235px 2fr;
+
+  @include d(m) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+//Linha
+
+.line {
+  width: 90%;
+  height: 1px;
+  background: $gray-c3;
+  margin-top: 10px;
+
+  @include d(m) {
+    width: 100%;
+  }
+
+  &.alunoAtualizacao {
+    margin-top: 18px;
+  }
+}
+
+//Select
+
+select {
+  background-color: $gray-c1;
+  background-image: url('/assets/images/icons/seta.svg');
+  background-origin: content-box;
+  background-position: right -1rem center;
+  background-repeat: no-repeat;
+  background-size: 9px 6px;
+  width: 60%;
+  @include type('title-xs');
+  color: $black;
+  appearance: none;
+  border: 1px solid $gray-c3;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  padding-right: 1.5rem;
+  transition: all 0.2s ease-in-out;
+
+  &:focus {
+    outline: none;
+    border: 1px solid $gray-c3;
+    background-color: $gray-c2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  @include d(m) {
+    width: 100%;
+  }
+}
+
+//Títulos
+
+.titulo {
+  @include type('title-l');
+  color: $black;
+  margin-bottom: 44px;
+
+  @include d(m) {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 40px;
+  }
+}
+
+//Subtitulo
+.subtitulo {
+  margin-bottom: 44px;
+  &-text {
+    @include type('title-md');
+    border-bottom: 3px solid $secondary;
+    padding-bottom: 19px;
+    color: $black;
+
+    @include d(m) {
+      font-size: 18px;
+    }
+
+    @include d(s) {
+      font-size: 16px;
+    }
+
+    &.default {
+      border-bottom: none;
+      color: $gray-c6;
+
+      &:hover {
+        border-bottom: 3px solid $secondary;
+        color: $black;
+        transition: 0.1s ease-in-out;
+      }
+    }
+
+   
+  }
+
+  &.line {
+    margin-top: 22px;
+  }
+
+  &.page-livro {
+    margin-bottom: 0px;
+  }
+}
+
+.subtitulo-menu {
+  display: flex;
+  gap: 44px;
+
+  @media (max-width: 375px) {
+    gap: 0;
+    justify-content: space-between;
+  }
+}
+
+//Legendas
+
+.legenda {
+  @include type('text-small');
+  font-style: italic;
+  font-size: 13px;
+  color: $gray-c12;
+}
+
+//Input
+
+.input,
+textarea {
+  width: 60%;
+  @include type('title-xs');
+  color: $black;
+  appearance: none;
+  border: 1px solid $gray-c3;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 8px;
+
+  &:focus {
+    outline: none;
+    border: 1px solid $gray-c3;
+    background-color: $gray-c2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  @include d(m) {
+    width: 100%;
+  }
+}
+
+.div_input {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 18px;
+
+  &-row {
+    display: flex;
+    flex-direction: row;
+
+    input {
+      width: calc(100% - 16px);
+    }
+  }
+
+  &.split {
+    display: grid;
+    width: 60%;
+    gap: 40px;
+
+    &.half {
+      grid-template-columns: 0.5fr;
+      gap: 0;
+    }
+
+    &.three {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    &.three--broken {
+      grid-template-columns: 4fr 1fr 4fr;
+    }
+
+    &.two {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include d(m) {
+      width: 100%;
+    }
+  }
+  &.space {
+    margin-bottom: 7.5rem;
+    @include d(m) {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.input-titulo {
+  @include type('title-xs-2');
+  color: $black;
+  margin-bottom: 8px;
+
+  &.alunoAtualizacao {
+    @include type('title-md');
+    margin-bottom: 12px;
+  }
+}
+
+
+
+.subtitulo-text.square {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.number-square {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;
+  height: 25px;
+  background: $gray-c3;
+  @include type('text-small');
+  color: $black;
+  border-radius: 5px;
+}

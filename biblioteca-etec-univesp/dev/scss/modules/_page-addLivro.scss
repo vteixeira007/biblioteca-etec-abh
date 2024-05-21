@@ -1,0 +1,26 @@
+.addLivro {
+  &_select {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 44px;
+    &-titulo {
+      @include type('title-md');
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    select {
+      margin-bottom: 8px;
+    }
+  }
+
+  &_form-button {
+    padding: 30px 50px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+    margin-left: -50px;
+
+    @include d(m) {
+      margin-inline: -30px;
+    }
+  }
+}

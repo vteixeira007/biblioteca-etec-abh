@@ -1,0 +1,17 @@
+
+~
+java:S1488'"hImmediately return this expression instead of assigning it to the temporary variable "listBookResponse".(¡„½‚
+z
+java:S1488E"dImmediately return this expression instead of assigning it to the temporary variable "bookResponse".(ÏëÂ×
+p
+java:S1128"NRemove this unused import 'com.univesp.bibliotecaetecapi.dto.CategoryRequest'.(¤óÕÑüÿÿÿÿ8‘©ôÚô1
+q
+java:S1128"ORemove this unused import 'com.univesp.bibliotecaetecapi.dto.CategoryResponse'.(ÓÒìèşÿÿÿÿ8‘©ôÚô1
+“
+java:S1128"vRemove this unused import 'com.univesp.bibliotecaetecapi.exception_handler.exceptions.CategoryAlreadyExistsException'.(ÁñôÕ8‘©ôÚô1
+Š
+java:S1128"hRemove this unused import 'com.univesp.bibliotecaetecapi.exception_handler.exceptions.CategoryNotFound'.(¨İ×şøÿÿÿÿ8‘©ôÚô1
+l
+java:S1128"ORemove this unused import 'com.univesp.bibliotecaetecapi.model.CategoryEntity'.(º±¾8‘©ôÚô1
+z
+java:S1128"XRemove this unused import 'com.univesp.bibliotecaetecapi.repository.CategoryRepository'.(Ùçÿ¸úÿÿÿÿ8‘©ôÚô1

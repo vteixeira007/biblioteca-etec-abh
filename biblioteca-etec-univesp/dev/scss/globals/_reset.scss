@@ -109,6 +109,7 @@ html {
 }
 ol,
 ul {
+  list-style: none;
 }
 blockquote,
 q {
@@ -124,4 +125,9 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+a {
+  color: $black;
+  text-decoration: none;
 }

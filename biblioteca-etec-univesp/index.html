@@ -1,31 +1,162 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<div include-html="./head.html"></div>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca ETEC | PI UNIVESP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dev/css/main-min.css"> <!--Style Dev  -->
+</head>
+
+
 
 <body>
 
-  <div class="example">
-    <h1>Sejam Bem-Vindos</h1>
-    <span> Projeto Biblioteca Etec | <span>Univesp</span> </span>
+  <header>
+    <nav id="nav" class="navbar">
+      <div class="navbar-image">
+        <img src="/assets/images/logo.svg" alt="">
+      </div>
+      <button aria-label="Abrir Menu" id="btn-mobile" class="navbar-btnMobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
 
-    <h2>Participantes</h2>
+        <span class="navbar-hamburguer"></span>
+      </button>
+      <ul id="menu" role="menu">
+        <li class="li-biblioteca active"><a href="">Biblioteca</a></li>
+        <li class="li-livros"><a href="./add-livro.html">Adicionar Livros</a></li>
+        <li class="li-colecao"><a href="./add-colecao.html">Adicionar Coleção</a></li>
+        <li class="li-alunos"><a href="./cadastro-alunos.html">Cadastrar Alunos</a></li>
+        <div class="navbar-space">
+          <li class="li-suporte"><a href="mailto:vinicius.teixeira60@etec.sp.gov.br" target="_blank">Suporte</a></li>
+        </div>
+      </ul>
+    </nav>
+  </header>
 
-    <ul>
-      <li>Bruno Santana De Sa, 2207280</li>
-      <li>Carolina Suelen Attili, 2200939</li>
-      <li>Dayane Oliveira Lima, 2206985</li>
-      <li>Leticia Francolino Nogueira, 2212202</li>
-      <li>Marcelo Scarponi, 2009521</li>
-      <li>Paola Regina Cordeiro, 2214948</li>
-      <li>Vinicius De Lira Teixeira, 2225260</li>
-      <li>Willian Monteiro Dos Santos, 2215752</li>
-    </ul>
+  <main>
+    <div class="home-menu">
+      <span class="home-menu_icon">Pesquisar...</span>
+      <div class="home-pesquisa">
+        <input class="home-pesquisa_input" type="search" style="width: 100%;" placeholder="Pesquisar...">
+        <div class="home-pesquisa_filters">
+        <button class="button pesquisa cover"> <img src="./assets/images/icons/cover.svg"></img></button>
+        <button class="button pesquisa title"> <img src="./assets/images/icons/filter-title.svg"></img></button>
+        <div <div class="home-pesquisa_filtro">
+        <button class="button filtro"></button>
+      </div>
+      </div>
+      </div>
+      <div class="home-pesquisa_alfabeto">
+        <ul>
+          <li><a href="">a</a></li>
+          <li><a href="">b</a></li>
+          <li><a href="">c</a></li>
+          <li><a href="">d</a></li>
+          <li><a href="">e</a></li>
+          <li><a href="">f</a></li>
+          <li><a href="">g</a></li>
+          <li><a href="">h</a></li>
+          <li><a href="">i</a></li>
+          <li><a href="">j</a></li>
+          <li><a href="">k</a></li>
+          <li><a href="">l</a></li>
+          <li><a href="">m</a></li>
+          <li><a href="">n</a></li>
+          <li><a href="">o</a></li>
+          <li><a href="">p</a></li>
+          <li><a href="">q</a></li>
+          <li><a href="">r</a></li>
+          <li><a href="">s</a></li>
+          <li><a href="">t</a></li>
+          <li><a href="">u</a></li>
+          <li><a href="">v</a></li>
+          <li><a href="">x</a></li>
+          <li><a href="">y</a></li>
+          <li><a href="">z</a></li>
+          <li><a href="">#</a></li>
+          <li><a class="home-pesquisa_alfabeto--all" href="">all</a></li>
+        </ul>
+      </div>
+    </div>
 
-  </div>
+    <div class="home-content">
+      <div class="home-content_letra">
+        <span>L</span>
+        <div class="line"></div>
+      </div>
 
+      <div class="home-content_livros">
+        <div class="home-content_livro">
+          <a class="home-content_capa-link" href="descricao-livro.html">
+            <div class="home-content_capa">
+              <img src="/assets/images/capa.jpg" alt="">
+              <div class="overlay">
+                <img src="./assets/images/icons/info.svg" alt="">
+              </div>
+            </div>
+          </a>
+          <span class="home-content_livro-titulo">Livro Teste</span>
+          <span class="home-content_livro-descricao">Grupo 007 | PI | Univesp</span>
+        </div>
 
-  <div include-html="./footer.html"></div>
+        <div class="home-content_livro">
+          <a class="home-content_capa-link" href="descricao-livro.html">
+            <div class="home-content_capa">
+              <img src="/assets/images/capa.jpg" alt="">
+              <div class="overlay">
+                <img src="./assets/images/icons/info.svg" alt="">
+              </div>
+            </div>
+          </a>
+          <span class="home-content_livro-titulo">Livro Teste</span>
+          <span class="home-content_livro-descricao">Grupo 007 | PI | Univesp</span>
+        </div>
 
+        <div class="home-content_livro">
+          <a class="home-content_capa-link" href="descricao-livro.html">
+            <div class="home-content_capa">
+              <img src="/assets/images/capa.jpg" alt="">
+              <div class="overlay">
+                <img src="./assets/images/icons/info.svg" alt="">
+              </div>
+            </div>
+          </a>
+          <span class="home-content_livro-titulo">Livro Teste</span>
+          <span class="home-content_livro-descricao">Grupo 007 | PI | Univesp</span>
+        </div>
+
+        <div class="home-content_livro">
+          <a class="home-content_capa-link" href="descricao-livro.html">
+            <div class="home-content_capa">
+              <img src="/assets/images/capa.jpg" alt="">
+              <div class="overlay">
+                <img src="./assets/images/icons/info.svg" alt="">
+              </div>
+            </div>
+          </a>
+          <span class="home-content_livro-titulo">Livro Teste</span>
+          <span class="home-content_livro-descricao">Grupo 007 | PI | Univesp</span>
+        </div>
+
+        <div class="home-content_livro">
+          <a class="home-content_capa-link" href="descricao-livro.html">
+            <div class="home-content_capa">
+              <img src="/assets/images/capa.jpg" alt="">
+              <div class="overlay">
+                <img src="./assets/images/icons/info.svg" alt="">
+              </div>
+            </div>
+          </a>
+          <span class="home-content_livro-titulo">Livro Teste</span>
+          <span class="home-content_livro-descricao">Grupo 007 | PI | Univesp</span>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <script src="./assets/js/main.js"></script>
 

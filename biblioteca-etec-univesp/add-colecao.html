@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Biblioteca ETEC | PI UNIVESP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dev/css/main-min.css"> <!--Style Dev  -->
+</head>
+
+
+
+<body>
+
+  <header>
+    <nav id="nav" class="navbar">
+      <div class="navbar-image">
+        <img src="/assets/images/logo.svg" alt="">
+      </div>
+      <button aria-label="Abrir Menu" id="btn-mobile" class="navbar-btnMobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+
+        <span class="navbar-hamburguer"></span>
+      </button>
+      <ul id="menu" role="menu">
+        <li class="li-biblioteca"><a href="./index.html">Biblioteca</a></li>
+        <li class="li-livros"><a href="./add-livro.html">Adicionar Livros</a></li>
+        <li class="li-colecao active"><a href="">Adicionar Coleção</a></li>
+        <li class="li-alunos"><a href="./cadastro-alunos.html">Cadastrar Alunos</a></li>
+        <div class="navbar-space">
+          <li class="li-suporte"><a href="">Suporte</a></li>
+        </div>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1 class="titulo addColecao">Adicionar Coleção</h1>
+    <div class="line subtitulo"></div>
+
+    <div class="subtitulo">
+      <ul class="subtitulo-menu">
+        <li><a class="subtitulo-text" href="">Novo Cadastro</a></li>
+        <li>
+          <a class="subtitulo-text default" href="./colecao-atualizacao.html">Configurações</a>
+        </li>
+      </ul>
+      <div class="line subtitulo"></div>
+    </div>
+
+    <form action="">
+      <div class="div_input">
+        <label class="input-titulo addColecao">Título da Coleção</label>
+        <input class="input" type="text">
+        <span class="legenda">Limite de 40 caracteres. Por exemplo, (Ação, Ficção Cientifica, Fantasia, Romance).</span>
+      </div>
+      <button class="button" type="submit">Adicionar</button>
+    </form>
+
+  </main>
+
+
+  <script src="./assets/js/main.js"></script>
+
+
+</body>
+
+
+</html>

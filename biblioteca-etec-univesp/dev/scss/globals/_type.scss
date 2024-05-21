@@ -1,5 +1,4 @@
 $mainfont: 'Roboto', sans-serif;
-$secondfont: 'Inter', sans-serif;
 
 @mixin type-text() {
   @include definedefineFont(
@@ -17,9 +16,9 @@ $types: (
     (
       'break': false,
       'responsive': false,
-      'font-size': 48,
-      'line-height': 22,
-      'font-weight': 800,
+      'font-size': 40,
+      'line-height': 48,
+      'font-weight': 700,
       'font-family': $mainfont,
     ),
   ),
@@ -28,8 +27,8 @@ $types: (
       'break': false,
       'responsive': false,
       'font-size': 24,
-      'line-height': 22,
-      'font-weight': 500,
+      'line-height': 28,
+      'font-weight': 700,
       'font-family': $mainfont,
     ),
   ),
@@ -37,9 +36,19 @@ $types: (
     (
       'break': false,
       'responsive': false,
-      'font-size': 20,
+      'font-size': 16,
+      'line-height': 24,
+      'font-weight': 400,
+      'font-family': $mainfont,
+    ),
+  ),
+  'title-xs-2': (
+    (
+      'break': false,
+      'responsive': false,
+      'font-size': 15,
       'line-height': 22,
-      'font-weight': 500,
+      'font-weight': 400,
       'font-family': $mainfont,
     ),
   ),
@@ -47,10 +56,10 @@ $types: (
     (
       'break': false,
       'responsive': false,
-      'font-size': 16,
-      'line-height': 22,
+      'font-size': 14,
+      'line-height': 21,
       'font-weight': 400,
-      'font-family': $secondfont,
+      'font-family': $mainfont,
     ),
   ),
   'text-small': (
@@ -58,9 +67,9 @@ $types: (
       'break': false,
       'responsive': false,
       'font-size': 12,
-      'line-height': 22,
+      'line-height': 18,
       'font-weight': 400,
-      'font-family': $secondfont,
+      'font-family': $mainfont,
     ),
   ),
 ) !default;

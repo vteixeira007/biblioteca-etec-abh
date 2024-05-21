@@ -16,7 +16,7 @@
   \***********************/
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _import_page_html_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./import-page-html.js */ \"./dev/js/import-page-html.js\");\n\n(0,_import_page_html_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\n\n//# sourceURL=webpack://biblioteca-etec-univesp/./dev/js/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _import_page_html_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./import-page-html.js */ \"./dev/js/import-page-html.js\");\n/* harmony import */ var _menu_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./menu.js */ \"./dev/js/menu.js\");\n\n\n(0,_import_page_html_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\n(0,_menu_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\n\n//# sourceURL=webpack://biblioteca-etec-univesp/./dev/js/app.js?");
 
 /***/ }),
 
@@ -27,6 +27,16 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _imp
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": function() { return /* binding */ importPageHTML; }\n/* harmony export */ });\nfunction importPageHTML() {\n  !function t() {\n    var e, n, i, o, r;\n    for (e = document.getElementsByTagName(\"*\"), n = 0; n < e.length; n++) if (o = (i = e[n]).getAttribute(\"include-html\")) return (r = new XMLHttpRequest()).onreadystatechange = function () {\n      4 == this.readyState && (200 == this.status && (i.innerHTML = this.responseText), 404 == this.status && (i.innerHTML = \"Page not found.\"), i.removeAttribute(\"include-html\"), t());\n    }, r.open(\"GET\", o, !0), void r.send();\n  }();\n}\n\n//# sourceURL=webpack://biblioteca-etec-univesp/./dev/js/import-page-html.js?");
+
+/***/ }),
+
+/***/ "./dev/js/menu.js":
+/*!************************!*\
+  !*** ./dev/js/menu.js ***!
+  \************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": function() { return /* binding */ Menu; }\n/* harmony export */ });\nfunction Menu() {\n  var btnMobile = document.getElementById('btn-mobile');\n  function toggleMenu(event) {\n    if (event.type === 'touchstart') event.preventDefault();\n    var nav = document.getElementById('nav');\n    nav.classList.toggle('active');\n    var active = nav.classList.contains('active');\n    event.currentTarget.setAttribute('aria-expanded', active);\n    if (active) {\n      event.currentTarget.setAttribute('aria-label', 'Fechar Menu');\n    } else {\n      event.currentTarget.setAttribute('aria-label', 'Abrir Menu');\n    }\n  }\n  btnMobile.addEventListener('click', toggleMenu);\n  btnMobile.addEventListener('touchstart', toggleMenu);\n}\n\n//# sourceURL=webpack://biblioteca-etec-univesp/./dev/js/menu.js?");
 
 /***/ })
 
