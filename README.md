@@ -42,12 +42,12 @@
 <h2><span class="emoji">&#x1F465;</span> Equipe</h2>
 
 <ul>
-	<li>Bruno Santana De Sa- Responsável pelo Desenvolvevimento Back-end e modelagem do Banco de dados</li>
+	<li>Bruno Santana De Sa- Responsável pelo Desenvolvimento Back-end e modelagem do Banco de dados</li>
   	<li>Carolina Suelen Attili - Apoio Desenvolvimento Back-end</li>
 	<li>Dayane Oliveira Lima - Apoio Desenvolvimento Back-end</li>
   	<li>Leticia Francolino Nogueira - Apoio Desenvolvimento Front-end</li>
 	<li>Marcelo Scarponi - Apoio Desenvolvimento Back-end</li>
         <li>Paola Regina Cordeiro - Apoio Desenvolvimento Front-end</li>
         <li>Vinicius De Lira Teixeira - Apoio Desenvolvimento Front-end</li>
-	<li>Willian Monteiro dos Santos -  Responsável pelo Desenvolvevimento Front-end e Design</li>
+	<li>Willian Monteiro dos Santos -  Responsável pelo Desenvolvimento Front-end e Design</li>
 </ul>
