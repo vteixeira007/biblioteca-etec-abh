@@ -37,6 +37,10 @@ body {
   background: $gray-c3;
   margin-top: 10px;
 
+  @include d(m) {
+    width: 100%;
+  }
+
   &.alunoAtualizacao {
     margin-top: 18px;
   }
@@ -68,6 +72,10 @@ select {
     background-color: $gray-c2;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
+
+  @include d(m) {
+    width: 100%;
+  }
 }
 
 //Títulos
@@ -76,6 +84,12 @@ select {
   @include type('title-l');
   color: $black;
   margin-bottom: 44px;
+
+  @include d(m) {
+    font-size: 36px;
+    text-align: center;
+    margin-top: 40px;
+  }
 }
 
 //Subtitulo
@@ -86,6 +100,10 @@ select {
     border-bottom: 3px solid $secondary;
     padding-bottom: 19px;
     color: $black;
+
+    @include d(m) {
+      font-size: 18px;
+    }
 
     &.default {
       border-bottom: none;
@@ -128,7 +146,7 @@ select {
 
 .input,
 textarea {
-  width: 59%;
+  width: 60%;
   @include type('title-xs');
   color: $black;
   appearance: none;
@@ -144,6 +162,10 @@ textarea {
     border: 1px solid $gray-c3;
     background-color: $gray-c2;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  @include d(m) {
+    width: 100%;
   }
 }
 
@@ -182,9 +204,16 @@ textarea {
     &.two {
       grid-template-columns: 1fr 1fr;
     }
+
+    @include d(m) {
+      width: 100%;
+    }
   }
   &.space {
     margin-bottom: 7.5rem;
+    @include d(m) {
+      margin-bottom: 2rem;
+    }
   }
 }
 

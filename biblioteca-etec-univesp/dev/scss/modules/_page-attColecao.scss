@@ -1,5 +1,9 @@
 .colecao-att_excluir {
   margin-top: 120px;
+
+  @include d(m) {
+    margin-top: 80px;
+  }
 }
 
 .colecao-att_alerta {
@@ -24,12 +28,22 @@
     text-transform: uppercase;
     font-weight: 700;
   }
+
+  @include d(m) {
+    width: 100%;
+
+    &:hover {
+      margin-left: 0;
+      scale: 1;
+    }
+  }
 }
 
 .button.excluir {
   background: $red-r3;
   color: $white;
   align-items: center;
+  margin-bottom: 20px;
   gap: 10px;
 
   &:hover {

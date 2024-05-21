@@ -18,5 +18,9 @@
     padding: 30px 50px;
     box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
     margin-left: -50px;
+
+    @include d(m) {
+      margin-inline: -30px;
+    }
   }
 }

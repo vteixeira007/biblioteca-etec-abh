@@ -6,10 +6,26 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-top: -50px;
   margin-left: -50px;
+
+  @include d(m) {
+    background: $white;
+    justify-content: center;
+    margin-top: 0;
+    width: calc(100% + 60px);
+    position: fixed;
+    bottom: 0%;
+    
+  }
+
   ul {
     display: flex;
     margin-left: 60px;
     gap: 42px;
+
+    @include d(m) {
+      margin-left: 0;
+      gap: 22px;
+    }
 
     li {
       display: flex;
@@ -72,6 +88,21 @@
   margin-right: 15px;
   gap: 8px;
   z-index: 2;
+
+  @include d(m) {
+    position: relative;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    margin-top: 0;
+    margin-right: 0;
+    top: 10%;
+  }
+
+  @media (max-width: 375px) {
+    top: 5%;
+    margin-right: -20px;
+  }
+
   &_question,
   &_closed {
     display: flex;
@@ -96,12 +127,24 @@
   grid-template-columns: 240px 1fr;
   margin-top: 40px;
 
+  @include d(m) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 80px;
+  }
+
   &_banner {
     width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
+
+    @include d(m) {
+     margin-bottom: 30px;
+    }
   }
 
   &_image {
@@ -137,6 +180,10 @@
   &_text {
     display: flex;
     flex-direction: column;
+
+    @include d(m) {
+      align-items: center;
+    }
 
     &-categoria {
       display: flex;
