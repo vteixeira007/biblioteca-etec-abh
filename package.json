@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "compileJavascript": "webpack --mode development --watch",
     "buildCompileJavascript": "webpack --mode production",
-    "compileScss": "sass --watch --style expanded ./dev/scss/main.scss ./dev/css/main-min.css",
+    "compileScss": "sass --watch --style expanded ./dev/scss/main.scss ./dev/css/main.css",
     "buildCompileScss": "sass --no-source-map --style compressed ./dev/scss/main.scss ./assets/css/main-min.css ",
     "autoPrefixStyle": "postcss dev/css/*.css  --use autoprefixer -d dev/css  --watch",
     "buildAutoPrefixStyle": "postcss assets/css/**/*.css --no-map --use autoprefixer -d assets/css/",
