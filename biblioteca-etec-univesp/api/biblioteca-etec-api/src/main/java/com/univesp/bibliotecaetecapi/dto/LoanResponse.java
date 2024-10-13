@@ -10,11 +10,10 @@ import java.time.LocalDate;
 public class LoanResponse {
 
     private Long idEmprestimo;
-
     private LocalDate dataEmprestimo;
-
     private LocalDate dataDevolucao;
-
-    private BookEntity bookEntity;
-    private StudentEntity studentEntity;
+    private String nomeAluno;
+    private String matricula;
+    private String nomeLivro;
+    private String codigoLivro;
 }

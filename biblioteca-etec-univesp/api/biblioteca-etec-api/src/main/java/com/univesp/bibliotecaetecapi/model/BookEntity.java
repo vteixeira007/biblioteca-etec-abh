@@ -17,12 +17,16 @@ public class BookEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
     private Long idLivro;
     @Column
     private String titulo;
     @Column
     private String autor;
+    @Column
+    private String assunto;
     @Column
     private String descricao;
     @Column
@@ -38,9 +42,12 @@ public class BookEntity implements Serializable {
     private LocalDateTime DataAtuallizacao;
     @ManyToOne
     private CategoryEntity categoryEntity;
-
+    @ManyToOne
+    private StudentEntity studentEntity;
     @PrimaryKeyJoinColumn
-    @OneToMany(mappedBy = "bookEntity", cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "bookEntity",
+            cascade = {CascadeType.ALL})
     @JsonIgnore
     List<LoanEntity> loan = new ArrayList<>();
 

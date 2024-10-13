@@ -16,7 +16,9 @@ public class StudentEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
     private Long idAluno;
     @Column
     private String nome;
@@ -36,11 +38,20 @@ public class StudentEntity implements Serializable {
     private LocalDateTime DataCriacao;
     @Column
     private LocalDateTime DataAtuallizacao;
-
     @PrimaryKeyJoinColumn
-    @OneToMany(mappedBy = "studentEntity", cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "studentEntity",
+            cascade = {CascadeType.ALL}
+    )
     @JsonIgnore
-    List<LoanEntity> loan = new ArrayList<>();
+    private List<LoanEntity> loan = new ArrayList();
+    @PrimaryKeyJoinColumn
+    @OneToMany(
+            mappedBy = "studentEntity",
+            cascade = {CascadeType.ALL}
+    )
+    @JsonIgnore
+    private List<BookEntity> bookEntities = new ArrayList();
 
 
 }

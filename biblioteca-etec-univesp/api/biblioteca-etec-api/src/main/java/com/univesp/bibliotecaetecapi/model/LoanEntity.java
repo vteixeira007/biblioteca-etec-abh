@@ -13,7 +13,9 @@ import java.time.LocalDate;
 public class LoanEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
     private Long idEmprestimo;
     @Column
     private LocalDate dataEmprestimo;
@@ -23,6 +25,5 @@ public class LoanEntity implements Serializable {
     private BookEntity bookEntity;
     @ManyToOne
     private StudentEntity studentEntity;
-
 
 }

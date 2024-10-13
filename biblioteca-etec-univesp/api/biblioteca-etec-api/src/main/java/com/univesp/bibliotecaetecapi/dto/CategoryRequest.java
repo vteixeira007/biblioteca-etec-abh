@@ -13,10 +13,9 @@ import java.util.List;
 public class CategoryRequest {
 
     private Long idCategoria;
-    @NotNull
-    private String nome;
+    private @NotNull String nome;
     private LocalDateTime DataCriacao;
     private LocalDateTime DataAtuallizacao;
-    List<BookRequest> bookRequests = new ArrayList<>();
+    List<BookRequest> bookRequests = new ArrayList();
 
 }

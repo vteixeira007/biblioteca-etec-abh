@@ -16,18 +16,22 @@ public class CategoryEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(
+            strategy = GenerationType.AUTO
+    )
     private Long idCategoria;
     @Column
     private String nome;
     @Column
     private LocalDateTime DataCriacao;
     @Column
-    private LocalDateTime DataAtuallizacao;
-
+    private LocalDateTime dataAtualizacao;
     @PrimaryKeyJoinColumn
-    @OneToMany(mappedBy = "categoryEntity", cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "categoryEntity",
+            cascade = {CascadeType.PERSIST}
+    )
     @JsonIgnore
-    List<BookEntity> bookEntities = new ArrayList<>();
+    List<BookEntity> bookEntities = new ArrayList();
 
 }
