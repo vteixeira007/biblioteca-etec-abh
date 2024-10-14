@@ -1,0 +1,23 @@
+spring:
+  application:
+
+    name: biblioteca-etec-api
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_biblioteca
+    username: root
+    password: root
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+  output:
+    ansi:
+      enabled: Always
+logging:
+  level:
+    com.univesp.bibliotecaetecapi: DEBUG
