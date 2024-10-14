@@ -1,2 +1,3 @@
-# biblioteca-etec-abh
-Projeto PI - 1
+# project-Foliobox
+
+## Esse projeto está sendo desenvolvido para exemplo ao desenvolvedores da equipe Foliobox.
