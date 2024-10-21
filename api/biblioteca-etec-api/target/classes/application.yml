@@ -3,21 +3,18 @@ spring:
 
     name: biblioteca-etec-api
   datasource:
-    url: jdbc:mysql://localhost:3306/db_biblioteca
-    username: root
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
     password: root
   jpa:
-    database: mysql
+    database: POSTGRESQL
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     open-in-view: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
-  output:
-    ansi:
-      enabled: Always
-logging:
-  level:
-    com.univesp.bibliotecaetecapi: DEBUG
+
+server:
+  port: 8090

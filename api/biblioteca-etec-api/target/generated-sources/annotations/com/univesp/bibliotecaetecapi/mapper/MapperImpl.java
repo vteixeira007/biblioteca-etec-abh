@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-10-06T17:06:02-0300",
+    date = "2024-10-19T16:40:53-0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (Oracle Corporation)"
 )
 @Component
@@ -144,7 +144,6 @@ public class MapperImpl implements Mapper {
         bookEntity.setStatus( request.getStatus() );
         bookEntity.setDataCriacao( request.getDataCriacao() );
         bookEntity.setDataAtuallizacao( request.getDataAtuallizacao() );
-        bookEntity.setLoan( loanRequestListToLoanEntityList( request.getLoan() ) );
 
         return bookEntity;
     }
