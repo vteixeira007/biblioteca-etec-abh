@@ -8,7 +8,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Executar a construção do Maven para criar o JAR
+
 RUN mvn clean package -DskipTests
 
 # Etapa de execução
