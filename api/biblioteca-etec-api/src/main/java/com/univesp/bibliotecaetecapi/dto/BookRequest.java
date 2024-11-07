@@ -15,6 +15,7 @@ public class BookRequest {
     private Long idLivro;
     private String titulo;
     private String autor;
+    private String assunto;
     private String descricao;
     private String codigo;
     private Integer quantidade;
@@ -22,6 +23,5 @@ public class BookRequest {
     private LocalDateTime DataCriacao;
     private LocalDateTime DataAtuallizacao;
     private Long idCategoria;
-    List<LoanRequest> loan = new ArrayList<>();
-
+    private String nome;
 }

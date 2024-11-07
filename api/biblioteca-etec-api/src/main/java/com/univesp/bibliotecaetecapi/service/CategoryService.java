@@ -16,6 +16,8 @@ import com.univesp.bibliotecaetecapi.repository.CategoryRepository;
 import com.univesp.bibliotecaetecapi.repository.StudentRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,57 +31,60 @@ import java.util.Optional;
 public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
-
     @Autowired
     private Mapper mapper;
 
-    public List<CategoryResponse> getAllCategories() {
-        List<CategoryEntity> listCategory =categoryRepository.findAll();
-        List<CategoryResponse> listCategoryResponse = listCategory.stream()
-                .map(category -> mapper.entityToDtoCategory(category)).toList();
+    public CategoryService() {
+    }
 
+    public List<CategoryResponse> getAllCategories() {
+        List<CategoryEntity> listCategory = this.categoryRepository.findAll();
+        List<CategoryResponse> listCategoryResponse = listCategory.stream().map((category) -> {
+            return this.mapper.entityToDtoCategory(category);
+        }).toList();
+        log.debug("Categorias mapeadass: {}", listCategory);
         return listCategoryResponse;
     }
 
-
     public CategoryEntity insertCategory(CategoryRequest request) {
-        Optional<CategoryEntity> categoryEntityOptional = categoryRepository.findByNome(request.getNome());
+        Optional<CategoryEntity> categoryEntityOptional = this.categoryRepository.findByNome(request.getNome());
         if (categoryEntityOptional.isPresent()) {
             throw new CategoryAlreadyExistsException();
         } else {
             request.setDataCriacao(LocalDateTime.now());
-            CategoryEntity categoryEntity = mapper.dtoToEntityCategory(request);
-            return categoryRepository.save(categoryEntity);
+            CategoryEntity categoryEntity = this.mapper.dtoToEntityCategory(request);
+            return (CategoryEntity)this.categoryRepository.save(categoryEntity);
         }
     }
 
-
     public CategoryResponse getCategoryById(Long idAluno) {
-        Optional<CategoryEntity> categoryEntityOptional = categoryRepository.findById(idAluno);
+        Optional<CategoryEntity> categoryEntityOptional = this.categoryRepository.findById(idAluno);
         if (categoryEntityOptional.isEmpty()) {
             throw new CategoryNotFound();
+        } else {
+            CategoryResponse categoryResponse = this.mapper.entityToDtoCategory((CategoryEntity)categoryEntityOptional.get());
+            return categoryResponse;
         }
-        CategoryResponse categoryResponse = mapper.entityToDtoCategory(categoryEntityOptional.get());
-        return categoryResponse;
     }
 
     public void deleteCategory(Long idCategory) {
-        Optional<CategoryEntity> categoryEntityOptional = categoryRepository.findById(idCategory);
+        Optional<CategoryEntity> categoryEntityOptional = this.categoryRepository.findById(idCategory);
         if (categoryEntityOptional.isEmpty()) {
             throw new CategoryNotFound();
+        } else {
+            CategoryEntity category = (CategoryEntity)categoryEntityOptional.get();
+            this.categoryRepository.delete(category);
         }
-        CategoryEntity category = categoryEntityOptional.get();
-        categoryRepository.delete(category);
-
     }
 
     public void updateCategory(CategoryEntity currentCategory, Long idCategory) {
-        Optional<CategoryEntity> categoryEntityOptional = categoryRepository.findById(idCategory);
+        Optional<CategoryEntity> categoryEntityOptional = this.categoryRepository.findById(idCategory);
         if (categoryEntityOptional.isEmpty()) {
             throw new CategoryNotFound();
+        } else {
+            CategoryEntity categoryInDb = (CategoryEntity)categoryEntityOptional.get();
+            categoryInDb.setNome(currentCategory.getNome());
+            this.categoryRepository.save(categoryInDb);
         }
-        CategoryEntity categoryInDb = categoryEntityOptional.get();
-        categoryInDb.setNome(currentCategory.getNome());
-        categoryRepository.save(categoryInDb);
     }
 }

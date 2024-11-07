@@ -13,13 +13,14 @@ public class BookResponse {
     private Long idLivro;
     private String titulo;
     private String autor;
+    private String assunto;
     private String descricao;
     private String codigo;
     private Integer quantidade;
     private Status status;
     private LocalDateTime DataCriacao;
     private LocalDateTime DataAtuallizacao;
-    private Long idCategoria;
+    private String nomeCategoria;
 
 
 }
