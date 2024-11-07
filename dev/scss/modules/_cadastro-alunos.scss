@@ -1,0 +1,96 @@
+/* Estilos para feedback visual */
+.input-error {
+  border-color: $red-r6 !important;
+  background-color: $white !important;
+}
+
+.message-feedback {
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.message-feedback.success {
+  background-color: $white;
+  border: 1px solid #68d391;
+  color: $green-g9;
+}
+
+.message-feedback.error {
+  background-color: $white;
+  border: 1px solid $red-r2;
+  color: $red-r6;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Adicione ao seu CSS existente */
+.lista-alunos {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.tabela-alunos {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.tabela-alunos th,
+.tabela-alunos td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid $secondary;
+}
+
+.tabela-alunos th {
+  background-color: $secondary;
+  font-weight: 600;
+  color: $gray-c1;
+}
+
+.tabela-alunos td {
+  color: var(--color-text);
+}
+
+.tabela-alunos tr:hover {
+  background-color: $gray-c4;
+}
+
+.tabela-alunos tr:last-child td {
+  border-bottom: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .tabela-alunos {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+/* Estilo para mensagem de erro mantendo o padrão do projeto */
+.lista-alunos .error {
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  text-align: center;
+  background-color: $secondary;
+  border: 1px solid $secondary;
+  color: var(--color-text);
+}
+
+/* Estilo para estado vazio */
+.lista-alunos .empty-state {
+  text-align: center;
+  padding: 30px;
+  color: var(--color-text);
+}
