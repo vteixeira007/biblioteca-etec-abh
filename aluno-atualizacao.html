@@ -29,7 +29,7 @@
       <ul id="menu" role="menu">
         <li class="li-biblioteca"><a href="./index.html">Biblioteca</a></li>
         <li class="li-livros "><a href="./add-livro.html">Adicionar Livros</a></li>
-        <li class="li-colecao"><a href="./add-colecao.html">Adicionar Coleção</a></li>
+        <li class="li-colecao"><a href="./add-colecao.html">Adicionar Categoria</a></li>
         <li class="li-alunos active"><a href="">Cadastrar Alunos</a></li>
         <div class="navbar-space">
           <li class="li-suporte"><a href="mailto:vinicius.teixeira60@etec.sp.gov.br" target="_blank">Suporte</a></li>
@@ -37,9 +37,6 @@
       </ul>
     </nav>
   </header>
-
-
-
   <main>
     <h1 class="titulo addColecao">Atualizar dados do Aluno</h1>
 
@@ -50,114 +47,57 @@
       </ul>
       <div class="line subtitulo"></div>
     </div>
-
-
-
-
-    <form action="">
+    <form id="atualizarAlunoForm" action="">
+      <!-- Campo de Pesquisa -->
       <div class="div_input">
-        <label class="input-titulo alunoAtualizacao">Pesquisar Aluno</label>
-        <input class="home-pesquisa_input" type="search">
-        <div class="line alunoAtualizacao"></div>
+          <label class="input-titulo alunoAtualizacao">Pesquisar Aluno</label>
+          <input class="home-pesquisa_input" type="search" id="pesquisaAluno" placeholder="Pesquisar aluno">
+          <div id="student-suggestions" class="suggestions"></div>
       </div>
-
-
-
+  
+      <!-- Campos para os Dados do Aluno -->
       <div class="div_input">
-        <label class="input-titulo">Nome</label>
-        <input class="input" type="text">
+          <label class="input-titulo" for="nome">Nome</label>
+          <input class="input" type="text" id="nome">
       </div>
-
       <div class="div_input">
-        <label class="input-titulo">CPF</label>
-        <input class="input" type="text">
-        <span class="legenda">Apenas números.</span>
+          <label class="input-titulo" for="cpf">CPF</label>
+          <input class="input" type="text" id="cpf">
+          <span class="legenda">Apenas números.</span>
       </div>
-
-      <div class="div_input-row">
-        <div class="div_input split two">
-          <div class="div_input">
-            <label class="input-titulo">E-mail</label>
-            <input class="input" type="email">
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">Telefone</label>
-            <input class="input" type="tel">
-            <span class="legenda">Apenas Números.</span>
-          </div>
-        </div>
+      <div class="div_input">
+          <label class="input-titulo" for="email">E-mail</label>
+          <input class="input" type="email" id="email">
       </div>
-
-
+      <div class="div_input">
+          <label class="input-titulo" for="telefone">Telefone</label>
+          <input class="input" type="tel" id="telefone">
+          <span class="legenda">Apenas Números.</span>
+      </div>
+  
+      <!-- Informações da Matrícula -->
       <div class="subtitulo">
-        <span class="subtitulo-text">Endereço</span>
-        <div class="line subtitulo"></div>
+          <span class="subtitulo-text">Informações da Matrícula</span>
+          <div class="line subtitulo"></div>
       </div>
-
       <div class="div_input">
-        <label class="input-titulo">Bairro</label>
-        <input class="input" type="text">
+          <label class="input-titulo" for="matricula">Número da matrícula</label>
+          <input class="input" type="text" id="matricula">
       </div>
-
       <div class="div_input">
-        <label class="input-titulo">CEP</label>
-        <input class="input" type="text">
-        <span class="legenda">Apenas números.</span>
+          <label class="input-titulo" for="curso">Curso</label>
+          <input class="input" type="text" id="curso">
       </div>
-
-
-      <div class="div_input-row">
-        <div class="div_input split three--broken">
-          <div class="div_input">
-            <label class="input-titulo">Rua</label>
-            <input class="input" type="text">
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">Número</label>
-            <input class="input" type="number">
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">Complemento</label>
-            <input class="input" type="text">
-          </div>
-        </div>
-      </div>
-
-
-      <div class="subtitulo">
-        <span class="subtitulo-text">Informações da Matrícula</span>
-        <div class="line subtitulo"></div>
-      </div>
-
       <div class="div_input">
-        <label class="input-titulo">Número da matrícula</label>
-        <input class="input" type="text">
+          <label class="input-titulo" for="turma">Turma</label>
+          <input class="input" type="text" id="turma">
       </div>
-
-      <div class="div_input-row">
-        <div class="div_input split two">
-          <div class="div_input">
-            <label class="input-titulo">Curso</label>
-            <input class="input" type="text">
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">Turma</label>
-            <input class="input" type="text">
-          </div>
-        </div>
-      </div>
-
-      <div class="div_input space">
-        <label class="input-titulo">Anotações</label>
-        <textarea cols="30" rows="10"></textarea>
-      </div>
-
+  
+      <!-- Botão Atualizar -->
       <div class="addLivro_form-button">
-        <button class="button" type="submit">Atualizar</button>
+          <button class="button" type="submit" id="btnAtualizar">Atualizar</button>
       </div>
-
     </form>
-
   </main>
 
 

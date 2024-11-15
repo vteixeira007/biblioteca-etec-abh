@@ -34,7 +34,7 @@ button:disabled {
   overflow-x: auto;
 }
 
-.tabela-alunos {
+table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 15px;
@@ -43,34 +43,34 @@ button:disabled {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.tabela-alunos th,
-.tabela-alunos td {
+table th,
+table td {
   padding: 16px;
   text-align: left;
   border-bottom: 1px solid $secondary;
 }
 
-.tabela-alunos th {
+table th {
   background-color: $secondary;
   font-weight: 600;
   color: $gray-c1;
 }
 
-.tabela-alunos td {
+table td {
   color: var(--color-text);
 }
 
-.tabela-alunos tr:hover {
+table tr:hover {
   background-color: $gray-c4;
 }
 
-.tabela-alunos tr:last-child td {
+table tr:last-child td {
   border-bottom: none;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .tabela-alunos {
+  table {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
@@ -78,7 +78,7 @@ button:disabled {
 }
 
 /* Estilo para mensagem de erro mantendo o padrão do projeto */
-.lista-alunos .error {
+.lista-table .error {
   padding: 15px;
   margin: 10px 0;
   border-radius: 8px;
@@ -89,7 +89,7 @@ button:disabled {
 }
 
 /* Estilo para estado vazio */
-.lista-alunos .empty-state {
+.lista-table .empty-state {
   text-align: center;
   padding: 30px;
   color: var(--color-text);

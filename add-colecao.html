@@ -13,8 +13,6 @@
   <!-- <link rel="stylesheet" href="./assets/css/main-min.css"> Style Build -->
 </head>
 
-
-
 <body>
 
   <header>
@@ -29,7 +27,7 @@
       <ul id="menu" role="menu">
         <li class="li-biblioteca"><a href="./index.html">Biblioteca</a></li>
         <li class="li-livros"><a href="./add-livro.html">Adicionar Livros</a></li>
-        <li class="li-colecao active"><a href="">Adicionar Coleção</a></li>
+        <li class="li-colecao active"><a href="">Adicionar Categoria</a></li>
         <li class="li-alunos"><a href="./cadastro-alunos.html">Cadastrar Alunos</a></li>
         <div class="navbar-space">
           <li class="li-suporte"><a href="mailto:vinicius.teixeira60@etec.sp.gov.br" target="_blank">Suporte</a></li>
@@ -39,7 +37,7 @@
   </header>
 
   <main>
-    <h1 class="titulo addColecao">Adicionar Coleção</h1>
+    <h1 class="titulo addColecao">Adicionar Categoria</h1>
     <div class="line subtitulo"></div>
 
     <div class="subtitulo">
@@ -52,22 +50,32 @@
       <div class="line subtitulo"></div>
     </div>
 
-    <form action="">
+    <form id="formCadastroCategorias">
       <div class="div_input">
-        <label class="input-titulo addColecao">Título da Coleção</label>
-        <input class="input" type="text">
+        <label class="input-titulo addColecao">Título da Categoria</label>
+        <input class="input" type="text" id="nomeCategoria">
         <span class="legenda">Limite de 40 caracteres. Por exemplo, (Ação, Ficção Cientifica, Fantasia, Romance).</span>
       </div>
       <button class="button" type="submit">Adicionar</button>
     </form>
 
+     <!-- Tabela de retorno para teste -->
+     <div class="subtitulo" style="margin-top: 44px;">
+      <ul class="subtitulo-menu">
+        <li><a class="subtitulo-text">Tebela Teste Lista Categorias</a></li>
+      </ul>
+      <div class="line subtitulo"></div>
+    </div>
+
+    <div class="div_input">
+      <div class="addLivro_form-button">
+        <button type="button" id="btnListarCategorias" class="button">
+          Listar Categorias
+        </button>
+      </div>
+      <div id="listaCategorias" class="lista-table"></div>
+    </div>
   </main>
-
-
   <script src="./assets/js/main.js"></script>
-
-
 </body>
-
-
 </html>

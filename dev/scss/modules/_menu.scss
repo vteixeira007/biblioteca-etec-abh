@@ -87,7 +87,7 @@ header {
         display: flex;
         align-items: center;
         width: 100%;
-        padding: 12px 34px;
+        padding: 12px 0 12px 34px;
         gap: 10px;
         @include type('title-xs');
         color: $black;
