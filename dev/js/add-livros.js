@@ -1,91 +1,99 @@
 export default function importCadastroLivros() {
   return new Promise((resolve) => {
     function inicializarFormulario() {
-      // Carregar categorias
-      fetch('https://biblioteca-etec-abh-2.onrender.com/categoria')
-        .then(response => response.json())
-        .then(categorias => {
-          const select = document.getElementById('categoria-select');
-          categorias.forEach(categoria => {
-            const option = document.createElement('option');
-            option.value = categoria.idCategoria;
-            option.textContent = categoria.nome;
-            select.appendChild(option);
-          });
-        })
-        .catch(error => {
-          console.error('Erro ao carregar categorias:', error);
-          alert('Erro ao carregar categorias. Por favor, tente novamente.');
-        });
+      // Verificar se estamos na página correta antes de inicializar
+      const categoriaSelect = document.getElementById('categoria-select');
+      const livroForm = document.getElementById('livroForm');
 
-      // Configurar envio do formulário
-      document.getElementById('livroForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        try {
-          // Validar campos obrigatórios
-          const campos = ['tituloLivro', 'autoresLivro', 'assuntoLivro', 'codigoLivro', 'quantidadeLivro'];
-          for (const campo of campos) {
-            const valor = document.getElementById(campo).value.trim();
-            if (!valor) {
-              throw new Error(`Por favor, preencha o campo ${campo.replace('Livro', '')}`);
+      // Carregar categorias apenas se o select existir
+      if (categoriaSelect) {
+        fetch('https://biblioteca-etec-abh-2.onrender.com/categoria')
+          .then(response => response.json())
+          .then(categorias => {
+            categorias.forEach(categoria => {
+              const option = document.createElement('option');
+              option.value = categoria.idCategoria;
+              option.textContent = categoria.nome;
+              categoriaSelect.appendChild(option);
+            });
+          })
+          .catch(error => {
+            console.error('Erro ao carregar categorias:', error);
+            // Só mostra o alerta se estivermos na página de adicionar livros
+            if (livroForm) {
+              alert('Erro ao carregar categorias. Por favor, tente novamente.');
             }
-          }
-
-          const categoriaId = document.getElementById('categoria-select').value;
-          if (!categoriaId) {
-            throw new Error('Por favor, selecione uma categoria');
-          }
-
-          // Preparar dados do livro
-          const livroData = {
-            titulo: document.getElementById('tituloLivro').value.trim(),
-            autor: document.getElementById('autoresLivro').value.trim(),
-            assunto: document.getElementById('assuntoLivro').value.trim(),
-            descricao: document.getElementById('descricaoLivro').value.trim() || 'Sem descrição',
-            codigo: document.getElementById('codigoLivro').value.trim(),
-            quantidade: parseInt(document.getElementById('quantidadeLivro').value, 10),
-            status: 'DISPONIVEL',
-            idCategoria: parseInt(categoriaId, 10)
-          };
-
-          // Validar código do livro
-          if (livroData.codigo.length > 13) {
-            throw new Error('O código do livro não pode ter mais que 13 caracteres');
-          }
-
-          // Validar quantidade
-          if (isNaN(livroData.quantidade) || livroData.quantidade < 1) {
-            throw new Error('A quantidade deve ser um número maior que zero');
-          }
-
-          // Enviar requisição
-          const response = await fetch('https://biblioteca-etec-abh-2.onrender.com/livro', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(livroData)
           });
+      }
 
-          if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText || 'Erro ao cadastrar livro');
-          }
-
-          alert('Livro cadastrado com sucesso!');
-          document.getElementById('livroForm').reset();
+      // Configurar envio do formulário apenas se ele existir
+      if (livroForm) {
+        livroForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
           
-          // Atualizar a lista de livros se ela existir na página
-          if (typeof listarLivros === 'function') {
-            listarLivros();
-          }
+          try {
+            // Validar campos obrigatórios
+            const campos = ['tituloLivro', 'autoresLivro', 'assuntoLivro', 'codigoLivro', 'quantidadeLivro'];
+            for (const campo of campos) {
+              const elemento = document.getElementById(campo);
+              if (!elemento || !elemento.value.trim()) {
+                throw new Error(`Por favor, preencha o campo ${campo.replace('Livro', '')}`);
+              }
+            }
 
-        } catch (error) {
-          console.error('Erro:', error);
-          alert(error.message || 'Erro ao cadastrar livro. Por favor, tente novamente.');
-        }
-      });
+            if (!categoriaSelect || !categoriaSelect.value) {
+              throw new Error('Por favor, selecione uma categoria');
+            }
+
+            // Preparar dados do livro
+            const livroData = {
+              titulo: document.getElementById('tituloLivro').value.trim(),
+              autor: document.getElementById('autoresLivro').value.trim(),
+              assunto: document.getElementById('assuntoLivro').value.trim(),
+              descricao: document.getElementById('descricaoLivro').value.trim() || 'Sem descrição',
+              codigo: document.getElementById('codigoLivro').value.trim(),
+              quantidade: parseInt(document.getElementById('quantidadeLivro').value, 10),
+              status: 'DISPONIVEL',
+              idCategoria: parseInt(categoriaSelect.value, 10)
+            };
+
+            // Validações
+            if (livroData.codigo.length > 13) {
+              throw new Error('O código do livro não pode ter mais que 13 caracteres');
+            }
+
+            if (isNaN(livroData.quantidade) || livroData.quantidade < 1) {
+              throw new Error('A quantidade deve ser um número maior que zero');
+            }
+
+            // Enviar requisição
+            const response = await fetch('https://biblioteca-etec-abh-2.onrender.com/livro', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(livroData)
+            });
+
+            if (!response.ok) {
+              const errorText = await response.text();
+              throw new Error(errorText || 'Erro ao cadastrar livro');
+            }
+
+            alert('Livro cadastrado com sucesso!');
+            livroForm.reset();
+            
+            // Atualizar a lista de livros se ela existir na página
+            if (typeof listarLivros === 'function') {
+              listarLivros();
+            }
+
+          } catch (error) {
+            console.error('Erro:', error);
+            alert(error.message || 'Erro ao cadastrar livro. Por favor, tente novamente.');
+          }
+        });
+      }
     }
 
     // Inicializar quando o DOM estiver pronto
@@ -94,7 +102,6 @@ export default function importCadastroLivros() {
     } else {
       inicializarFormulario();
     }
-
 
     //Tabela
     window.deletarLivro = async function(id) {
@@ -112,14 +119,15 @@ export default function importCadastroLivros() {
         }
 
         alert('Livro deletado com sucesso!');
-        // Atualiza a lista de livros
-        listarLivros();
+        // Atualiza a lista de livros apenas se a função existir
+        if (typeof listarLivros === 'function') {
+          listarLivros();
+        }
       } catch (error) {
         console.error('Erro:', error);
         alert('Erro ao deletar livro. Por favor, tente novamente.');
       }
     };
-    
     
     async function listarLivros() {
       const listaDiv = document.getElementById('listaLivros');
@@ -166,16 +174,8 @@ export default function importCadastroLivros() {
     
           const tbody = document.createElement('tbody');
           categorias.forEach((categoria) => {
-            if (
-              categoria.bookResponses &&
-              Array.isArray(categoria.bookResponses)
-            ) {
+            if (categoria.bookResponses && Array.isArray(categoria.bookResponses)) {
               categoria.bookResponses.forEach((livro) => {
-                const subcategorias = livro.subcategorias
-                  ? livro.subcategorias.join(', ')
-                  : 'N/A';
-                const dataAtualizacao = livro.dataAtualizacao || 'N/A';
-    
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                   <td>${livro.idLivro}</td>
@@ -188,7 +188,7 @@ export default function importCadastroLivros() {
                   <td>${livro.status}</td>
                   <td>${livro.nomeCategoria}</td>
                   <td>${livro.dataCriacao}</td>
-                  <td>${livro.dataAtuallizacao}</td>
+                  <td>${livro.dataAtuallizacao || 'N/A'}</td>
                   <td>
                     <button class="button-delete" onclick="deletarLivro(${livro.idLivro})">
                       Deletar
@@ -218,31 +218,7 @@ export default function importCadastroLivros() {
       }
     }
     
-    // Função para deletar livro
-    async function deletarLivro(id) {
-      if (!confirm('Tem certeza que deseja deletar este livro?')) {
-        return;
-      }
-    
-      try {
-        const response = await fetch(`https://biblioteca-etec-abh-2.onrender.com/livro/${id}`, {
-          method: 'DELETE'
-        });
-    
-        if (!response.ok) {
-          throw new Error(`Erro ao deletar livro: ${response.status}`);
-        }
-    
-        alert('Livro deletado com sucesso!');
-        // Atualiza a lista de livros
-        listarLivros();
-      } catch (error) {
-        console.error('Erro:', error);
-        alert('Erro ao deletar livro. Por favor, tente novamente.');
-      }
-    }
-    
-    // Adicionar evento para o botão de listar categorias
+    // Adicionar evento para o botão de listar categorias apenas se ele existir
     const btnListarCategorias = document.getElementById('btnListarLivros');
     if (btnListarCategorias) {
       btnListarCategorias.addEventListener('click', listarLivros);

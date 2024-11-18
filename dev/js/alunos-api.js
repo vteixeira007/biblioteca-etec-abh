@@ -1,9 +1,12 @@
 export default function importCadastroAlunos() {
   return new Promise((resolve) => {
+    // Verificar se estamos na página de cadastro
+    const formCadastro = document.getElementById('formCadastroAluno');
+    const btnListarAlunos = document.getElementById('btnListarAlunos');
+
     //Cadastro
-    document
-      .getElementById('formCadastroAluno')
-      .addEventListener('submit', async function (e) {
+    if (formCadastro) {
+      formCadastro.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         const submitButton = this.querySelector('button[type="submit"]');
@@ -22,9 +25,7 @@ export default function importCadastroAlunos() {
           matricula: parseInt(document.getElementById('matricula').value),
           cpf: document.getElementById('cpf').value.replace(/\D/g, ''),
           email: document.getElementById('email').value.trim(),
-          telefone: document
-            .getElementById('telefone')
-            .value.replace(/\D/g, ''),
+          telefone: document.getElementById('telefone').value.replace(/\D/g, ''),
           curso: document.getElementById('curso').value.trim(),
           turma: document.getElementById('turma').value.trim(),
         };
@@ -61,11 +62,37 @@ export default function importCadastroAlunos() {
           submitButton.textContent = buttonText;
         }
       });
+    }
 
     //Tabela Para testes
-    document
-      .getElementById('btnListarAlunos')
-      .addEventListener('click', async function () {
+
+    window.deletarAluno = async function(id) {
+      if (!confirm('Tem certeza que deseja deletar este aluno?')) {
+        return;
+      }
+    
+      try {
+        const response = await fetch(`https://biblioteca-etec-abh-2.onrender.com/aluno/${id}`, {
+          method: 'DELETE'
+        });
+    
+        if (!response.ok) {
+          throw new Error(`Erro ao deletar aluno: ${response.status}`);
+        }
+    
+        alert('Aluno deletado com sucesso!');
+        // Atualiza a lista de alunos apenas se a função existir
+        if (typeof listarAlunos === 'function') {
+          listarAlunos();
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro ao deletar aluno. Por favor, tente novamente.');
+      }
+    };
+
+    if (btnListarAlunos) {
+      btnListarAlunos.addEventListener('click', async function () {
         const button = this;
         const listaDiv = document.getElementById('listaAlunos');
 
@@ -88,59 +115,122 @@ export default function importCadastroAlunos() {
 
           const thead = document.createElement('thead');
           thead.innerHTML = `
-        <tr>
-            <th>Nome</th>
-            <th>Matrícula</th>
-            <th>Curso</th>
-            <th>Turma</th>
-            <th>E-mail</th>
-            <th>Telefone</th>
-        </tr>
-    `;
+            <tr>
+                <th>Nome</th>
+                <th>Matrícula</th>
+                <th>Curso</th>
+                <th>Turma</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+            </tr>
+        `;
           table.appendChild(thead);
 
           const tbody = document.createElement('tbody');
           alunos.forEach((aluno) => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-            <td>${aluno.nome}</td>
-            <td>${aluno.matricula}</td>
-            <td>${aluno.curso}</td>
-            <td>${aluno.turma}</td>
-            <td>${aluno.email}</td>
-            <td>${aluno.telefone}</td>
-        `;
+              <td>${aluno.nome}</td>
+              <td>${aluno.matricula}</td>
+              <td>${aluno.curso}</td>
+              <td>${aluno.turma}</td>
+              <td>${aluno.email}</td>
+              <td>${aluno.telefone}</td>
+              <td>
+                <button onclick="deletarAluno(${aluno.idAluno})" class="btn-delete">
+                  Deletar
+                </button>
+              </td>
+            `;
             tbody.appendChild(tr);
           });
           table.appendChild(tbody);
 
-          listaDiv.innerHTML = '';
-          listaDiv.appendChild(table);
+          if (listaDiv) {
+            listaDiv.innerHTML = '';
+            listaDiv.appendChild(table);
+          }
         } catch (error) {
           console.error('Erro:', error);
-          listaDiv.innerHTML =
-            '<p class="error">Erro ao carregar a lista de alunos. Por favor, tente novamente.</p>';
+          if (listaDiv) {
+            listaDiv.innerHTML =
+              '<p class="error">Erro ao carregar a lista de alunos. Por favor, tente novamente.</p>';
+          }
         } finally {
           button.textContent = 'Listar Alunos';
           button.disabled = false;
         }
       });
-
-    function showMessage(message, isError = false) {
-      const existingMessage = document.querySelector('.message-feedback');
-      if (existingMessage) {
-        existingMessage.remove();
-      }
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message-feedback ${
-        isError ? 'error' : 'success'
-      }`;
-      messageDiv.textContent = message;
-      const submitButton = document.querySelector('.addLivro_form-button');
-      submitButton.parentNode.insertBefore(messageDiv, submitButton);
-
-      setTimeout(() => messageDiv.remove(), 5000);
     }
+
+    // Validações de campos e eventos apenas se os elementos existirem
+    const cpfInput = document.getElementById('cpf');
+    const telefoneInput = document.getElementById('telefone');
+    const cepInput = document.getElementById('cep');
+    const matriculaInput = document.getElementById('matricula');
+
+    if (cpfInput) {
+      cpfInput.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 11) value = value.slice(0, 11);
+
+        if (value.length > 3) {
+          value = value.replace(/^(\d{3})/, '$1.');
+        }
+        if (value.length > 6) {
+          value = value.replace(/^(\d{3})\.(\d{3})/, '$1.$2.');
+        }
+        if (value.length > 9) {
+          value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})/, '$1.$2.$3-');
+        }
+
+        e.target.value = value;
+        this.classList.remove('input-error');
+      });
+    }
+
+    if (telefoneInput) {
+      telefoneInput.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 11) value = value.slice(0, 11);
+
+        if (value.length > 2) {
+          value = `(${value.slice(0, 2)})${value.slice(2)}`;
+        }
+        if (value.length > 9) {
+          value = `${value.slice(0, 9)}-${value.slice(9)}`;
+        }
+        e.target.value = value;
+        this.classList.remove('input-error');
+      });
+    }
+
+    if (cepInput) {
+      cepInput.addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 8) value = value.slice(0, 8);
+
+        if (value.length > 5) {
+          value = value.replace(/^(\d{5})/, '$1-');
+        }
+
+        e.target.value = value;
+      });
+    }
+
+    if (matriculaInput) {
+      matriculaInput.addEventListener('input', function (e) {
+        e.target.value = e.target.value.replace(/\D/g, '');
+        this.classList.remove('input-error');
+      });
+    }
+
+    // Remover classe de erro em todos os inputs
+    document.querySelectorAll('.input').forEach((input) => {
+      input.addEventListener('input', function () {
+        this.classList.remove('input-error');
+      });
+    });
 
     function validarCampos() {
       const camposObrigatorios = [
@@ -157,33 +247,18 @@ export default function importCadastroAlunos() {
 
       camposObrigatorios.forEach((campo) => {
         const elemento = document.getElementById(campo);
-        const valor = elemento.value.trim();
+        if (elemento) {
+          const valor = elemento.value.trim();
+          elemento.classList.remove('input-error');
 
-        elemento.classList.remove('input-error');
-
-        if (!valor) {
-          elemento.classList.add('input-error');
-          isValid = false;
-          if (!campoInvalido)
-            campoInvalido = elemento.previousElementSibling.textContent;
+          if (!valor) {
+            elemento.classList.add('input-error');
+            isValid = false;
+            if (!campoInvalido)
+              campoInvalido = elemento.previousElementSibling?.textContent || campo;
+          }
         }
       });
-
-      const cpf = document.getElementById('cpf').value.replace(/\D/g, '');
-      if (cpf.length !== 11) {
-        document.getElementById('cpf').classList.add('input-error');
-        isValid = false;
-        campoInvalido = 'CPF (deve ter 11 dígitos)';
-      }
-
-      const telefone = document
-        .getElementById('telefone')
-        .value.replace(/\D/g, '');
-      if (telefone.length < 10) {
-        document.getElementById('telefone').classList.add('input-error');
-        isValid = false;
-        campoInvalido = 'Telefone (deve ter pelo menos 10 dígitos)';
-      }
 
       if (!isValid) {
         showMessage(
@@ -195,66 +270,27 @@ export default function importCadastroAlunos() {
       return isValid;
     }
 
-    //validação CPF
-    document.getElementById('cpf').addEventListener('input', function (e) {
-      let value = e.target.value.replace(/\D/g, '');
-      if (value.length > 11) value = value.slice(0, 11);
+    function showMessage(message, isError = false) {
+      const submitButton = document.querySelector('.addLivro_form-button');
+      if (!submitButton) return;
 
-      if (value.length > 3) {
-        value = value.replace(/^(\d{3})/, '$1.');
-      }
-      if (value.length > 6) {
-        value = value.replace(/^(\d{3})\.(\d{3})/, '$1.$2.');
-      }
-      if (value.length > 9) {
-        value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})/, '$1.$2.$3-');
+      const existingMessage = document.querySelector('.message-feedback');
+      if (existingMessage) {
+        existingMessage.remove();
       }
 
-      e.target.value = value;
-      this.classList.remove('input-error');
-    });
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message-feedback ${isError ? 'error' : 'success'}`;
+      messageDiv.textContent = message;
+      submitButton.parentNode.insertBefore(messageDiv, submitButton);
 
-    //validação telefone
-    document.getElementById('telefone').addEventListener('input', function (e) {
-      let value = e.target.value.replace(/\D/g, '');
-      if (value.length > 11) value = value.slice(0, 11);
+      setTimeout(() => messageDiv.remove(), 5000);
+    }
 
-      if (value.length > 2) {
-        value = `(${value.slice(0, 2)})${value.slice(2)}`;
-      }
-      if (value.length > 9) {
-        value = `${value.slice(0, 9)}-${value.slice(9)}`;
-      }
-      e.target.value = value;
-      this.classList.remove('input-error');
-    });
-
-    document.getElementById('cep').addEventListener('input', function (e) {
-      let value = e.target.value.replace(/\D/g, '');
-      if (value.length > 8) value = value.slice(0, 8);
-
-      if (value.length > 5) {
-        value = value.replace(/^(\d{5})/, '$1-');
-      }
-
-      e.target.value = value;
-    });
-
-    //validação mastricula
-    document
-      .getElementById('matricula')
-      .addEventListener('input', function (e) {
-        e.target.value = e.target.value.replace(/\D/g, '');
-        this.classList.remove('input-error');
-      });
-
-    document.querySelectorAll('.input').forEach((input) => {
-      input.addEventListener('input', function () {
-        this.classList.remove('input-error');
-      });
-    });
-
-    document.addEventListener('DOMContentLoaded', listarAlunos);
+    // Inicializar listagem apenas se a função e o elemento existirem
+    if (typeof listarAlunos === 'function' && document.getElementById('listaAlunos')) {
+      document.addEventListener('DOMContentLoaded', listarAlunos);
+    }
 
     resolve();
   });

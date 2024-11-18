@@ -94,6 +94,33 @@ export default function addCategoria() {
     }
 
     // Função para listar categorias
+
+    window.deletarCategoria = async function(idCategoria) {
+      if (!confirm('Tem certeza que deseja deletar esta categoria?')) {
+        return;
+      }
+    
+      try {
+        const response = await fetch(`https://biblioteca-etec-abh-2.onrender.com/categoria/${idCategoria}`, {
+          method: 'DELETE'
+        });
+    
+        if (!response.ok) {
+          throw new Error(`Erro ao deletar categoria: ${response.status}`);
+        }
+    
+        alert('Categoria deletada com sucesso!');
+        // Atualiza a lista de categorias apenas se a função existir
+        if (typeof listarCategorias === 'function') {
+          await listarCategorias();
+        }
+      } catch (error) {
+        console.error('Erro:', error);
+        alert('Erro ao deletar categoria. Por favor, tente novamente.');
+      }
+    };
+
+
     async function listarCategorias() {
       const listaDiv = document.getElementById('listaCategorias');
       const button = document.getElementById('btnListarCategorias');
@@ -133,6 +160,11 @@ export default function addCategoria() {
             tr.innerHTML = `
             <td>${categoria.idCategoria}</td>
             <td>${categoria.nome}</td>
+                      <td>
+            <button onclick="deletarCategoria(${categoria.idCategoria})" class="btn-delete">
+              Deletar
+            </button>
+          </td>
           `;
             tbody.appendChild(tr);
           });
