@@ -1,19 +1,18 @@
 package com.univesp.bibliotecaetecapi.repository;
 
 
-import com.univesp.bibliotecaetecapi.model.BookEntity;
-import com.univesp.bibliotecaetecapi.model.StudentEntity;
+import com.univesp.bibliotecaetecapi.model.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface BookRepository extends JpaRepository<BookEntity,Long> {
-   Optional<BookEntity> findByTitulo(String titulo);
+public interface BookRepository extends JpaRepository<Book,Long> {
+   Optional<Book> findByTitulo(String titulo);
 
-   Optional<BookEntity> findByCodigo(String codigo);
+   Optional<Book> findByCodigo(String codigo);
 
-   List<BookEntity> findAllByAssunto(String assunto);
+   List<Book> findAllByAssunto(String assunto);
 
-   List<Optional<BookEntity>> findByAutor(String autor);
+   List<Optional<Book>> findByAutor(String autor);
 }

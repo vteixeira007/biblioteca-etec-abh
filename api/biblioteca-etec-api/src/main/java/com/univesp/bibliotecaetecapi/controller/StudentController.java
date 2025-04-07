@@ -2,7 +2,7 @@ package com.univesp.bibliotecaetecapi.controller;
 
 import com.univesp.bibliotecaetecapi.dto.StudentRequest;
 import com.univesp.bibliotecaetecapi.dto.StudentResponse;
-import com.univesp.bibliotecaetecapi.model.StudentEntity;
+import com.univesp.bibliotecaetecapi.model.Student;
 import com.univesp.bibliotecaetecapi.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,9 +33,9 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<StudentEntity> insertStudent(@RequestBody @Valid StudentRequest aluno) {
-        StudentEntity studentEntity = this.studentService.insertStudent(aluno);
-        return ResponseEntity.status(HttpStatus.CREATED).body(studentEntity);
+    public ResponseEntity<Student> insertStudent(@RequestBody @Valid StudentRequest aluno) {
+        Student student = this.studentService.insertStudent(aluno);
+        return ResponseEntity.status(HttpStatus.CREATED).body(student);
     }
 
     @DeleteMapping({"/{id}"})
@@ -45,7 +45,7 @@ public class StudentController {
     }
 
     @PutMapping({"/{id}"})
-    public ResponseEntity<String> updateStudent(@RequestBody StudentEntity student, @PathVariable("id") Long idAluno) {
+    public ResponseEntity<String> updateStudent(@RequestBody Student student, @PathVariable("id") Long idAluno) {
         student.setIdAluno(idAluno);
         this.studentService.updateStudent(student, idAluno);
         String mensagem = "Aluno com o ID " + idAluno + " foi atualizado com sucesso.";

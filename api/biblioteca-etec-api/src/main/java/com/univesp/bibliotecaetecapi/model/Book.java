@@ -1,6 +1,7 @@
 package com.univesp.bibliotecaetecapi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.univesp.bibliotecaetecapi.enums.Status;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,48 +11,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "aluno_entity")
+@Table(name = "book_entity")
 @Data
-public class StudentEntity implements Serializable {
+public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(
             strategy = GenerationType.AUTO
     )
-    private Long idAluno;
+    private Long idLivro;
     @Column
-    private String nome;
+    private String titulo;
     @Column
-    private Integer matricula;
+    private String autor;
     @Column
-    private String cpf;
+    private String assunto;
     @Column
-    private String email;
+    private String descricao;
     @Column
-    private String telefone;
+    private String codigo;
     @Column
-    private String curso;
+    private Integer quantidade;
     @Column
-    private String turma;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     @Column
     private LocalDateTime DataCriacao;
     @Column
     private LocalDateTime DataAtuallizacao;
+    @ManyToOne
+    private Category category;
+    @ManyToOne
+    private Student student;
     @PrimaryKeyJoinColumn
     @OneToMany(
-            mappedBy = "studentEntity",
-            cascade = {CascadeType.ALL}
-    )
+            mappedBy = "book",
+            cascade = {CascadeType.ALL})
     @JsonIgnore
-    private List<LoanEntity> loan = new ArrayList();
-    @PrimaryKeyJoinColumn
-    @OneToMany(
-            mappedBy = "studentEntity",
-            cascade = {CascadeType.ALL}
-    )
-    @JsonIgnore
-    private List<BookEntity> bookEntities = new ArrayList();
-
+    List<Loan> loan = new ArrayList<>();
 
 }

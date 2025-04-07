@@ -3,12 +3,12 @@ spring:
 
     name: biblioteca-etec-api
   datasource:
-    url: ${DB_URL}
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-#    url: jdbc:postgresql://localhost:5432/postgres
-#    username: postgres
-#    password: root
+#    url: ${DB_URL}
+#    username: ${DB_USERNAME}
+#    password: ${DB_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: root
   jpa:
     database: POSTGRESQL
     hibernate:
@@ -21,3 +21,8 @@ spring:
 
 server:
   port: 8090
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET:my-secret-key}

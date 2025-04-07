@@ -2,11 +2,10 @@ package com.univesp.bibliotecaetecapi.controller;
 
 import com.univesp.bibliotecaetecapi.dto.BookRequest;
 import com.univesp.bibliotecaetecapi.dto.BookResponse;
-import com.univesp.bibliotecaetecapi.model.BookEntity;
+import com.univesp.bibliotecaetecapi.model.Book;
 import com.univesp.bibliotecaetecapi.service.BookService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping({"/livro"})
@@ -50,9 +48,9 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<BookEntity> insertBook(@RequestBody @Valid BookRequest book) {
+    public ResponseEntity<Book> insertBook(@RequestBody @Valid BookRequest book) {
         log.debug("BookRequest: {}", book);
-        BookEntity bookEntity = this.bookService.insertBook(book);
+        Book bookEntity = this.bookService.insertBook(book);
         log.debug("BookEntity: {}", bookEntity);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(new Object[]{book.getIdLivro()}).toUri();
         return ResponseEntity.created(uri).body(bookEntity);
@@ -65,7 +63,7 @@ public class BookController {
     }
 
     @PutMapping({"/{id}"})
-    public ResponseEntity<String> updateBook(@RequestBody BookEntity book, @PathVariable("id") Long idBook) {
+    public ResponseEntity<String> updateBook(@RequestBody Book book, @PathVariable("id") Long idBook) {
         book.setIdLivro(idBook);
         this.bookService.updateBook(book, idBook);
         String mensagem = "Categoria com o ID " + idBook + " foi atualizado com sucesso.";
