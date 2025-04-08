@@ -2,7 +2,6 @@ package com.univesp.bibliotecaetecapi.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -10,7 +9,7 @@ import java.time.LocalDate;
 @Data
 @Table(name = "loan_entity")
 @Entity
-public class LoanEntity implements Serializable {
+public class Loan implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(
@@ -22,8 +21,8 @@ public class LoanEntity implements Serializable {
     @Column
     private LocalDate dataDevolucao;
     @ManyToOne
-    private BookEntity bookEntity;
+    private Book book;
     @ManyToOne
-    private StudentEntity studentEntity;
+    private Student student;
 
 }

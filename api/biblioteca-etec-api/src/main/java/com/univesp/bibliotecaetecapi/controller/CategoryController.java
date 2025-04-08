@@ -2,7 +2,7 @@ package com.univesp.bibliotecaetecapi.controller;
 
 import com.univesp.bibliotecaetecapi.dto.CategoryRequest;
 import com.univesp.bibliotecaetecapi.dto.CategoryResponse;
-import com.univesp.bibliotecaetecapi.model.CategoryEntity;
+import com.univesp.bibliotecaetecapi.model.Category;
 import com.univesp.bibliotecaetecapi.service.CategoryService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -39,8 +39,8 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<CategoryEntity> insertCategory(@RequestBody @Valid CategoryRequest category) {
-        CategoryEntity categoryEntity = this.categoryService.insertCategory(category);
+    public ResponseEntity<Category> insertCategory(@RequestBody @Valid CategoryRequest category) {
+        Category categoryEntity = this.categoryService.insertCategory(category);
         return ResponseEntity.status(HttpStatus.CREATED).body(categoryEntity);
     }
 
@@ -51,7 +51,7 @@ public class CategoryController {
     }
 
     @PutMapping({"/{id}"})
-    public ResponseEntity<String> updateCategory(@RequestBody CategoryEntity category, @PathVariable("id") Long idCategory) {
+    public ResponseEntity<String> updateCategory(@RequestBody Category category, @PathVariable("id") Long idCategory) {
         category.setIdCategoria(idCategory);
         this.categoryService.updateCategory(category, idCategory);
         String mensagem = "Categoria com o ID " + idCategory + " foi atualizado com sucesso.";
