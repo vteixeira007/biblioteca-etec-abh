@@ -1,7 +1,7 @@
 package com.univesp.bibliotecaetecapi.controller;
 import com.univesp.bibliotecaetecapi.dto.LoanRequest;
 import com.univesp.bibliotecaetecapi.dto.LoanResponse;
-import com.univesp.bibliotecaetecapi.model.LoanEntity;
+import com.univesp.bibliotecaetecapi.model.Loan;
 import com.univesp.bibliotecaetecapi.service.LoanService;
 import java.net.URI;
 import java.util.List;
@@ -29,7 +29,7 @@ public class LoanController {
     }
 
     @PostMapping
-    public ResponseEntity<LoanEntity> insertLoan(@RequestBody LoanRequest loanRequest) {
+    public ResponseEntity<Loan> insertLoan(@RequestBody LoanRequest loanRequest) {
         this.loanService.Loan(loanRequest);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(new Object[]{loanRequest.getIdEmprestimo()}).toUri();
         return ResponseEntity.created(uri).build();

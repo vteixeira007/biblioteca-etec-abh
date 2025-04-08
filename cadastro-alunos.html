@@ -1,164 +1,147 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biblioteca ETEC | PI UNIVESP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./dev/css/main.css" />
+    <!-- <link rel="stylesheet" href="./assets/css/main-min.css"> Style Build -->
+    <!--Style Build-->
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Biblioteca ETEC | PI UNIVESP</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/css/main-min.css"> <!--Style Build-->
-</head>
-
-
-
-<body>
-
-  <header>
-    <nav id="nav" class="navbar">
-      <div class="navbar-image">
-        <img src="./assets/images/logo.svg" alt="">
-      </div>
-      <button aria-label="Abrir Menu" id="btn-mobile" class="navbar-btnMobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
-
-        <span class="navbar-hamburguer"></span>
-      </button>
-      <ul id="menu" role="menu">
-        <li class="li-biblioteca"><a href="./index.html">Biblioteca</a></li>
-        <li class="li-livros "><a href="./add-livro.html">Adicionar Livros</a></li>
-        <li class="li-colecao"><a href="./add-colecao.html">Adicionar Coleção</a></li>
-        <li class="li-alunos active"><a href="">Cadastrar Alunos</a></li>
-        <div class="navbar-space">
-          <li class="li-suporte"><a href="mailto:vinicius.teixeira60@etec.sp.gov.br" target="_blank">Suporte</a></li>
+  <body>
+    <header>
+      <nav id="nav" class="navbar">
+        <div class="navbar-image">
+          <img src="./assets/images/logo.svg" alt="" />
         </div>
-      </ul>
-    </nav>
-  </header>
-
-
-
-  <main>
-    <h1 class="titulo addColecao">Cadastrar Aluno</h1>
-
-    <div class="subtitulo">
-      <ul class="subtitulo-menu">
-        <li> <a class="subtitulo-text" href="">Novo Cadastro</a></li>
-        <li> <a class="subtitulo-text default" href="./aluno-atualizacao.html">Atualizar Cadastro </a></li>
-      </ul>
-      <div class="line subtitulo"></div>
-    </div>
-
-
-    <form action="">
-      <div class="div_input">
-        <label class="input-titulo">Nome</label>
-        <input class="input" type="text">
-      </div>
-
-      <div class="div_input">
-        <label class="input-titulo">CPF</label>
-        <input class="input" type="text">
-        <span class="legenda">Apenas números.</span>
-      </div>
-
-      <div class="div_input-row">
-        <div class="div_input split two">
-          <div class="div_input">
-            <label class="input-titulo">E-mail</label>
-            <input class="input" type="email">
+        <button
+          aria-label="Abrir Menu"
+          id="btn-mobile"
+          class="navbar-btnMobile"
+          aria-haspopup="true"
+          aria-controls="menu"
+          aria-expanded="false"
+        >
+          <span class="navbar-hamburguer"></span>
+        </button>
+        <ul id="menu" role="menu">
+          <li class="li-biblioteca"><a href="./index.html">Biblioteca</a></li>
+          <li class="li-livros ">
+            <a href="./add-livro.html">Adicionar Livros</a>
+          </li>
+          <li class="li-colecao">
+            <a href="./add-colecao.html">Adicionar Categoria</a>
+          </li>
+          <li class="li-alunos active"><a href="">Cadastrar Alunos</a></li>
+          <div class="navbar-space">
+            <li class="li-suporte">
+              <a
+                href="mailto:vinicius.teixeira60@etec.sp.gov.br"
+                target="_blank"
+                >Suporte</a
+              >
+            </li>
           </div>
-          <div class="div_input">
-            <label class="input-titulo">Telefone</label>
-            <input class="input" type="tel">
-            <span class="legenda">Apenas Números.</span>
-          </div>
-        </div>
-      </div>
-
-
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <h1 class="titulo addColecao">Cadastrar Aluno</h1>
       <div class="subtitulo">
-        <span class="subtitulo-text">Endereço</span>
+        <ul class="subtitulo-menu">
+          <li><a class="subtitulo-text" href="">Novo Cadastro</a></li>
+          <li>
+            <a class="subtitulo-text default" href="./aluno-atualizacao.html"
+              >Atualizar Cadastro
+            </a>
+          </li>
+        </ul>
+        <div class="line subtitulo"></div>
+      </div>
+      <form id="formCadastroAluno">
+        <div class="div_input">
+          <label class="input-titulo" for="nome">Nome*</label>
+          <input class="input" type="text" id="nome" />
+        </div>
+
+        <div class="div_input">
+          <label class="input-titulo" for="cpf">CPF*</label>
+          <input class="input" type="text" id="cpf" />
+          <span class="legenda">Apenas números.</span>
+        </div>
+
+        <div class="div_input-row">
+          <div class="div_input split two">
+            <div class="div_input">
+              <label class="input-titulo" for="email">E-mail*</label>
+              <input class="input" type="email" id="email" />
+            </div>
+            <div class="div_input">
+              <label class="input-titulo" for="telefone">Telefone*</label>
+              <input class="input" type="tel" id="telefone" />
+              <span class="legenda">Apenas Números.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="subtitulo">
+          <span class="subtitulo-text">Informações da Matrícula</span>
+          <div class="line subtitulo"></div>
+        </div>
+
+        <div class="div_input">
+          <label class="input-titulo" for="matricula"
+            >Número da matrícula*</label
+          >
+          <input class="input" type="text" id="matricula" />
+        </div>
+
+        <div class="div_input-row">
+          <div class="div_input split two">
+            <div class="div_input">
+              <label class="input-titulo" for="curso">Curso*</label>
+              <input class="input" type="text" id="curso" />
+            </div>
+            <div class="div_input">
+              <label class="input-titulo" for="turma">Turma*</label>
+              <input class="input" type="text" id="turma" />
+            </div>
+          </div>
+        </div>
+
+        <div class="addLivro_form-button">
+          <button class="button" type="submit">Cadastrar Aluno</button>
+        </div>
+      </form>
+
+      <!-- Tabela de retorno para teste -->
+      <div class="subtitulo" style="margin-top: 44px;">
+        <ul class="subtitulo-menu">
+          <li><a class="subtitulo-text">Tebela Teste Lista de Alunos Cadastrados</a></li>
+        </ul>
         <div class="line subtitulo"></div>
       </div>
 
       <div class="div_input">
-        <label class="input-titulo">Bairro</label>
-        <input class="input" type="text">
-      </div>
-
-      <div class="div_input">
-        <label class="input-titulo">CEP</label>
-        <input class="input" type="text">
-        <span class="legenda">Apenas números.</span>
-      </div>
-
-
-      <div class="div_input-row">
-        <div class="div_input split three--broken">
-          <div class="div_input">
-            <label class="input-titulo">Rua</label>
-            <input class="input" type="text">
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">Número</label>
-            <input class="input" type="number">
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">Complemento</label>
-            <input class="input" type="text">
-          </div>
+        <div class="addLivro_form-button">
+          <button type="button" id="btnListarAlunos" class="button">
+            Listar Alunos
+          </button>
         </div>
+        <div id="listaAlunos" class="lista-table"></div>
       </div>
-
-
-      <div class="subtitulo">
-        <span class="subtitulo-text">Informações da Matrícula</span>
-        <div class="line subtitulo"></div>
-      </div>
-
-      <div class="div_input">
-        <label class="input-titulo">Número da matrícula</label>
-        <input class="input" type="text">
-      </div>
-
-      <div class="div_input-row">
-        <div class="div_input split two">
-          <div class="div_input">
-            <label class="input-titulo">Curso</label>
-            <input class="input" type="text">
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">Turma</label>
-            <input class="input" type="text">
-          </div>
-        </div>
-      </div>
-
-      <div class="div_input space">
-        <label class="input-titulo">Anotações</label>
-        <textarea cols="30" rows="10"></textarea>
-      </div>
-
-      <div class="addLivro_form-button">
-        <button class="button" type="submit">Cadastrar Aluno</button>
-      </div>
-
-    </form>
-
-  </main>
-
-
-
-
-
-
-
-
-  <script src="./assets/js/main.js"></script>
-
-
-</body>
-
+    </main>
+    <script src="./assets/js/main.js"></script>
+  </body>
 </html>

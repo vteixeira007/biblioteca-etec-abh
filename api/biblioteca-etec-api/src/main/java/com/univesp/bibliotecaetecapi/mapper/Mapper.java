@@ -2,10 +2,10 @@ package com.univesp.bibliotecaetecapi.mapper;
 
 
 import com.univesp.bibliotecaetecapi.dto.*;
-import com.univesp.bibliotecaetecapi.model.BookEntity;
-import com.univesp.bibliotecaetecapi.model.CategoryEntity;
-import com.univesp.bibliotecaetecapi.model.LoanEntity;
-import com.univesp.bibliotecaetecapi.model.StudentEntity;
+import com.univesp.bibliotecaetecapi.model.Book;
+import com.univesp.bibliotecaetecapi.model.Category;
+import com.univesp.bibliotecaetecapi.model.Loan;
+import com.univesp.bibliotecaetecapi.model.Student;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
@@ -13,63 +13,63 @@ import org.mapstruct.Mappings;
 public interface Mapper {
 
 
-    StudentEntity dtoToEntity(StudentRequest studentRequest);
+    Student dtoToEntity(StudentRequest studentRequest);
 
-    StudentResponse entityToDto(StudentEntity studentEntity);
+    StudentResponse entityToDto(Student student);
 
-    CategoryEntity dtoToEntityCategory(CategoryRequest categoryRequest);
+    Category dtoToEntityCategory(CategoryRequest categoryRequest);
 
     @Mapping(
             target = "bookResponses",
             source = "bookEntities"
     )
-    CategoryResponse entityToDtoCategory(CategoryEntity categoryEntity);
+    CategoryResponse entityToDtoCategory(Category category);
 
     @Mapping(
             target = "nomeCategoria",
-            source = "categoryEntity.nome"
+            source = "category.nome"
     )
-    BookResponse entityToDtoBook(BookEntity book);
+    BookResponse entityToDtoBook(Book book);
 
     @Mappings({@Mapping(
-            target = "categoryEntity.idCategoria",
+            target = "category.idCategoria",
             source = "idCategoria"
     ), @Mapping(
-            target = "categoryEntity.nome",
+            target = "category.nome",
             source = "nome"
     ), @Mapping(
-            target = "categoryEntity.dataCriacao",
+            target = "category.dataCriacao",
             ignore = true
     ), @Mapping(
-            target = "categoryEntity.dataAtualizacao",
+            target = "category.dataAtualizacao",
             ignore = true
     )})
-    BookEntity dtoToEntityBook(BookRequest request);
+    Book dtoToEntityBook(BookRequest request);
 
     @Mappings({@Mapping(
-            target = "studentEntity.idAluno",
+            target = "student.idAluno",
             source = "idAluno"
     ), @Mapping(
-            target = "bookEntity.idLivro",
+            target = "book.idLivro",
             source = "idLivro"
     ), @Mapping(
-            target = "bookEntity.status",
+            target = "book.status",
             source = "status"
     )})
-    LoanEntity dtoToEntityLoan(LoanRequest loanRequest);
+    Loan dtoToEntityLoan(LoanRequest loanRequest);
 
     @Mappings({@Mapping(
-            source = "bookEntity.titulo",
+            source = "book.titulo",
             target = "nomeLivro"
     ), @Mapping(
-            source = "bookEntity.codigo",
+            source = "book.codigo",
             target = "codigoLivro"
     ), @Mapping(
-            source = "studentEntity.nome",
+            source = "student.nome",
             target = "nomeAluno"
     ), @Mapping(
-            source = "studentEntity.matricula",
+            source = "student.matricula",
             target = "matricula"
     )})
-    LoanResponse entityToDtoLoan(LoanEntity loanEntity);
+    LoanResponse entityToDtoLoan(Loan loan);
 }

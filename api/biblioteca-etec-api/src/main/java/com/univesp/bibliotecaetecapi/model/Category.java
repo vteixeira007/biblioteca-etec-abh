@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "category_entity")
 @Data
-public class CategoryEntity implements Serializable {
+public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -28,10 +28,10 @@ public class CategoryEntity implements Serializable {
     private LocalDateTime dataAtualizacao;
     @PrimaryKeyJoinColumn
     @OneToMany(
-            mappedBy = "categoryEntity",
+            mappedBy = "category",
             cascade = {CascadeType.PERSIST}
     )
     @JsonIgnore
-    List<BookEntity> bookEntities = new ArrayList();
+    List<Book> bookEntities = new ArrayList();
 
 }
