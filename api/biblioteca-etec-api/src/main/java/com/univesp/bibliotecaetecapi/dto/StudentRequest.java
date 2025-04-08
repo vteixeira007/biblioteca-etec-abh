@@ -1,5 +1,6 @@
 package com.univesp.bibliotecaetecapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Data
 public class StudentRequest {
-
+    @JsonIgnore
     private Long idAluno;
     @NotNull
     @Size(max = 10, min = 2)
@@ -34,9 +35,11 @@ public class StudentRequest {
     @NotNull
     @NotBlank
     private String turma;
-
+    @JsonIgnore
     private LocalDateTime DataCriacao;
+    @JsonIgnore
     private LocalDateTime DataAtuallizacao;
+    @JsonIgnore
     List<LoanRequest> loan = new ArrayList<>();
 
 }
