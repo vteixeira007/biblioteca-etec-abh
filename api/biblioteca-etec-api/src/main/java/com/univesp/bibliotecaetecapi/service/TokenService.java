@@ -35,7 +35,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                    .withIssuer("music-api")
+                    .withIssuer("auth-api")
                     .build()
                     .verify(token)
                     .getSubject();
