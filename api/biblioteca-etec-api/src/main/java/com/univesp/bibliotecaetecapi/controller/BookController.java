@@ -4,6 +4,7 @@ import com.univesp.bibliotecaetecapi.dto.BookRequest;
 import com.univesp.bibliotecaetecapi.dto.BookResponse;
 import com.univesp.bibliotecaetecapi.model.Book;
 import com.univesp.bibliotecaetecapi.service.BookService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping({"/livro"})
 @Slf4j
+@SecurityRequirement(name = "bearerAuth")
 public class BookController {
     @Autowired
     public BookService bookService;

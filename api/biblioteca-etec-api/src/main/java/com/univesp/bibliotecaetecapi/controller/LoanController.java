@@ -5,6 +5,8 @@ import com.univesp.bibliotecaetecapi.model.Loan;
 import com.univesp.bibliotecaetecapi.service.LoanService;
 import java.net.URI;
 import java.util.List;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping({"/loan"})
+@SecurityRequirement(name = "bearerAuth")
 public class LoanController {
     @Autowired
     LoanService loanService;
