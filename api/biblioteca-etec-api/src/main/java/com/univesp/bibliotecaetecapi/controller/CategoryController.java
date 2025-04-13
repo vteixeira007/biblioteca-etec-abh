@@ -49,7 +49,7 @@ public class CategoryController {
     @DeleteMapping({"/{id}"})
     public ResponseEntity<Void> deleteCategory(@PathVariable("id") Long idCategory) {
         this.categoryService.deleteCategory(idCategory);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PutMapping({"/{id}"})
