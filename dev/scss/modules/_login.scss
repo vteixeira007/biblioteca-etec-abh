@@ -100,6 +100,12 @@
         }
       }
 
+      .name-group {
+        input {
+          padding-right: 50px;
+        }
+      }
+
       .forget-password {
         display: flex;
         width: 100%;
@@ -121,6 +127,7 @@
       border-radius: 8px;
       margin-bottom: 16px;
       padding: 15px 16px;
+      box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
       &:focus {
         outline: none;
       }
