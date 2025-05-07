@@ -5,6 +5,7 @@ import com.univesp.bibliotecaetecapi.dto.BookRequest;
 import com.univesp.bibliotecaetecapi.dto.BookResponse;
 import com.univesp.bibliotecaetecapi.enums.Status;
 import com.univesp.bibliotecaetecapi.exception_handler.exceptions.BookNotFound;
+import com.univesp.bibliotecaetecapi.exception_handler.exceptions.CategoryNotFound;
 import com.univesp.bibliotecaetecapi.mapper.Mapper;
 import com.univesp.bibliotecaetecapi.model.Book;
 import com.univesp.bibliotecaetecapi.model.Category;
@@ -76,9 +77,9 @@ public class BookService {
     }
 
     public Book insertBook(BookRequest request) {
-        Category category = (Category)this.categoryRepository.findById(request.getIdCategoria()).orElseThrow(() -> {
-            return new EntityNotFoundException("Categoria não encontrada com ID: " + request.getIdCategoria());
-        });
+        Category category = categoryRepository.findById(request.getIdCategoria())
+                .orElseThrow(() -> new CategoryNotFound());
+
         Optional<Book> bookEntityOptional = this.bookRepository.findByCodigo(request.getCodigo());
         request.setDataCriacao(LocalDateTime.now());
         request.setDataAtuallizacao(LocalDateTime.now());
