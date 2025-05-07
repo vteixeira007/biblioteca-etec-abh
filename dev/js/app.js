@@ -4,6 +4,8 @@ import ImportCadastroAlunos from './alunos-api.js';
 import ImportAttAlunos from './alunos-api-att.js';
 import addCategoria from './add-colecao.js';
 import ImportCadastroLivros from './add-livros.js';
+import ImportDescricaoLivros from './descricao-livro.js';
+
 
 
 
@@ -14,3 +16,4 @@ ImportCadastroLivros();
 ImportCadastroAlunos();
 ImportAttAlunos();
 addCategoria();
+ImportDescricaoLivros();

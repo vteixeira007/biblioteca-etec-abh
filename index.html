@@ -88,76 +88,61 @@
         <div class="line"></div>
       </div>
 
-      <div class="home-content_livros">
-        <div class="home-content_livro">
-          <a class="home-content_capa-link" href="descricao-livro.html">
-            <div class="home-content_capa">
-              <img src="./assets/images/capa.jpg" alt="">
-              <div class="overlay">
-                <img src="./assets/images/icons/info.svg" alt="">
-              </div>
-            </div>
-          </a>
-          <span class="home-content_livro-titulo">Livro Teste</span>
-          <span class="home-content_livro-descricao">Grupo 007 | PI | Univesp</span>
-        </div>
+      <div id="homeLivrosContainer" class="home-content_livros-container"></div>
 
-        <div class="home-content_livro">
-          <a class="home-content_capa-link" href="descricao-livro.html">
-            <div class="home-content_capa">
-              <img src="./assets/images/capa.jpg" alt="">
-              <div class="overlay">
-                <img src="./assets/images/icons/info.svg" alt="">
-              </div>
-            </div>
-          </a>
-          <span class="home-content_livro-titulo">Livro Teste</span>
-          <span class="home-content_livro-descricao">Grupo 007 | PI | Univesp</span>
-        </div>
-
-        <div class="home-content_livro">
-          <a class="home-content_capa-link" href="descricao-livro.html">
-            <div class="home-content_capa">
-              <img src="./assets/images/capa.jpg" alt="">
-              <div class="overlay">
-                <img src="./assets/images/icons/info.svg" alt="">
-              </div>
-            </div>
-          </a>
-          <span class="home-content_livro-titulo">Livro Teste</span>
-          <span class="home-content_livro-descricao">Grupo 007 | PI | Univesp</span>
-        </div>
-
-        <div class="home-content_livro">
-          <a class="home-content_capa-link" href="descricao-livro.html">
-            <div class="home-content_capa">
-              <img src="./assets/images/capa.jpg" alt="">
-              <div class="overlay">
-                <img src="./assets/images/icons/info.svg" alt="">
-              </div>
-            </div>
-          </a>
-          <span class="home-content_livro-titulo">Livro Teste</span>
-          <span class="home-content_livro-descricao">Grupo 007 | PI | Univesp</span>
-        </div>
-
-        <div class="home-content_livro">
-          <a class="home-content_capa-link" href="descricao-livro.html">
-            <div class="home-content_capa">
-              <img src="./assets/images/capa.jpg" alt="">
-              <div class="overlay">
-                <img src="./assets/images/icons/info.svg" alt="">
-              </div>
-            </div>
-          </a>
-          <span class="home-content_livro-titulo">Livro Teste</span>
-          <span class="home-content_livro-descricao">Grupo 007 | PI | Univesp</span>
-        </div>
-      </div>
     </div>
   </main>
 
   <script src="./assets/js/main.js"></script>
+  <script>
+    async function carregarLivrosHome() {
+      const container = document.getElementById('homeLivrosContainer');
+      container.innerHTML = '<p>Carregando livros...</p>';
+  
+      try {
+        // Buscar todas as categorias, para pegar todos os livros.
+        const response = await fetch('https://biblioteca-etec-abh-2.onrender.com/categoria');
+        if (!response.ok) throw new Error('Erro ao buscar livros');
+        const categorias = await response.json();
+  
+        container.innerHTML = ''; // limpa o container
+  
+        categorias.forEach(categoria => {
+          if (categoria.bookResponses && Array.isArray(categoria.bookResponses)) {
+            categoria.bookResponses.forEach(livro => {
+              const livroDiv = document.createElement('div');
+              livroDiv.classList.add('home-content_livro');
+  
+              // Montar HTML do card
+              livroDiv.innerHTML = `
+                <a class="home-content_capa-link" href="descricao-livro.html?idLivro=${livro.idLivro}">
+                  <div class="home-content_capa">
+                    <img src="./assets/images/capa.jpg" alt="Capa do livro ${livro.titulo}">
+                    <div class="overlay">
+                      <img src="./assets/images/icons/info.svg" alt="Informações do livro">
+                    </div>
+                  </div>
+                </a>
+                <span class="home-content_livro-titulo">${livro.titulo}</span>
+                <span class="home-content_livro-descricao">${livro.autor}</span>
+              `;
+  
+              container.appendChild(livroDiv);
+            });
+          }
+        });
+  
+        if (!container.hasChildNodes()) {
+          container.innerHTML = '<p>Nenhum livro disponível.</p>';
+        }
+      } catch (error) {
+        console.error(error);
+        container.innerHTML = '<p>Erro ao carregar os livros. Tente novamente.</p>';
+      }
+    }
+  
+    document.addEventListener('DOMContentLoaded', carregarLivrosHome);
+  </script>
 
 
 </body>
