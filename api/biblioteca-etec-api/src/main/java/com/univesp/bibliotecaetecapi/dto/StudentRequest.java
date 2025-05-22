@@ -15,7 +15,7 @@ public class StudentRequest {
 
     private Long idAluno;
     @NotNull
-    @Size(max = 10, min = 2)
+    @Size(max = 100, min = 2)
     private String nome;
     @NotNull
     private Integer matricula;

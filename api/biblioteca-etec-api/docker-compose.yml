@@ -1,5 +1,3 @@
-version: '3'
-
 services:
   spring-app:
     build:
@@ -9,21 +7,18 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/db_biblioteca
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgresdb:5432/bibliotecaetec
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 1234
     depends_on:
-      - mysqldb
+      - postgresdb
 
-  mysqldb:
-    image: mysql:8.0.33
-    container_name: mysqldb
+  postgresdb:
+    image: postgres:16
+    container_name: postgresdb
     ports:
-      - "3306:3306"
+      - "5434:5432"
     environment:
-      MYSQL_ROOT_USER: root
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: db_biblioteca
-
-
-
+      POSTGRES_DB: bibliotecaetec
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234

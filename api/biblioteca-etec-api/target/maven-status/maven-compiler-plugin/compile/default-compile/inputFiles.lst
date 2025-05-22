@@ -1,40 +1,51 @@
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\BibliotecaEtecApiApplication.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\BookResponse.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\StudentNotFound.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\service\BookService.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\StandardError.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\repository\StudentRepository.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\StudentRequest.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\ValidationBadRequest.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\CpfInvalidException.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\BookRequest.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\model\BookEntity.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\CategoryResponse.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\service\StudentService.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\CategoryAlreadyExistsException.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\EmailInvalidException.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\BookAlreadyExistsException.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\controller\CategoryController.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\StudentResponse.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\enums\Status.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\ExceptionHandler.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\controller\BookController.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\repository\CategoryRepository.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\config\Cors.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\LoanResponse.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\BadRequestException.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\CategoryRequest.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\LoanRequest.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\mapper\Mapper.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\model\LoanEntity.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\repository\BookRepository.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\BookNotFound.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\service\CategoryService.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\service\LoanService.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\controller\LoanController.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\model\StudentEntity.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\CategoryNotFound.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\controller\StudentController.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\CpfAlreadyExistsException.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\model\CategoryEntity.java
-C:\NOVA ETEC\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\repository\LoanRepository.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\EmailInvalidException.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\service\TokenService.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\LoginResponseDto.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\LoanRequest.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\ExceptionHandler.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\StudentNotFound.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\config\SecurityFilter.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\service\LoanService.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\repository\CategoryRepository.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\controller\CategoryController.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\CpfAlreadyExistsException.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\model\Book.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\repository\UserRepository.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\config\Cors.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\repository\StudentRepository.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\BookRequest.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\BookAlreadyExistsException.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\LoanResponse.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\CategoryNotFound.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\service\BookService.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\CategoryAlreadyExistsException.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\service\StudentService.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\CategoryResponse.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\model\Loan.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\service\AuthorizationService.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\mapper\Mapper.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\BookResponse.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\CpfInvalidException.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\enums\UserRole.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\CategoryRequest.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\ValidationBadRequest.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\controller\LoanController.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\BibliotecaEtecApiApplication.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\StudentResponse.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\repository\LoanRepository.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\StudentRequest.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\enums\Status.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\AuthenticationDto.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\BadRequestException.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\model\Category.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\config\SecurityConfigurations.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\model\User.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\controller\StudentController.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\exceptions\BookNotFound.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\repository\BookRepository.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\controller\AuthenticationController.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\exception_handler\StandardError.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\model\Student.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\service\CategoryService.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\controller\BookController.java
+C:\Users\Willian\Documents\biblioteca-etec-univesp\biblioteca-etec-abh\api\biblioteca-etec-api\src\main\java\com\univesp\bibliotecaetecapi\dto\RegisterDto.java
