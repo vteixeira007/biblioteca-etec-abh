@@ -38,7 +38,7 @@
 
   <main>
     <div class="home-menu">
-      <span class="home-menu_icon">Pesquisar...</span>
+      <span class="home-menu_icon"></span>
       <div class="home-pesquisa">
         <input class="home-pesquisa_input" type="search" style="width: 100%;" placeholder="Pesquisar...">
         <div class="home-pesquisa_filters">
@@ -52,98 +52,42 @@
       <div class="home-pesquisa_alfabeto">
         <ul>
           <li><a href="">a</a></li>
-          <li><a href="">b</a></li>
-          <li><a href="">c</a></li>
-          <li><a href="">d</a></li>
-          <li><a href="">e</a></li>
-          <li><a href="">f</a></li>
-          <li><a href="">g</a></li>
-          <li><a href="">h</a></li>
-          <li><a href="">i</a></li>
-          <li><a href="">j</a></li>
-          <li><a href="">k</a></li>
-          <li><a href="">l</a></li>
-          <li><a href="">m</a></li>
-          <li><a href="">n</a></li>
-          <li><a href="">o</a></li>
-          <li><a href="">p</a></li>
-          <li><a href="">q</a></li>
-          <li><a href="">r</a></li>
-          <li><a href="">s</a></li>
-          <li><a href="">t</a></li>
-          <li><a href="">u</a></li>
-          <li><a href="">v</a></li>
-          <li><a href="">x</a></li>
-          <li><a href="">y</a></li>
-          <li><a href="">z</a></li>
-          <li><a href="">#</a></li>
-          <li><a class="home-pesquisa_alfabeto--all" href="">all</a></li>
+          <li><a href="#">b</a></li>
+          <li><a href="#">c</a></li>
+          <li><a href="#">d</a></li>
+          <li><a href="#">e</a></li>
+          <li><a href="#">f</a></li>
+          <li><a href="#">g</a></li>
+          <li><a href="#">h</a></li>
+          <li><a href="#">i</a></li>
+          <li><a href="#">j</a></li>
+          <li><a href="#">k</a></li>
+          <li><a href="#">l</a></li>
+          <li><a href="#">m</a></li>
+          <li><a href="#">n</a></li>
+          <li><a href="#">o</a></li>
+          <li><a href="#">p</a></li>
+          <li><a href="#">q</a></li>
+          <li><a href="#">r</a></li>
+          <li><a href="#">s</a></li>
+          <li><a href="#">t</a></li>
+          <li><a href="#">u</a></li>
+          <li><a href="#">v</a></li>
+          <li><a href="#">x</a></li>
+          <li><a href="#">y</a></li>
+          <li><a href="#">z</a></li>
+          <li><a href="#">#</a></li>
+          <li><a class="home-pesquisa_alfabeto--all ativo#" href="">todos</a></li>
         </ul>
       </div>
     </div>
 
     <div class="home-content">
-      <div class="home-content_letra">
-        <span>L</span>
-        <div class="line"></div>
-      </div>
-
-      <div id="homeLivrosContainer" class="home-content_livros-container"></div>
-
+      <div id="homeLivrosContainer" class="home-content_livros"></div>
     </div>
   </main>
 
   <script src="./assets/js/main.js"></script>
-  <script>
-    async function carregarLivrosHome() {
-      const container = document.getElementById('homeLivrosContainer');
-      container.innerHTML = '<p>Carregando livros...</p>';
-  
-      try {
-        // Buscar todas as categorias, para pegar todos os livros.
-        const response = await fetch('https://biblioteca-etec-abh-2.onrender.com/categoria');
-        if (!response.ok) throw new Error('Erro ao buscar livros');
-        const categorias = await response.json();
-  
-        container.innerHTML = ''; // limpa o container
-  
-        categorias.forEach(categoria => {
-          if (categoria.bookResponses && Array.isArray(categoria.bookResponses)) {
-            categoria.bookResponses.forEach(livro => {
-              const livroDiv = document.createElement('div');
-              livroDiv.classList.add('home-content_livro');
-  
-              // Montar HTML do card
-              livroDiv.innerHTML = `
-                <a class="home-content_capa-link" href="descricao-livro.html?idLivro=${livro.idLivro}">
-                  <div class="home-content_capa">
-                    <img src="./assets/images/capa.jpg" alt="Capa do livro ${livro.titulo}">
-                    <div class="overlay">
-                      <img src="./assets/images/icons/info.svg" alt="Informações do livro">
-                    </div>
-                  </div>
-                </a>
-                <span class="home-content_livro-titulo">${livro.titulo}</span>
-                <span class="home-content_livro-descricao">${livro.autor}</span>
-              `;
-  
-              container.appendChild(livroDiv);
-            });
-          }
-        });
-  
-        if (!container.hasChildNodes()) {
-          container.innerHTML = '<p>Nenhum livro disponível.</p>';
-        }
-      } catch (error) {
-        console.error(error);
-        container.innerHTML = '<p>Erro ao carregar os livros. Tente novamente.</p>';
-      }
-    }
-  
-    document.addEventListener('DOMContentLoaded', carregarLivrosHome);
-  </script>
-
 
 </body>
 

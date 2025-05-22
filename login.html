@@ -2,50 +2,43 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Biblioteca ETEC | PI UNIVESP</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./dev/css/main.css" />
 </head>
 
 <body style="grid-template-columns: 1fr !important;">
-  <main style=" margin: 0 !important;">
+  <main style="margin: 0 !important;">
     <div class="login-page">
       <div class="login-container">
-        <div class="login-box">
-          <h1>
-            Olá,<br />
-            prazer ver você novamente por aqui!
-          </h1>
+        <div class="login-box" id="login-section">
+          <h1>Olá, </br> prazer ver você novamente por aqui!</h1>
 
-          <form action="">
-            <div class="input-group email-group">
-              <span class="icon-envelope"></span>
-              <input type="email" name="email" placeholder="E-mail" />
+          <form id="login-form">
+            <div class="input-group">
+              <input type="text" id="login-login" placeholder="Nome de usuário" required />
             </div>
 
-            <div class="input-group password-group">
-              <input type="password" name="senha" placeholder="Senha" />
-              <span class="toggle-password"></span>
+            <div class="input-group">
+              <input type="password" id="login-password" placeholder="Senha" required />
             </div>
 
-            <a href="" class="forget-password">Esqueceu a senha?</a>
-
-            <button type="submit" class="login-button">Login</button>
-
-            <p class="register">
-              Não tem uma conta?
-              <a href="/dashboard/register" class="register-link">Cadastrar</a>
-            </p>
+            <button type="submit" class="login-button">Entrar</button>
           </form>
         </div>
       </div>
     </div>
   </main>
+
+  <script>
+
+  </script>
+
   <script src="./assets/js/main.js"></script>
 </body>
 

@@ -1,10 +1,16 @@
 export default function importAttAlunos() {
   return new Promise((resolve) => {
-    // Verificar se estamos na página de atualização
     const pesquisaInput = document.getElementById('pesquisaAluno');
     const btnAtualizar = document.getElementById('btnAtualizar');
 
-    // Continua apenas se estivermos na página correta
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+      showMessage('Você precisa estar logado para acessar esta funcionalidade.', true);
+      resolve();
+      return;
+    }
+
     if (pesquisaInput) {
       let alunoIdSelecionado = null;
 
@@ -18,10 +24,20 @@ export default function importAttAlunos() {
       async function buscarAlunos(nomeAluno) {
         try {
           const response = await fetch(
-            `https://biblioteca-etec-abh-2.onrender.com/aluno?nome=${nomeAluno}`
+            `http://localhost:8090/aluno?nome=${nomeAluno}`,
+            {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            }
           );
+          if (response.status === 401) {
+            showMessage('Sessão expirada. Faça login novamente.', true);
+            return;
+          }
+
           const alunos = await response.json();
-          
+
           const suggestions = document.getElementById('student-suggestions');
           if (!suggestions) return;
 
@@ -41,16 +57,28 @@ export default function importAttAlunos() {
 
       async function carregarDadosAluno(idAluno) {
         try {
-          const response = await fetch(`https://biblioteca-etec-abh-2.onrender.com/aluno/${idAluno}`);
+          const response = await fetch(
+            `http://localhost:8090/aluno/${idAluno}`,
+            {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            }
+          );
+          if (response.status === 401) {
+            showMessage('Sessão expirada. Faça login novamente.', true);
+            return;
+          }
+
           const aluno = await response.json();
-          
+
           if (!aluno) {
             throw new Error('Nenhum dado recebido');
           }
 
           alunoIdSelecionado = idAluno;
           const campos = ['nome', 'cpf', 'email', 'telefone', 'matricula', 'curso', 'turma'];
-          
+
           campos.forEach(campo => {
             const elemento = document.getElementById(campo);
             if (elemento) {
@@ -64,7 +92,6 @@ export default function importAttAlunos() {
         }
       }
 
-      // Configurar botão de atualização se existir
       if (btnAtualizar) {
         btnAtualizar.addEventListener('click', atualizarAluno);
       }
@@ -101,13 +128,21 @@ export default function importAttAlunos() {
           };
 
           const response = await fetch(
-            `https://biblioteca-etec-abh-2.onrender.com/aluno/${alunoIdSelecionado}`,
+            `http://localhost:8090/aluno/${alunoIdSelecionado}`,
             {
               method: 'PUT',
-              headers: { 'Content-Type': 'application/json' },
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+              },
               body: JSON.stringify(dadosAtualizados)
             }
           );
+
+          if (response.status === 401) {
+            showMessage('Sessão expirada. Faça login novamente.', true);
+            return;
+          }
 
           if (!response.ok) {
             throw new Error(`Erro ao atualizar aluno (status ${response.status})`);
@@ -125,7 +160,7 @@ export default function importAttAlunos() {
         }
       }
 
-      // Adicionar máscaras e validações para os campos existentes
+
       const cpfInput = document.getElementById('cpf');
       const telefoneInput = document.getElementById('telefone');
       const matriculaInput = document.getElementById('matricula');
@@ -179,7 +214,7 @@ export default function importAttAlunos() {
           if (!valor) {
             elemento.classList.add('input-error');
             isValid = false;
-            if (!campoInvalido) 
+            if (!campoInvalido)
               campoInvalido = elemento.previousElementSibling?.textContent || campo;
           }
         }
