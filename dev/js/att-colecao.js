@@ -51,7 +51,6 @@ async function carregarCategoriasParaPagina() {
 
   } catch (error) {
     console.error('Erro ao carregar categorias:', error);
-    showMessageAtt(`Erro ao carregar categorias: ${error.message}`, true);
   } finally {
     if(selectAtualizar) selectAtualizar.disabled = false;
     if(selectExcluir) selectExcluir.disabled = false;

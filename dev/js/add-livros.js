@@ -143,7 +143,6 @@ export default function importCadastroLivros() {
           })
           .catch(error => {
             console.error('Erro ao carregar categorias:', error);
-            showMessageLivro('Erro ao carregar categorias. Verifique o console.');
           });
       }
 

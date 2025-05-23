@@ -50,7 +50,6 @@ export default function importAtualizacaoLivros() {
 
       } catch (error) {
         console.error('Erro ao carregar todos os livros:', error);
-        showMessageAttLivro('Não foi possível carregar a lista de livros para pesquisa.', true);
       }
     }
     
@@ -69,7 +68,6 @@ export default function importAtualizacaoLivros() {
                 const cats = await response.json();
                 popularDropdownCategoriasLivro(cats, categoriaSelect);
              } catch(error) {
-                 console.error('Erro ao carregar categorias no select:', error);
              }
         }
     }
