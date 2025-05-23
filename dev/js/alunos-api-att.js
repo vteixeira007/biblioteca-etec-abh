@@ -1,206 +1,27 @@
+
 export default function importAttAlunos() {
   return new Promise((resolve) => {
+    const API_BASE_URL = 'http://localhost:8090';
+
     const pesquisaInput = document.getElementById('pesquisaAluno');
     const btnAtualizar = document.getElementById('btnAtualizar');
+    const suggestionsDiv = document.getElementById('student-suggestions');
+    const cpfInput = document.getElementById('cpf');
+    const telefoneInput = document.getElementById('telefone');
+    const matriculaInput = document.getElementById('matricula');
 
-    const token = localStorage.getItem('authToken');
+    let alunoIdSelecionado = null;
 
-    if (!token) {
-      showMessage('Você precisa estar logado para acessar esta funcionalidade.', true);
-      resolve();
-      return;
+    function showMessage(message, isError = false) {
+      alert(message);
     }
 
-    if (pesquisaInput) {
-      let alunoIdSelecionado = null;
-
-      pesquisaInput.addEventListener('input', function() {
-        const nomeAluno = this.value;
-        if (nomeAluno.length >= 3) {
-          buscarAlunos(nomeAluno);
-        }
-      });
-
-      async function buscarAlunos(nomeAluno) {
-        try {
-          const response = await fetch(
-            `http://localhost:8090/aluno?nome=${nomeAluno}`,
-            {
-              headers: {
-                'Authorization': `Bearer ${token}`
-              }
-            }
-          );
-          if (response.status === 401) {
-            showMessage('Sessão expirada. Faça login novamente.', true);
-            return;
-          }
-
-          const alunos = await response.json();
-
-          const suggestions = document.getElementById('student-suggestions');
-          if (!suggestions) return;
-
-          suggestions.innerHTML = '';
-          alunos.forEach((aluno) => {
-            const item = document.createElement('div');
-            item.textContent = aluno.nome;
-            item.className = 'suggestion-item';
-            item.onclick = () => carregarDadosAluno(aluno.idAluno);
-            suggestions.appendChild(item);
-          });
-        } catch (error) {
-          console.error('Erro ao buscar alunos:', error);
-          showMessage('Erro ao buscar alunos. Tente novamente.', true);
-        }
-      }
-
-      async function carregarDadosAluno(idAluno) {
-        try {
-          const response = await fetch(
-            `http://localhost:8090/aluno/${idAluno}`,
-            {
-              headers: {
-                'Authorization': `Bearer ${token}`
-              }
-            }
-          );
-          if (response.status === 401) {
-            showMessage('Sessão expirada. Faça login novamente.', true);
-            return;
-          }
-
-          const aluno = await response.json();
-
-          if (!aluno) {
-            throw new Error('Nenhum dado recebido');
-          }
-
-          alunoIdSelecionado = idAluno;
-          const campos = ['nome', 'cpf', 'email', 'telefone', 'matricula', 'curso', 'turma'];
-
-          campos.forEach(campo => {
-            const elemento = document.getElementById(campo);
-            if (elemento) {
-              elemento.value = aluno[campo] || '';
-            }
-          });
-
-        } catch (error) {
-          console.error('Erro ao carregar dados do aluno:', error);
-          showMessage('Erro ao carregar dados do aluno', true);
-        }
-      }
-
-      if (btnAtualizar) {
-        btnAtualizar.addEventListener('click', atualizarAluno);
-      }
-
-      async function atualizarAluno() {
-        if (!alunoIdSelecionado) {
-          showMessage('Selecione um aluno para atualizar.', true);
-          return;
-        }
-
-        const submitButton = document.querySelector('button[type="submit"]');
-        if (!submitButton) return;
-
-        const buttonText = submitButton.textContent;
-        submitButton.disabled = true;
-        submitButton.textContent = 'Atualizando...';
-
-        if (!validarCampos()) {
-          submitButton.disabled = false;
-          submitButton.textContent = buttonText;
-          return;
-        }
-
-        try {
-          const dadosAtualizados = {
-            nome: document.getElementById('nome')?.value.trim(),
-            matricula: parseInt(document.getElementById('matricula')?.value),
-            cpf: document.getElementById('cpf')?.value.replace(/\D/g, ''),
-            email: document.getElementById('email')?.value.trim(),
-            telefone: document.getElementById('telefone')?.value.replace(/\D/g, ''),
-            curso: document.getElementById('curso')?.value.trim(),
-            turma: document.getElementById('turma')?.value.trim(),
-            dataAtuallizacao: new Date().toISOString()
-          };
-
-          const response = await fetch(
-            `http://localhost:8090/aluno/${alunoIdSelecionado}`,
-            {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-              },
-              body: JSON.stringify(dadosAtualizados)
-            }
-          );
-
-          if (response.status === 401) {
-            showMessage('Sessão expirada. Faça login novamente.', true);
-            return;
-          }
-
-          if (!response.ok) {
-            throw new Error(`Erro ao atualizar aluno (status ${response.status})`);
-          }
-
-          const data = await response.text();
-          showMessage(data || 'Dados atualizados com sucesso!');
-
-        } catch (error) {
-          console.error('Erro ao atualizar aluno:', error);
-          showMessage('Erro ao atualizar aluno. Por favor, tente novamente.', true);
-        } finally {
-          submitButton.disabled = false;
-          submitButton.textContent = buttonText;
-        }
-      }
-
-
-      const cpfInput = document.getElementById('cpf');
-      const telefoneInput = document.getElementById('telefone');
-      const matriculaInput = document.getElementById('matricula');
-
-      if (cpfInput) {
-        cpfInput.addEventListener('input', function(e) {
-          let value = e.target.value.replace(/\D/g, '');
-          if (value.length > 11) value = value.slice(0, 11);
-
-          if (value.length > 3) value = value.replace(/^(\d{3})/, '$1.');
-          if (value.length > 6) value = value.replace(/^(\d{3})\.(\d{3})/, '$1.$2.');
-          if (value.length > 9) value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})/, '$1.$2.$3-');
-
-          e.target.value = value;
-          this.classList.remove('input-error');
-        });
-      }
-
-      if (telefoneInput) {
-        telefoneInput.addEventListener('input', function(e) {
-          let value = e.target.value.replace(/\D/g, '');
-          if (value.length > 11) value = value.slice(0, 11);
-
-          if (value.length > 2) value = `(${value.slice(0, 2)})${value.slice(2)}`;
-          if (value.length > 9) value = `${value.slice(0, 9)}-${value.slice(9)}`;
-
-          e.target.value = value;
-          this.classList.remove('input-error');
-        });
-      }
-
-      if (matriculaInput) {
-        matriculaInput.addEventListener('input', function(e) {
-          e.target.value = e.target.value.replace(/\D/g, '');
-          this.classList.remove('input-error');
-        });
-      }
+    function handleAuthError(msg = "Sessão expirada ou inválida. Faça login novamente.") {
+        showMessage(msg, true);
+        window.location.href = 'login.html';
     }
 
-    function validarCampos() {
+    function validarCamposFormulario() {
       const camposObrigatorios = ['nome', 'cpf', 'email', 'telefone', 'matricula', 'curso', 'turma'];
       let isValid = true;
       let campoInvalido = '';
@@ -217,32 +38,189 @@ export default function importAttAlunos() {
             if (!campoInvalido)
               campoInvalido = elemento.previousElementSibling?.textContent || campo;
           }
+        } else {
+            console.warn(`[AttAlunos] Validação: Campo ${campo} não encontrado.`);
+            isValid = false;
         }
       });
 
       if (!isValid) {
         showMessage(`Por favor, preencha corretamente o campo ${campoInvalido}`, true);
       }
-
       return isValid;
     }
 
-    function showMessage(message, isError = false) {
-      const submitButton = document.querySelector('.addLivro_form-button');
-      if (!submitButton) return;
 
-      const existingMessage = document.querySelector('.message-feedback');
-      if (existingMessage) {
-        existingMessage.remove();
+    async function buscarAlunos(nomeAluno) {
+      const token = localStorage.getItem('authToken');
+      if (!token) return handleAuthError();
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/aluno?nome=${encodeURIComponent(nomeAluno)}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.status === 401) return handleAuthError();
+        if (!response.ok) throw new Error(`Erro ${response.status} ao buscar.`);
+
+        const alunos = await response.json();
+
+        if (suggestionsDiv) {
+            suggestionsDiv.innerHTML = '';
+            if (alunos.length === 0) {
+                suggestionsDiv.innerHTML = '<div class="suggestion-item no-results">Nenhum aluno encontrado.</div>';
+            } else {
+                alunos.forEach((aluno) => {
+                    const item = document.createElement('div');
+                    item.textContent = `${aluno.nome} (Mat: ${aluno.matricula})`;
+                    item.className = 'suggestion-item';
+                    item.onclick = () => carregarDadosAluno(aluno.idAluno);
+                    suggestionsDiv.appendChild(item);
+                });
+            }
+        }
+      } catch (error) {
+        console.error('Erro ao buscar alunos:', error);
+        showMessage('Erro ao buscar alunos.', true);
       }
-
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message-feedback ${isError ? 'error' : 'success'}`;
-      messageDiv.textContent = message;
-      submitButton.parentNode.insertBefore(messageDiv, submitButton);
-
-      setTimeout(() => messageDiv.remove(), 5000);
     }
+
+    async function carregarDadosAluno(idAluno) {
+      const token = localStorage.getItem('authToken');
+      if (!token) return handleAuthError();
+
+      alunoIdSelecionado = null;
+      if (suggestionsDiv) suggestionsDiv.innerHTML = '';
+
+      try {
+        const response = await fetch(`${API_BASE_URL}/aluno/${idAluno}`, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+
+        if (response.status === 401) return handleAuthError();
+        if (!response.ok) throw new Error(`Erro ${response.status} ao carregar dados.`);
+
+        const aluno = await response.json();
+        if (!aluno) throw new Error('Nenhum dado recebido');
+
+        alunoIdSelecionado = idAluno;
+        const campos = ['nome', 'cpf', 'email', 'telefone', 'matricula', 'curso', 'turma'];
+
+        campos.forEach(campo => {
+          const elemento = document.getElementById(campo);
+          if (elemento) {
+            elemento.value = aluno[campo] || '';
+          }
+        });
+        
+        if(pesquisaInput) pesquisaInput.value = aluno.nome;
+
+      } catch (error) {
+        console.error('Erro ao carregar dados do aluno:', error);
+        showMessage('Erro ao carregar dados do aluno.', true);
+      }
+    }
+
+    async function atualizarAluno(event) {
+        event.preventDefault();
+        const token = localStorage.getItem('authToken');
+        if (!token) return handleAuthError();
+
+        if (!alunoIdSelecionado) {
+            showMessage('Nenhum aluno selecionado para atualizar.', true);
+            return;
+        }
+
+        if (!validarCamposFormulario()) {
+            return;
+        }
+
+        const submitButton = btnAtualizar;
+        const buttonText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Atualizando...';
+
+        try {
+            const dadosAtualizados = {
+                nome: document.getElementById('nome')?.value.trim(),
+                matricula: document.getElementById('matricula')?.value.replace(/\D/g, ''),
+                cpf: document.getElementById('cpf')?.value.replace(/\D/g, ''),
+                email: document.getElementById('email')?.value.trim(),
+                telefone: document.getElementById('telefone')?.value.replace(/\D/g, ''),
+                curso: document.getElementById('curso')?.value.trim(),
+                turma: document.getElementById('turma')?.value.trim(),
+            };
+            
+
+            const response = await fetch(`${API_BASE_URL}/aluno/${alunoIdSelecionado}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(dadosAtualizados)
+            });
+
+            if (response.status === 401) return handleAuthError();
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Erro ${response.status}: ${errorText || 'Falha ao atualizar'}`);
+            }
+
+            const data = await response.text();
+            showMessage(data || 'Dados atualizados com sucesso!');
+            alunoIdSelecionado = null;
+            if(pesquisaInput) pesquisaInput.value = '';
+
+        } catch (error) {
+            console.error('Erro ao atualizar aluno:', error);
+            showMessage(`Erro ao atualizar aluno: ${error.message}`, true);
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = buttonText;
+        }
+    }
+
+    function aplicarMascaraCPF(e) {
+        let value = e.target.value.replace(/\D/g, '').slice(0, 11);
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        e.target.value = value;
+        e.target.classList.remove('input-error');
+    }
+
+    function aplicarMascaraTelefone(e) {
+        let value = e.target.value.replace(/\D/g, '').slice(0, 11);
+        value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+        value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+        e.target.value = value;
+        e.target.classList.remove('input-error');
+    }
+    
+    function apenasNumeros(e) {
+        e.target.value = e.target.value.replace(/\D/g, '');
+        e.target.classList.remove('input-error');
+    }
+
+    if (pesquisaInput) {
+      pesquisaInput.addEventListener('input', function() {
+        const nomeAluno = this.value;
+        if (nomeAluno.length >= 3) {
+          buscarAlunos(nomeAluno);
+        } else if (suggestionsDiv) {
+            suggestionsDiv.innerHTML = '';
+        }
+      });
+    }
+
+    if (btnAtualizar) {
+      btnAtualizar.addEventListener('click', atualizarAluno);
+    }
+    
+    if (cpfInput) cpfInput.addEventListener('input', aplicarMascaraCPF);
+    if (telefoneInput) telefoneInput.addEventListener('input', aplicarMascaraTelefone);
+    if (matriculaInput) matriculaInput.addEventListener('input', apenasNumeros);
 
     resolve();
   });

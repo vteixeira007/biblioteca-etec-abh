@@ -1,183 +1,42 @@
+
 export default function importAtualizacaoLivros() {
   return new Promise((resolve) => {
+    const API_BASE_URL = 'http://localhost:8090';
+
     let todosLivros = [];
-    
-    function inicializarFormulario() {
-      const token = localStorage.getItem('authToken');
-      if (!token) {
-        window.location.href = 'login.html';
-        return;
-      }
-      
-      const categoriaSelect = document.getElementById('categoria-select');
-      const atualizarLivroForm = document.getElementById('atualizarLivroForm');
-      const pesquisarLivroInput = document.getElementById('pesquisarLivro');
-      const sugestoesContainer = document.getElementById('sugestoes-livros');
-      
-                                                                                                                                   
-      
-      carregarTodosLivros();
-      
-      if (pesquisarLivroInput && sugestoesContainer) {
-        pesquisarLivroInput.addEventListener('input', () => {
-          const termoPesquisa = pesquisarLivroInput.value.trim().toLowerCase();
-          
-          sugestoesContainer.innerHTML = '';
-          
-          if (termoPesquisa.length < 2) {
-            sugestoesContainer.style.display = 'none';
-            return;
-          }
-          
-          const livrosFiltrados = todosLivros.filter(livro => 
-            livro.titulo.toLowerCase().includes(termoPesquisa) || 
-            livro.codigo.toLowerCase().includes(termoPesquisa)
-          );
-          
-          if (livrosFiltrados.length > 0) {
-            sugestoesContainer.style.display = 'block';
-            
-            const resultadosLimitados = livrosFiltrados.slice(0, 6);
-            
-            resultadosLimitados.forEach(livro => {
-              const sugestaoItem = document.createElement('div');
-              sugestaoItem.className = 'sugestao-item';
-              sugestaoItem.textContent = `${livro.titulo} (${livro.codigo})`;
-              
-              sugestaoItem.addEventListener('click', () => {
-                pesquisarLivroInput.value = livro.titulo;
-                sugestoesContainer.style.display = 'none';
-                preencherFormulario(livro);
-                atualizarLivroForm.style.display = 'block';
-              });
-              
-              sugestoesContainer.appendChild(sugestaoItem);
-            });
-          } else {
-            sugestoesContainer.style.display = 'none';
-          }
-        });
-        
-        document.addEventListener('click', (e) => {
-          if (e.target !== pesquisarLivroInput && e.target !== sugestoesContainer) {
-            sugestoesContainer.style.display = 'none';
-          }
-        });
-        
-        pesquisarLivroInput.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            const termoPesquisa = pesquisarLivroInput.value.trim().toLowerCase();
-            
-            if (termoPesquisa.length < 2) return;
-            
-            const livroEncontrado = todosLivros.find(livro => 
-              livro.titulo.toLowerCase().includes(termoPesquisa) || 
-              livro.codigo.toLowerCase() === termoPesquisa
-            );
-            
-            if (livroEncontrado) {
-              preencherFormulario(livroEncontrado);
-              atualizarLivroForm.style.display = 'block';
-              sugestoesContainer.style.display = 'none';
-            } else {
-              alert('Livro não encontrado. Verifique o título ou código digitado.');
-            }
-          }
-        });
-      }
 
-      if (atualizarLivroForm) {
-        atualizarLivroForm.addEventListener('submit', async (e) => {
-          e.preventDefault();
+    const categoriaSelect = document.getElementById('categoria-select');
+    const atualizarLivroForm = document.getElementById('atualizarLivroForm');
+    const pesquisarLivroInput = document.getElementById('pesquisarLivro');
+    const sugestoesContainer = document.getElementById('sugestoes-livros');
+    const listaLivrosDiv = document.getElementById('listaLivros');
+    const btnListarLivros = document.getElementById('btnListarLivros');
 
-          try {
-            const livroId = document.getElementById('livroId').value;
-            const campos = ['tituloLivro', 'autoresLivro', 'assuntoLivro', 'codigoLivro', 'quantidadeLivro'];
-            
-            for (const campo of campos) {
-              const elemento = document.getElementById(campo);
-              if (!elemento || !elemento.value.trim()) {
-                throw new Error(`Por favor, preencha o campo ${campo.replace('Livro', '')}`);
-              }
-            }
-
-            if (!categoriaSelect || !categoriaSelect.value) {
-              throw new Error('Por favor, selecione uma categoria');
-            }
-
-            const livroData = {
-              idLivro: parseInt(livroId, 10),
-              titulo: document.getElementById('tituloLivro').value.trim(),
-              autor: document.getElementById('autoresLivro').value.trim(),
-              assunto: document.getElementById('assuntoLivro').value.trim(),
-              descricao: document.getElementById('descricaoLivro').value.trim() || 'Sem descrição',
-              codigo: document.getElementById('codigoLivro').value.trim(),
-              quantidade: parseInt(document.getElementById('quantidadeLivro').value, 10),
-              status: document.getElementById('statusLivro').value,
-              idCategoria: parseInt(categoriaSelect.value, 10)
-            };
-
-            if (livroData.codigo.length > 13) {
-              throw new Error('O código do livro não pode ter mais que 13 caracteres');
-            }
-
-            if (isNaN(livroData.quantidade) || livroData.quantidade < 1) {
-              throw new Error('A quantidade deve ser um número maior que zero');
-            }
-
-            const response = await fetch(`http://localhost:8090/livro/${livroId}`, {
-              method: 'PUT',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-              },
-              body: JSON.stringify(livroData)
-            });
-
-            if (!response.ok) {
-              const errorText = await response.text();
-              throw new Error(errorText || 'Erro ao atualizar livro');
-            }
-
-            alert('Livro atualizado com sucesso!');
-            atualizarLivroForm.reset();
-            atualizarLivroForm.style.display = 'none';
-            pesquisarLivroInput.value = '';
-
-            carregarTodosLivros();
-            
-            if (typeof listarLivros === 'function') {
-              listarLivros();
-            }
-
-          } catch (error) {
-            console.error('Erro:', error);
-            alert(error.message || 'Erro ao atualizar livro. Por favor, tente novamente.');
-          }
-        });
-      }
+    function showMessageAttLivro(message, isError = false) {
+      alert(message);
     }
-    
+
+    function handleAuthErrorAttLivro() {
+        showMessageAttLivro("Sessão expirada ou inválida. Faça login novamente.", true);
+        window.location.href = 'login.html';
+    }
+
+
     async function carregarTodosLivros() {
       const token = localStorage.getItem('authToken');
-      if (!token) return;
-      
+      if (!token) return handleAuthErrorAttLivro();
+
       try {
-        const response = await fetch('http://localhost:8090/categoria', {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+        const response = await fetch(`${API_BASE_URL}/categoria`, {
+          headers: { Authorization: `Bearer ${token}` }
         });
         
-        if (!response.ok) {
-          throw new Error(`Erro ao buscar livros: ${response.status}`);
-        }
+        if (response.status === 401) return handleAuthErrorAttLivro();
+        if (!response.ok) throw new Error(`Erro ${response.status} ao buscar.`);
         
         const categorias = await response.json();
-        
         todosLivros = [];
-        
+
         categorias.forEach(categoria => {
           if (categoria.bookResponses && Array.isArray(categoria.bookResponses)) {
             categoria.bookResponses.forEach(livro => {
@@ -187,217 +46,257 @@ export default function importAtualizacaoLivros() {
             });
           }
         });
-        
+        if(categoriaSelect) carregarCategoriasSelect(categorias, token);
+
       } catch (error) {
-        console.error('Erro ao carregar livros:', error);
+        console.error('Erro ao carregar todos os livros:', error);
+        showMessageAttLivro('Não foi possível carregar a lista de livros para pesquisa.', true);
       }
     }
+    
+    async function carregarCategoriasSelect(categorias, token) {
+        if (categorias && categorias.length > 0) {
+            popularDropdownCategoriasLivro(categorias, categoriaSelect);
+        } else {
+             if (!token) token = localStorage.getItem('authToken');
+             if (!token) return handleAuthErrorAttLivro();
+             try {
+                const response = await fetch(`${API_BASE_URL}/categoria`, {
+                  headers: { Authorization: `Bearer ${token}` }
+                });
+                if (response.status === 401) return handleAuthErrorAttLivro();
+                if (!response.ok) throw new Error(`Erro ${response.status} ao buscar categorias.`);
+                const cats = await response.json();
+                popularDropdownCategoriasLivro(cats, categoriaSelect);
+             } catch(error) {
+                 console.error('Erro ao carregar categorias no select:', error);
+             }
+        }
+    }
+    
+    function popularDropdownCategoriasLivro(categorias, selectElement) {
+        selectElement.innerHTML = '<option value="">Selecione uma categoria</option>';
+        categorias.forEach(categoria => {
+          const option = document.createElement('option');
+          option.value = categoria.idCategoria;
+          option.textContent = categoria.nome;
+          selectElement.appendChild(option);
+        });
+    }
+
 
     function preencherFormulario(livro) {
-      document.getElementById('livroId').value = livro.idLivro;
-      document.getElementById('tituloLivro').value = livro.titulo || '';
-      document.getElementById('autoresLivro').value = livro.autor || '';
-      document.getElementById('assuntoLivro').value = livro.assunto || '';
-      document.getElementById('descricaoLivro').value = livro.descricao || '';
-      document.getElementById('codigoLivro').value = livro.codigo || '';
-      document.getElementById('quantidadeLivro').value = livro.quantidade || 1;
+        if (!atualizarLivroForm) return;
+
+        document.getElementById('livroId').value = livro.idLivro;
+        document.getElementById('tituloLivro').value = livro.titulo || '';
+        document.getElementById('autoresLivro').value = livro.autor || '';
+        document.getElementById('assuntoLivro').value = livro.assunto || '';
+        document.getElementById('descricaoLivro').value = livro.descricao || '';
+        document.getElementById('codigoLivro').value = livro.codigo || '';
+        document.getElementById('quantidadeLivro').value = livro.quantidade || 1;
+
+        if (categoriaSelect && livro.idCategoria) {
+            categoriaSelect.value = livro.idCategoria;
+        }
+
+        const statusSelect = document.getElementById('statusLivro');
+        if (statusSelect && livro.status) {
+            statusSelect.value = livro.status;
+        }
+        
+        atualizarLivroForm.style.display = 'block';
+    }
+
+    async function handleAtualizarSubmit(e) {
+      e.preventDefault();
+      const token = localStorage.getItem('authToken');
+      if (!token) return handleAuthErrorAttLivro();
+
+      const livroId = document.getElementById('livroId').value;
+      if (!livroId) {
+          showMessageAttLivro("Nenhum livro selecionado para atualizar.", true);
+          return;
+      }
       
-      const categoriaSelect = document.getElementById('categoria-select');
-      if (categoriaSelect) {
-        if (livro.idCategoria) {
-          for (let i = 0; i < categoriaSelect.options.length; i++) {
-            if (categoriaSelect.options[i].value == livro.idCategoria) {
-              categoriaSelect.selectedIndex = i;
-              break;
-            }
-          }
-        } 
-        else if (livro.nomeCategoria) {
-          for (let i = 0; i < categoriaSelect.options.length; i++) {
-            if (categoriaSelect.options[i].textContent === livro.nomeCategoria) {
-              categoriaSelect.selectedIndex = i;
-              break;
-            }
-          }
-        }
+      if (!document.getElementById('tituloLivro').value.trim()) {
+          showMessageAttLivro("O título é obrigatório.", true);
+          return;
       }
 
-      const statusSelect = document.getElementById('statusLivro');
-      if (statusSelect && livro.status) {
-        for (let i = 0; i < statusSelect.options.length; i++) {
-          if (statusSelect.options[i].value === livro.status) {
-            statusSelect.selectedIndex = i;
-            break;
-          }
-        }
-      }
-    }
+      const livroData = {
+        idLivro: parseInt(livroId, 10),
+        titulo: document.getElementById('tituloLivro').value.trim(),
+        autor: document.getElementById('autoresLivro').value.trim(),
+        assunto: document.getElementById('assuntoLivro').value.trim(),
+        descricao: document.getElementById('descricaoLivro').value.trim() || 'Sem descrição',
+        codigo: document.getElementById('codigoLivro').value.trim(),
+        quantidade: parseInt(document.getElementById('quantidadeLivro').value, 10),
+        status: document.getElementById('statusLivro').value,
+        idCategoria: parseInt(categoriaSelect.value, 10)
+      };
 
-    async function listarLivros() {
-      const token = localStorage.getItem('authToken');
-      if (!token) {
-        window.location.href = 'login.html';
-        return;
-      }
-
-      const listaDiv = document.getElementById('listaLivros');
-      const button = document.getElementById('btnListarLivros');
-
-      if (button) {
-        button.textContent = 'Carregando...';
-        button.disabled = true;
-      }
+      const submitButton = atualizarLivroForm.querySelector('button[type="submit"]');
+      const buttonText = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = 'Atualizando...';
 
       try {
-        const response = await fetch(
-          'http://localhost:8090/categoria',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`Erro ao buscar categorias: ${response.status}`);
-        }
-
-        const categorias = await response.json();
-
-        if (listaDiv) {
-          const table = document.createElement('table');
-          table.className = 'tabela-categoria';
-
-          const thead = document.createElement('thead');
-          thead.innerHTML = `
-            <tr>
-              <th>ID</th>
-              <th>Título</th>
-              <th>Autor</th>
-              <th>Assunto</th>
-              <th>Código</th>
-              <th>Qtd</th>
-              <th>Status</th>
-              <th>Categoria</th>
-              <th>Ações</th>
-            </tr>
-          `;
-          table.appendChild(thead);
-
-          const tbody = document.createElement('tbody');
-          let livrosEncontrados = false;
-
-          categorias.forEach((categoria) => {
-            if (categoria.bookResponses && Array.isArray(categoria.bookResponses)) {
-              categoria.bookResponses.forEach((livro) => {
-                livrosEncontrados = true;
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                  <td>${livro.idLivro}</td>
-                  <td>${livro.titulo}</td>
-                  <td>${livro.autor}</td>
-                  <td>${livro.assunto}</td>
-                  <td>${livro.codigo}</td>
-                  <td>${livro.quantidade}</td>
-                  <td>${livro.status}</td>
-                  <td>${livro.nomeCategoria}</td>
-                  <td>
-                    <button class="button-update" onclick="selecionarLivroParaAtualizar(${livro.idLivro})">
-                      Editar
-                    </button>
-                  </td>
-                `;
-                tbody.appendChild(tr);
-              });
-            }
-          });
-          
-          table.appendChild(tbody);
-
-          listaDiv.innerHTML = '';
-          if (livrosEncontrados) {
-            listaDiv.appendChild(table);
-          } else {
-            listaDiv.innerHTML = '<p>Nenhum livro encontrado.</p>';
-          }
-        }
-      } catch (error) {
-        console.error('Erro:', error);
-        if (listaDiv) {
-          listaDiv.innerHTML =
-            '<p>Erro ao carregar a lista de livros. Por favor, tente novamente.</p>';
-        }
-      } finally {
-        if (button) {
-          button.textContent = 'Listar Todos os Livros';
-          button.disabled = false;
-        }
-      }
-    }
-
-    window.selecionarLivroParaAtualizar = async function(idLivro) {
-      const token = localStorage.getItem('authToken');
-      if (!token) {
-        window.location.href = 'login.html';
-        return;
-      }
-
-      try {
-        const response = await fetch('http://localhost:8090/categoria', {
+        const response = await fetch(`${API_BASE_URL}/livro/${livroId}`, {
+          method: 'PUT',
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(livroData)
         });
 
+        if (response.status === 401) return handleAuthErrorAttLivro();
         if (!response.ok) {
-          throw new Error(`Erro ao buscar livros: ${response.status}`);
+          const errorText = await response.text();
+          throw new Error(errorText || `Erro ${response.status} ao atualizar.`);
         }
 
-        const categorias = await response.json();
-        let livroEncontrado = null;
+        showMessageAttLivro('Livro atualizado com sucesso!');
+        atualizarLivroForm.reset();
+        atualizarLivroForm.style.display = 'none';
+        if(pesquisarLivroInput) pesquisarLivroInput.value = '';
 
-        categorias.forEach(categoria => {
-          if (categoria.bookResponses && Array.isArray(categoria.bookResponses)) {
-            categoria.bookResponses.forEach(livro => {
-              if (livro.idLivro === idLivro) {
-                livroEncontrado = livro;
-              }
-            });
-          }
-        });
+        await carregarTodosLivros();
+        await listarLivrosGlobaisAtt();
 
-        if (livroEncontrado) {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          
-          setTimeout(() => {
-            preencherFormulario(livroEncontrado);
-            document.getElementById('atualizarLivroForm').style.display = 'block';
-          }, 500);
+      } catch (error) {
+        console.error('Erro ao atualizar livro:', error);
+        showMessageAttLivro(`Erro ao atualizar: ${error.message}`, true);
+      } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = buttonText;
+      }
+    }
+    
+    
+    window.listarLivrosGlobaisAtt = async function () { 
+      const token = localStorage.getItem('authToken');
+      if (!token) return handleAuthErrorAttLivro();
+
+      if (!listaLivrosDiv) return;
+
+      if (btnListarLivros) { btnListarLivros.textContent = 'Carregando...'; btnListarLivros.disabled = true; }
+      listaLivrosDiv.innerHTML = 'Carregando livros...';
+
+      try {
+        if (todosLivros.length === 0) {
+            await carregarTodosLivros(); 
+        }
+
+        const table = document.createElement('table');
+        table.className = 'tabela-categoria'; 
+        table.innerHTML = `
+          <thead>
+            <tr>
+              <th>ID</th> <th>Título</th> <th>Autor</th> <th>Código</th>
+              <th>Qtd</th> <th>Status</th> <th>Categoria</th> <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${todosLivros.map(livro => `
+              <tr>
+                <td>${livro.idLivro || 'N/A'}</td>
+                <td>${livro.titulo || 'N/A'}</td>
+                <td>${livro.autor || 'N/A'}</td>
+                <td>${livro.codigo || 'N/A'}</td>
+                <td>${livro.quantidade || 'N/A'}</td>
+                <td>${livro.status || 'N/A'}</td>
+                <td>${livro.nomeCategoria || 'N/A'}</td>
+                <td>
+                  <button class="btn-edit" onclick="window.selecionarLivroParaAtualizarGlobal(${livro.idLivro})"> 
+                    Editar
+                  </button>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        `;
+        
+        listaLivrosDiv.innerHTML = '';
+        if (todosLivros.length > 0) {
+            listaLivrosDiv.appendChild(table);
         } else {
-          alert('Livro não encontrado.');
+            listaLivrosDiv.innerHTML = '<p>Nenhum livro encontrado.</p>';
         }
 
       } catch (error) {
-        console.error('Erro:', error);
-        alert('Erro ao selecionar livro para atualização. Por favor, tente novamente.');
+        console.error('Erro ao listar livros:', error);
+        listaLivrosDiv.innerHTML = '<p class="error">Erro ao carregar a lista. Tente novamente.</p>';
+      } finally {
+        if (btnListarLivros) { btnListarLivros.textContent = 'Listar Todos'; btnListarLivros.disabled = false; }
       }
-    };
+    }
 
-    const btnListarLivros = document.getElementById('btnListarLivros');
-    if (btnListarLivros) {
-      btnListarLivros.addEventListener('click', listarLivros);
+    window.selecionarLivroParaAtualizarGlobal = function(idLivro) {
+        const livro = todosLivros.find(l => l.idLivro === idLivro);
+        
+        if (livro) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            preencherFormulario(livro);
+        } else {
+            showMessageAttLivro(`Livro com ID ${idLivro} não encontrado na lista local. Tente recarregar.`, true);
+        }
+    }
+
+
+    function inicializar() {        
+        const token = localStorage.getItem('authToken');
+        if (!token) return handleAuthErrorAttLivro();
+
+        carregarTodosLivros().then(() => {
+             listarLivrosGlobaisAtt();
+        });
+
+        if (pesquisarLivroInput && sugestoesContainer) {
+            pesquisarLivroInput.addEventListener('input', () => {
+                const termo = pesquisarLivroInput.value.trim().toLowerCase();
+                sugestoesContainer.innerHTML = '';
+                if (termo.length < 2) {
+                    sugestoesContainer.style.display = 'none';
+                    return;
+                }
+                const filtrados = todosLivros.filter(l => l.titulo.toLowerCase().includes(termo) || l.codigo.toLowerCase().includes(termo));
+                if (filtrados.length > 0) {
+                    sugestoesContainer.style.display = 'block';
+                    filtrados.slice(0, 6).forEach(livro => {
+                        const item = document.createElement('div');
+                        item.className = 'sugestao-item';
+                        item.textContent = `${livro.titulo} (${livro.codigo})`;
+                        item.onclick = () => {
+                            pesquisarLivroInput.value = livro.titulo;
+                            sugestoesContainer.style.display = 'none';
+                            preencherFormulario(livro);
+                        };
+                        sugestoesContainer.appendChild(item);
+                    });
+                } else {
+                    sugestoesContainer.style.display = 'none';
+                }
+            });
+        }
+
+        if (atualizarLivroForm) {
+            atualizarLivroForm.addEventListener('submit', handleAtualizarSubmit);
+        }
+        
+        if (btnListarLivros) {
+            btnListarLivros.addEventListener('click', listarLivrosGlobaisAtt);
+        }
     }
 
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', inicializarFormulario);
+      document.addEventListener('DOMContentLoaded', inicializar);
     } else {
-      inicializarFormulario();
+      inicializar();
     }
 
     resolve();
   });
 }
 
-if (typeof window !== 'undefined') {
-  importAtualizacaoLivros();
-}

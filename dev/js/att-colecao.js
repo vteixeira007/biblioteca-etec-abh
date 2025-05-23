@@ -1,17 +1,13 @@
 
 const API_BASE_URL = 'http://localhost:8090';
 
-function showMessageAtt(message) {
+function showMessageAtt(message, isError = false) {
   alert(message);
 }
 
-function getToken() {
-  const token = localStorage.getItem('authToken');
-  if (!token) {
-    showMessageAtt("Você precisa estar logado para acessar esta funcionalidade.");
-    window.location.href = "login.html";
-  }
-  return token;
+function handleAuthErrorAtt() {
+    showMessageAtt("Sessão expirada ou inválida. Faça login novamente.", true);
+    window.location.href = 'login.html';
 }
 
 function popularDropdownCategorias(categorias, selectElement, defaultOptionText) {
@@ -30,8 +26,8 @@ function popularDropdownCategorias(categorias, selectElement, defaultOptionText)
 }
 
 async function carregarCategoriasParaPagina() {
-  const token = getToken();
-  if (!token) return;
+  const token = localStorage.getItem('authToken');
+  if (!token) return handleAuthErrorAtt();
 
   const selectAtualizar = document.getElementById('selectCategoriaAtualizar');
   const selectExcluir = document.getElementById('selectCategoriaExcluir');
@@ -42,27 +38,20 @@ async function carregarCategoriasParaPagina() {
   try {
     const response = await fetch(`${API_BASE_URL}/categoria`, {
       method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
+      headers: { 'Authorization': `Bearer ${token}` }
     });
 
-    if (!response.ok) {
-      throw new Error(`Erro ao buscar categorias: ${response.status} - ${await response.text()}`);
-    }
+    if (response.status === 401) return handleAuthErrorAtt();
+    if (!response.ok) throw new Error(`Erro ${response.status} ao buscar.`);
 
     const categorias = await response.json();
     
-    if (selectAtualizar) {
-        popularDropdownCategorias(categorias, selectAtualizar, "-- Selecione para Atualizar --");
-    }
-    if (selectExcluir) {
-        popularDropdownCategorias(categorias, selectExcluir, "-- Selecione para Excluir --");
-    }
+    if (selectAtualizar) popularDropdownCategorias(categorias, selectAtualizar, "-- Selecione para Atualizar --");
+    if (selectExcluir) popularDropdownCategorias(categorias, selectExcluir, "-- Selecione para Excluir --");
 
   } catch (error) {
     console.error('Erro ao carregar categorias:', error);
-    showMessageAtt(`Erro ao carregar categorias: ${error.message}`);
+    showMessageAtt(`Erro ao carregar categorias: ${error.message}`, true);
   } finally {
     if(selectAtualizar) selectAtualizar.disabled = false;
     if(selectExcluir) selectExcluir.disabled = false;
@@ -79,43 +68,39 @@ function handleSelecaoCategoriaParaAtualizar() {
   const inputNovoNome = document.getElementById('novoNomeCategoriaInputAtt');
   const inputHiddenIdCategoria = document.getElementById('categoriaIdAtt');
 
-  if (idCategoriaSelecionada) {
+  if (idCategoriaSelecionada && divCamposNovoNome && btnSubmitAtualizar && inputNomeAtual && inputNovoNome && inputHiddenIdCategoria) {
     const nomeCategoriaSelecionada = selectAtualizar.options[selectAtualizar.selectedIndex].getAttribute('data-nome');
     
     inputHiddenIdCategoria.value = idCategoriaSelecionada;
     inputNomeAtual.value = nomeCategoriaSelecionada;
-    inputNovoNome.value = nomeCategoriaSelecionada;
+    inputNovoNome.value = nomeCategoriaSelecionada; 
     
     divCamposNovoNome.style.display = 'block';
     btnSubmitAtualizar.style.display = 'block';
     inputNovoNome.focus();
-  } else {
+  } else if (divCamposNovoNome) {
     divCamposNovoNome.style.display = 'none';
-    btnSubmitAtualizar.style.display = 'none';
-    inputHiddenIdCategoria.value = '';
-    inputNomeAtual.value = '';
-    inputNovoNome.value = '';
+    if(btnSubmitAtualizar) btnSubmitAtualizar.style.display = 'none';
+    if(inputHiddenIdCategoria) inputHiddenIdCategoria.value = '';
+    if(inputNomeAtual) inputNomeAtual.value = '';
+    if(inputNovoNome) inputNovoNome.value = '';
   }
 }
 
 async function handleAtualizarCategoriaSubmit(event) {
   event.preventDefault();
-  const token = getToken();
-  if (!token) return;
+  const token = localStorage.getItem('authToken');
+  if (!token) return handleAuthErrorAtt();
 
   const idCategoria = document.getElementById('categoriaIdAtt').value;
   const novoNome = document.getElementById('novoNomeCategoriaInputAtt').value.trim();
 
-  if (!idCategoria) {
-    showMessageAtt('Por favor, selecione uma categoria da lista para editar.');
+  if (!idCategoria || !novoNome) {
+    showMessageAtt('Por favor, selecione uma categoria e preencha o novo nome.', true);
     return;
   }
-  if (!novoNome) {
-    showMessageAtt('Por favor, preencha o novo nome da categoria.');
-    return;
-  }
-  if (novoNome.length > 40) {
-    showMessageAtt('O nome da categoria deve ter no máximo 40 caracteres.');
+   if (novoNome.length > 40) {
+    showMessageAtt('O nome da categoria deve ter no máximo 40 caracteres.', true);
     return;
   }
 
@@ -134,11 +119,12 @@ async function handleAtualizarCategoriaSubmit(event) {
       body: JSON.stringify({ nome: novoNome })
     });
 
+    if (response.status === 401) return handleAuthErrorAtt();
     const responseText = await response.text();
     if (!response.ok) {
         let errorMessage = responseText;
         try { const errorJson = JSON.parse(responseText); errorMessage = errorJson.message || JSON.stringify(errorJson); } catch (e) {}
-        throw new Error(`Erro ao atualizar categoria: ${response.status} - ${errorMessage}`);
+        throw new Error(`Erro ${response.status}: ${errorMessage}`);
     }
     
     showMessageAtt('Categoria atualizada com sucesso!');
@@ -146,14 +132,13 @@ async function handleAtualizarCategoriaSubmit(event) {
     document.getElementById('formAtualizarCategoria').reset();
     document.getElementById('categoriaIdAtt').value = ''; 
     document.getElementById('selectCategoriaAtualizar').value = '';
-    document.getElementById('divCamposNovoNome').style.display = 'none';
-    submitButton.style.display = 'none';
+    handleSelecaoCategoriaParaAtualizar();
     
     await carregarCategoriasParaPagina();
 
   } catch (error) {
     console.error('Erro ao atualizar categoria:', error);
-    showMessageAtt(`Erro ao atualizar categoria. ${error.message}`);
+    showMessageAtt(`Erro ao atualizar categoria: ${error.message}`, true);
   } finally {
     submitButton.disabled = false;
     submitButton.textContent = originalButtonText;
@@ -163,42 +148,43 @@ async function handleAtualizarCategoriaSubmit(event) {
 
 async function handleExcluirCategoriaSubmit(event) {
   event.preventDefault();
-  const token = getToken();
-  if (!token) return;
+  const token = localStorage.getItem('authToken');
+  if (!token) return handleAuthErrorAtt();
 
   const selectExcluir = document.getElementById('selectCategoriaExcluir');
   const idCategoriaParaExcluir = selectExcluir.value;
 
   if (!idCategoriaParaExcluir) {
-    showMessageAtt('Por favor, selecione uma categoria para excluir.');
+    showMessageAtt('Por favor, selecione uma categoria para excluir.', true);
     return;
   }
   if (!confirm(`Tem certeza que deseja excluir a categoria selecionada (Nome: ${selectExcluir.options[selectExcluir.selectedIndex].text})? Esta ação não pode ser desfeita e removerá os livros associados.`)) {
     return;
   }
 
-  if (typeof window.deletarCategoria === 'function') {
-    try {
-      await window.deletarCategoria(idCategoriaParaExcluir);
-      await carregarCategoriasParaPagina();
+  try {
+      const response = await fetch(`${API_BASE_URL}/categoria/${idCategoriaParaExcluir}`, {
+          method: 'DELETE',
+          headers: { 'Authorization': `Bearer ${token}` }
+      });
+
+      if (response.status === 401) return handleAuthErrorAtt();
+      if (!response.ok) throw new Error(`Erro ${response.status} ao deletar.`);
+
+      showMessageAtt('Categoria deletada com sucesso!');
+      await carregarCategoriasParaPagina(); 
       selectExcluir.value = ""; 
-    } catch (error) {
-      console.error('Erro ao tentar excluir categoria:', error);
-      showMessageAtt('Ocorreu um problema durante a exclusão. Verifique o console.');
-    }
-  } else {
-    showMessageAtt('Erro: Função de exclusão (deletarCategoria) não encontrada.');
-    console.error('window.deletarCategoria não está definida.');
+
+  } catch (error) {
+      console.error('Erro ao deletar categoria:', error);
+      showMessageAtt(`Erro ao deletar categoria. ${error.message}`, true);
   }
 }
 
+/**
+ * Função de inicialização para a página de atualização de categorias.
+ */
 export function initAtualizarCategoriasPage() {
-  const token = localStorage.getItem('authToken');
-  if (!token) {
-    alert("Você precisa estar logado para acessar esta página.");
-    window.location.href = "login.html";
-    return;
-  }
 
   const selectCategoriaAtualizar = document.getElementById('selectCategoriaAtualizar');
   const formAtualizarCategoria = document.getElementById('formAtualizarCategoria');
