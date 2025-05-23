@@ -4,9 +4,11 @@ import com.univesp.bibliotecaetecapi.dto.BookRequest;
 import com.univesp.bibliotecaetecapi.dto.BookResponse;
 import com.univesp.bibliotecaetecapi.model.Book;
 import com.univesp.bibliotecaetecapi.service.BookService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -15,8 +17,9 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping({"/livro"})
 @Slf4j
+@RequestMapping({"/livro"})
+@SecurityRequirement(name = "bearerAuth")
 public class BookController {
     @Autowired
     public BookService bookService;
@@ -52,8 +55,7 @@ public class BookController {
         log.debug("BookRequest: {}", book);
         Book bookEntity = this.bookService.insertBook(book);
         log.debug("BookEntity: {}", bookEntity);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(new Object[]{book.getIdLivro()}).toUri();
-        return ResponseEntity.created(uri).body(bookEntity);
+        return ResponseEntity.status(HttpStatus.CREATED).body(bookEntity);
     }
 
     @DeleteMapping({"/{id}"})

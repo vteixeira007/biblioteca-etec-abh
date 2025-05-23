@@ -34,7 +34,7 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.POST, "/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/**").authenticated()
-
+                        .requestMatchers(HttpMethod.POST, "/livro/**").hasRole("USER")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

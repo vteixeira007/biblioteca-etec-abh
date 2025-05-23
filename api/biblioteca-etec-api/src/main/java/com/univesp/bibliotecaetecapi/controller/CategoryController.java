@@ -4,6 +4,7 @@ import com.univesp.bibliotecaetecapi.dto.CategoryRequest;
 import com.univesp.bibliotecaetecapi.dto.CategoryResponse;
 import com.univesp.bibliotecaetecapi.model.Category;
 import com.univesp.bibliotecaetecapi.service.CategoryService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping({"/categoria"})
+@SecurityRequirement(name = "bearerAuth")
 public class CategoryController {
     @Autowired
     public CategoryService categoryService;
@@ -47,7 +49,7 @@ public class CategoryController {
     @DeleteMapping({"/{id}"})
     public ResponseEntity<Void> deleteCategory(@PathVariable("id") Long idCategory) {
         this.categoryService.deleteCategory(idCategory);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PutMapping({"/{id}"})

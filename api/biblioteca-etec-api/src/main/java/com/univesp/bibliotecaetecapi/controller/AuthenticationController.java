@@ -7,6 +7,7 @@ import com.univesp.bibliotecaetecapi.dto.RegisterDto;
 import com.univesp.bibliotecaetecapi.model.User;
 import com.univesp.bibliotecaetecapi.repository.UserRepository;
 import com.univesp.bibliotecaetecapi.service.TokenService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("auth")
+@SecurityRequirement(name = "bearerAuth")
 public class AuthenticationController {
 
     @Autowired
@@ -29,6 +31,7 @@ public class AuthenticationController {
 
     @Autowired
     private TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDto authDto){
         var userNamePassword = new UsernamePasswordAuthenticationToken(authDto.getLogin(),authDto.getPassword());

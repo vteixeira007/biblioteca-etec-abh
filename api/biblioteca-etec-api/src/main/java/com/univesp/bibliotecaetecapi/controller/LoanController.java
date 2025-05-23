@@ -5,7 +5,10 @@ import com.univesp.bibliotecaetecapi.model.Loan;
 import com.univesp.bibliotecaetecapi.service.LoanService;
 import java.net.URI;
 import java.util.List;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping({"/loan"})
+@SecurityRequirement(name = "bearerAuth")
 public class LoanController {
     @Autowired
     LoanService loanService;
@@ -30,8 +34,7 @@ public class LoanController {
 
     @PostMapping
     public ResponseEntity<Loan> insertLoan(@RequestBody LoanRequest loanRequest) {
-        this.loanService.Loan(loanRequest);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(new Object[]{loanRequest.getIdEmprestimo()}).toUri();
-        return ResponseEntity.created(uri).build();
+        Loan loan =this.loanService.Loan(loanRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(loan);
     }
 }

@@ -4,6 +4,7 @@ import com.univesp.bibliotecaetecapi.dto.StudentRequest;
 import com.univesp.bibliotecaetecapi.dto.StudentResponse;
 import com.univesp.bibliotecaetecapi.model.Student;
 import com.univesp.bibliotecaetecapi.service.StudentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping({"/aluno"})
+@SecurityRequirement(name = "bearerAuth")
 public class StudentController {
     @Autowired
     public StudentService studentService;
