@@ -18,12 +18,12 @@
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background-image: url('./assets/images/svg/wave-desktop.svg');
+    background-image: url('data:image/svg+xml,<svg width="1440" height="821" viewBox="0 0 1440 821" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0V821C147.5 719 328 615 636 688.5C944 762 1066.5 736.5 1150 698.5C1216.8 668.1 1371.17 577.833 1440 536.5V0H0Z" fill="url(%23paint0_linear_2473_750)"/><defs><linearGradient id="paint0_linear_2473_750" x1="1397.5" y1="316" x2="32.5001" y2="799" gradientUnits="userSpaceOnUse"><stop stop-color="%23FFE2A7"/><stop offset="0.484375" stop-color="%239C6DEF"/><stop offset="0.692708" stop-color="%23845FD6"/><stop offset="0.864583" stop-color="%236B51BD"/><stop offset="1" stop-color="%236B51BD"/></linearGradient></defs></svg>') ;
     background-size: cover;
     background-position: bottom;
 
     @include d(m) {
-      background-image: url('./assets/images/svg/wave-mobile.svg');
+      background-image: url('data:image/svg+xml,<svg width="393" height="827" viewBox="0 0 393 827" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0.5V826.065C40.2552 798.227 89.5167 769.844 173.575 789.903C257.633 809.963 291.066 803.003 313.854 792.632C332.085 784.336 374.214 759.7 393 748.42V0.5H0Z" fill="url(%23paint0_linear_2482_817)"/><defs><linearGradient id="paint0_linear_2482_817" x1="495" y1="106" x2="8.87033" y2="820.061" gradientUnits="userSpaceOnUse"><stop stop-color="%23FFE2A7"/><stop offset="0.484375" stop-color="%239C6DEF"/><stop offset="0.692708" stop-color="%23845FD6"/><stop offset="0.864583" stop-color="%236B51BD"/><stop offset="1" stop-color="%236B51BD"/></linearGradient></defs></svg>');
     }
 
     h1 {
