@@ -1,7 +1,7 @@
 
 export default function importCadastroAlunos() {
   return new Promise((resolve) => {
-    const API_BASE_URL = 'http://localhost:8090';
+    const API_BASE_URL = 'https://biblioteca-etec-abh-2.onrender.com/';
 
     function showMessage(mensagem, isError = false) {
       alert((isError ? 'Erro: ' : '') + mensagem);

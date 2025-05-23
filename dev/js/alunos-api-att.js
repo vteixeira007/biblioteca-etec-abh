@@ -1,7 +1,7 @@
 
 export default function importAttAlunos() {
   return new Promise((resolve) => {
-    const API_BASE_URL = 'http://localhost:8090';
+    const API_BASE_URL = 'https://biblioteca-etec-abh-2.onrender.com/';
 
     const pesquisaInput = document.getElementById('pesquisaAluno');
     const btnAtualizar = document.getElementById('btnAtualizar');

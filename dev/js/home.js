@@ -1,5 +1,5 @@
 export default function pageLivros() {
-  const API_BASE_URL = 'http://localhost:8090';
+  const API_BASE_URL = 'https://biblioteca-etec-abh-2.onrender.com/';
   let todosOsLivrosDaPagina = [];
   const container = document.getElementById('homeLivrosContainer');
   const inputPesquisa = document.querySelector('.home-pesquisa_input');

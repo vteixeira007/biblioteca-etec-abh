@@ -1,6 +1,6 @@
 
 export default function importDescricaoLivros() {
-  const API_BASE_URL = 'http://localhost:8090';
+  const API_BASE_URL = 'https://biblioteca-etec-abh-2.onrender.com/';
 
   function showMessageDescricao(message, containerElement) {
     if (containerElement) {
