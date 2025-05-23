@@ -4,32 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Biblioteca ETEC | PI UNIVESP</title>
+  <title>Biblioteca ETEC | Configurar Categorias</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./dev/css/main.css" />
-  <!-- <link rel="stylesheet" href="./assets/css/main-min.css"> Style Build -->
+   <!-- <link rel="stylesheet" href="./assets/css/main-min.css"> Style Build -->
 </head>
-
-
 
 <body>
 
   <header>
     <nav id="nav" class="navbar">
       <div class="navbar-image">
-        <img src="./assets/images/logo.svg" alt="">
+        <img src="./assets/images/logo.svg" alt="Logo da Biblioteca">
       </div>
       <button aria-label="Abrir Menu" id="btn-mobile" class="navbar-btnMobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
-
         <span class="navbar-hamburguer"></span>
       </button>
       <ul id="menu" role="menu">
         <li class="li-biblioteca"><a href="./index.html">Biblioteca</a></li>
         <li class="li-livros"><a href="./add-livro.html">Adicionar Livros</a></li>
-        <li class="li-colecao active"><a href="">Adicionar Categoria</a></li>
+        <li class="li-colecao active"><a href="./add-colecao.html">Adicionar Categoria</a></li>
         <li class="li-alunos"><a href="./cadastro-alunos.html">Cadastrar Alunos</a></li>
         <div class="navbar-space">
           <li class="li-suporte"><a href="mailto:vinicius.teixeira60@etec.sp.gov.br" target="_blank">Suporte</a></li>
@@ -39,53 +36,59 @@
   </header>
 
   <main>
-    <h1 class="titulo addColecao">Configuração de Coleções</h1>
+    <h1 class="titulo addColecao">Configuração de Categorias</h1>
     <div class="line subtitulo"></div>
 
     <div class="subtitulo">
       <ul class="subtitulo-menu">
         <li><a class="subtitulo-text default" href="./add-colecao.html">Novo Cadastro</a></li>
         <li>
-          <a class="subtitulo-text" href="">Configurações</a>
+          <a class="subtitulo-text" href="./colecao-atualizacao.html">Configurações</a>
         </li>
       </ul>
       <div class="line subtitulo"></div>
     </div>
 
+    <h2 class="addLivro_select-titulo">Atualizar Nome da Categoria</h2>
+    <form id="formAtualizarCategoria">
+        <input type="hidden" id="categoriaIdAtt" name="categoriaIdAtt">
+        
+        <div class="div_input">
+            <label class="input-titulo" for="selectCategoriaAtualizar">Selecionar Categoria para Atualizar</label>
+            <select class="select" id="selectCategoriaAtualizar" name="selectCategoriaAtualizar" required>
+                <option class="option" value="">-- Selecione uma Categoria --</option>
+                </select>
+        </div>
 
-    <form action="">
-      <div class="div_input">
-        <label class="input-titulo alunoAtualizacao">Pesquisar Categoria</label>
-        <input class="home-pesquisa_input" type="search" />
-        <span style="margin-top: 12px;" class="legenda">Escolha a Categoria para fazer a alteração de nome</span>
-      </div>
-      <button class="button" type="submit">Atualizar nome da Categoria</button>
+        <div class="div_input" id="divCamposNovoNome" style="display: none;"> 
+            <label class="input-titulo" for="nomeAtualCategoriaDisplayAtt">Nome Atual</label>
+            <input class="input" type="text" id="nomeAtualCategoriaDisplayAtt" readonly style="margin-bottom:15px; background-color: #f0f0f0;">
+        </br>
+            <label class="input-titulo" for="novoNomeCategoriaInputAtt">Novo Nome da Categoria</label>
+            <input class="input" type="text" id="novoNomeCategoriaInputAtt" placeholder="Digite o novo nome" required maxlength="40">
+            <span class="legenda">Limite de 40 caracteres.</span>
+        </div>
+        <button class="button" type="submit" id="btnSubmitAtualizarCategoria" style="display: none; margin-top: 15px;">Atualizar Nome</button>
     </form>
 
-<div class="colecao-att_excluir">
-  <form action="">
-    <div class="addLivro_select">
-      <h2 class="addLivro_select-titulo">Selecionar Categoria para <span>excluir</span></h2>
-      <div class="colecao-att_alerta"><span>atenção:</span> A exclusão de uma Categoria removerá permanentemente todos os itens (livros) dessa Categoria.</div>
-      <select class="select" name="Teste" id="">
-        <option class="option" value="">Teste</option>
-        <option class="option" value="">Teste 2</option>
-        <option class="option" value="">Teste 3</option>
-        <option class="option" value="">Teste 4</option>
-      </select>
-      <span class="legenda">Escolha a Categoria que deseja excluir</span>
+    <div class="line subtitulo" style="margin-top: 40px; margin-bottom: 20px;"></div>
+
+    <div class="colecao-att_excluir">
+        <form id="formExcluirCategoriaAtt">
+            <div class="addLivro_select">
+                <h2 class="addLivro_select-titulo" style="font-size: 1.8rem;">Selecionar Categoria para <span>excluir</span></h2>
+                <div class="colecao-att_alerta"><span>Atenção:</span> A exclusão de uma categoria removerá permanentemente todos os itens (livros) associados a ela.</div>
+                <select class="select" name="categoriaParaExcluir" id="selectCategoriaExcluir" required>
+                    <option class="option" value="">Selecione uma Categoria</option>
+                </select>
+                <span class="legenda">Escolha a categoria que deseja excluir</span>
+            </div>
+            <button class="button excluir" type="submit">Excluir Categoria Selecionada</button>
+        </form>
     </div>
-      <button class="button excluir" type="submit">Excluir</button>
-    </form>
-  </div>
-
   </main>
 
-
-  <script src="./assets/js/main.js"></script>
-
+  <script src="./assets/js/main.js" type="module"></script>
 
 </body>
-
-
 </html>

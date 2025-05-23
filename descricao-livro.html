@@ -1,151 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Biblioteca ETEC | PI UNIVESP</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/swiper/swiper-bundle.min.css"
-    />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./dev/css/main.css" />
-    <!-- <link rel="stylesheet" href="./assets/css/main-min.css"> Style Build -->
-  </head>
 
-  <body>
-    <header>
-      <nav id="nav" class="navbar">
-        <div class="navbar-image">
-          <img src="./assets/images/logo.svg" alt="" />
-        </div>
-        <button
-          aria-label="Abrir Menu"
-          id="btn-mobile"
-          class="navbar-btnMobile"
-          aria-haspopup="true"
-          aria-controls="menu"
-          aria-expanded="false"
-        >
-          <span class="navbar-hamburguer"></span>
-        </button>
-        <ul id="menu" role="menu">
-          <li class="li-biblioteca active"><a href="./index.html">Biblioteca</a></li>
-          <li class="li-livros ">
-            <a href="./add-livro.html">Adicionar Livros</a>
-          </li>
-          <li class="li-colecao">
-            <a href="./add-colecao.html">Adicionar Categoria</a>
-          </li>
-          <li class="li-alunos"><a href="">Cadastrar Alunos</a></li>
-          <div class="navbar-space">
-            <li class="li-suporte"><a href="mailto:vinicius.teixeira60@etec.sp.gov.br" target="_blank">Suporte</a></li>
-          </div>
-        </ul>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biblioteca ETEC | PI UNIVESP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./dev/css/main.css" />
+  <!-- <link rel="stylesheet" href="./assets/css/main-min.css"> Style Build -->
+</head>
 
-    <main>
-      <div class="livro-submenu">
-        <ul>
-          <li class="livro-submenu_editor"><a href="">Editar</a></li>
-          <li class="livro-submenu_detalhes"><a href="">Detalhes</a></li>
-          <li class="livro-submenu_excluir">
-            <a class="livro-submenu_excluir-text">Excluir</a>
-          </li>
-        </ul>
+<body>
+  <header>
+    <nav id="nav" class="navbar">
+      <div class="navbar-image">
+        <img src="./assets/images/logo.svg" alt="" />
       </div>
-      <div class="livro-buttons">
-        <a class="livro-buttons_question" href="">
-          <img src="./assets/images/icons/question.svg" alt=""
-        /></a>
-        <a class="livro-buttons_closed" href="">
-          <img src="./assets/images/icons/closed.svg" alt=""
-        /></a>
-      </div>
+      <button aria-label="Abrir Menu" id="btn-mobile" class="navbar-btnMobile" aria-haspopup="true" aria-controls="menu" aria-expanded="false">
+        <span class="navbar-hamburguer"></span>
+      </button>
+      <ul id="menu" role="menu">
+        <li class="li-biblioteca active"><a href="./index.html">Biblioteca</a></li>
+        <li class="li-livros ">
+          <a href="./add-livro.html">Adicionar Livros</a>
+        </li>
+        <li class="li-colecao">
+          <a href="./add-colecao.html">Adicionar Categoria</a>
+        </li>
+        <li class="li-alunos"><a href="">Cadastrar Alunos</a></li>
+        <div class="navbar-space">
+          <li class="li-suporte"><a href="mailto:vinicius.teixeira60@etec.sp.gov.br" target="_blank">Suporte</a></li>
+        </div>
+      </ul>
+    </nav>
+  </header>
 
-      <div class="livro-content">
-        <div class="livro-content_banner">
-          <div class="livro-content_image">
-            <img src="./assets/images/capa.jpg" alt="" />
-          </div>
-          <div class="livro-content_tag">
-            <span>Devolvido</span>
-          </div>
-        </div>
-        <div class="livro-content_text">
-          <div class="livro-content_text-categoria">
-            <h3>Teste</h3>
-            <span>Teste</span>
-          </div>
-          <h1>Livro teste</h1>
-          <h2>Grupo 007 | PI | Univesp</h2>
-          <div class="livro-content_submenu">
-            <div class="livro-content_submenu-numbers">
-              <span class="livro-content_submenu-numbers-ano">2019</span>
-              <span class="livro-content_submenu-numbers-pages"
-                ><span>200</span> páginas</span
-              >
-              <span class="livro-content_submenu-numbers-editora"
-                >(Editora)</span
-              >
-            </div>
-            <div class="livro-content_submenu-codes">
-              <span class="livro-content_submenu-codes-isbn13"
-                ><span>EAN / ISBN13:</span>9780526250509</span
-              >
-              <span class="livro-content_submenu-codes-isbn10"
-                ><span>UPC / ISBN10:</span> 052625050X</span
-              >
-            </div>
-            <div class="livro-content_submenu-data">
-              <span class="livro-content_submenu-data-add"
-                >Adicionado em: 01/04/2024</span
-              >
-              <span class="livro-content_submenu-data-att"
-                >Atualizado em: 01/04/2024</span
-              >
-            </div>
-            <span class="livro-content_submenu-copias"
-              >Cópias: <span>1</span></span
-            >
-          </div>
-          <div class="subtitulo page-livro">
-            <span class="subtitulo-text">Descrição</span>
-            <div class="line subtitulo"></div>
-          </div>
-          <div class="livro-content_text-description">
-          <p>
-            Bem-vindo ao mundo dos livros, onde as páginas são portais para
-            aventuras infinitas e onde cada palavra é uma promessa de
-            descoberta. Neste universo encantado, as estantes são como florestas
-            mágicas, repletas de segredos esperando para serem desvendados.
-          </p>
-          <p>Imagine-se agora em uma dessas bibliotecas universitárias, onde o ar
-            é impregnado com o aroma de livros antigos e o silêncio é quebrado
-            apenas pelo sussurro das páginas virando. Aqui, a curiosidade é a
-            bússola que guia os aventureiros do conhecimento através de
-            territórios desconhecidos da mente e do coração. Cada livro é uma
-            jornada, uma viagem para além do tempo e do espaço, onde os sonhos
-            se tornam realidade e as ideias ganham vida própria. Nas suas
-            páginas, encontramos não apenas informações, mas também inspiração,
-            imaginação e a promessa de novos horizontes.</p>
-        </div>
-        <div class="subtitulo">
-          <ul class="subtitulo-menu">
-            <li> <a class="subtitulo-text square" href="">Status <span class="number-square ">1</span></a> </li>
-            <li> <a class="subtitulo-text square  " href="">Cópias <span class="number-square">1</span></a></li>
-          </ul>
-        </div>
-        </div>
-      </div>
-    </main>
+  <main>
+    <div class="livro-submenu">
+      <ul>
+        <li class="livro-submenu_editor"><a href="">Editar</a></li>
+        <li class="livro-submenu_detalhes"><a href="">Detalhes</a></li>
+        <li class="livro-submenu_excluir">
+          <a class="livro-submenu_excluir-text">Excluir</a>
+        </li>
+      </ul>
+    </div>
+    <div class="livro-buttons">
+      <a class="livro-buttons_question" href="">
+        <img src="./assets/images/icons/question.svg" alt="" /></a>
+      <a class="livro-buttons_closed" href="">
+        <img src="./assets/images/icons/closed.svg" alt="" /></a>
+    </div>
 
-    <script src="./assets/js/main.js"></script>
-  </body>
+    <div id="livrosContainer"></div>
+  </main>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+
 </html>

@@ -185,6 +185,7 @@ main {
 
 .home-content {
   &_letra {
+    width: 100%;
     span {
       @include type('title-md');
       color: $secondary;

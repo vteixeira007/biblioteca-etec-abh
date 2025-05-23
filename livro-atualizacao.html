@@ -24,7 +24,7 @@
       </button>
       <ul id="menu" role="menu">
         <li class="li-biblioteca"><a href="./index.html">Biblioteca</a></li>
-        <li class="li-livros active"><a href="">Adicionar Livros</a></li>
+        <li class="li-livros active"><a href="./add-livro.html">Adicionar Livros</a></li>
         <li class="li-colecao">
           <a href="./add-colecao.html">Adicionar Categoria</a>
         </li>
@@ -47,93 +47,110 @@
           <a class="subtitulo-text default" href="./add-livro.html">Novo Cadastro</a>
         </li>
         <li>
-          <a class="subtitulo-text" href="./livro-atualizacao.html">Atualizar Cadastro</a>
+          <a class="subtitulo-text" href="">Atualizar Cadastro</a>
         </li>
       </ul>
       <div class="line subtitulo"></div>
     </div>
 
-    <form action="">
-      <div class="div_input">
-        <label class="input-titulo alunoAtualizacao">Pesquisar Livro</label>
-        <input class="home-pesquisa_input" type="search" />
+    <div class="addLivro_select">
+      <h2 class="addLivro_select-titulo">Pesquisar Livro</h2>
+      <div class="pesquisa-autocomplete">
+        <input class="select input-titulo home-pesquisa_input" type="search" id="pesquisarLivro" placeholder="Digite título ou código do livro" autocomplete="off" />
+        <div id="sugestoes-livros" class="sugestoes-container"></div>
       </div>
+      <span class="legenda">Digite para buscar por título ou código do livro.</span>
+    </div>
 
+    <form id="atualizarLivroForm" style="display: none;">
+      <input type="hidden" id="livroId" />
+      
       <div class="subtitulo">
         <span class="subtitulo-text">Item</span>
         <div class="line subtitulo"></div>
       </div>
 
+      <div class="addLivro_select">
+        <h2 class="addLivro_select-titulo">Categoria</h2>
+        <select class="select" name="categoria" id="categoria-select" type="search">
+          <!-- As opções serão preenchidas dinamicamente pelo JavaScript -->
+        </select>
+        <span class="legenda">Escolha à qual Categoria esse livro pertencerá.</span>
+      </div>
+
       <div class="div_input">
         <label class="input-titulo">Título</label>
-        <input class="input" type="text" />
+        <input class="input" type="text" id="tituloLivro" />
       </div>
 
       <div class="div_input">
         <label class="input-titulo">Autores</label>
-        <input class="input" type="text" />
+        <input class="input" type="text" id="autoresLivro" />
         <span class="legenda">Separar os autores com uma vírgula. <br />
           Os apelidos com espaços devem ser colocados entre aspas. (ex. Piers
           Anthony, Walter "De la Mare").</span>
       </div>
 
       <div class="div_input">
-        <label class="input-titulo">Descrição</label>
-        <textarea class="textarea" cols="30" rows="10"></textarea>
+        <label class="input-titulo">Assunto</label>
+        <input class="input" type="text" id="assuntoLivro" />
       </div>
 
       <div class="div_input">
-        <label class="input-titulo">Publisher</label>
-        <input class="input" type="text" />
-      </div>
-
-      <h3 class="input-titulo">Data de Publicação</h3>
-
-      <div class="div_input-row">
-        <div class="div_input split three">
-          <div class="div_input">
-            <label class="input-titulo">Dia</label>
-            <input class="input" type="text" placeholder="DD" />
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">Mês</label>
-            <input class="input" type="text" placeholder="MM" />
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">Ano</label>
-            <input class="input" type="text" placeholder="AAAA" />
-          </div>
-        </div>
+        <label class="input-titulo">Descrição</label>
+        <textarea class="textarea" id="descricaoLivro" cols="30" rows="10"></textarea>
       </div>
 
       <div class="div_input-row">
         <div class="div_input split two">
           <div class="div_input">
-            <label class="input-titulo">ISBN 13</label>
-            <input class="input" type="text" />
-            <span class="legenda">Apenas números. Máximo de 13 digítos.</span>
-          </div>
-          <div class="div_input">
-            <label class="input-titulo">ISBN 10</label>
-            <input class="input" type="text" />
-            <span class="legenda">Máximo de 12 caracteres.</span>
+            <label class="input-titulo">Código</label>
+            <input class="input" type="text" id="codigoLivro" />
+            <span class="legenda">Máximo de 13 digítos.</span>
           </div>
         </div>
       </div>
 
       <div class="div_input split half space">
-        <label class="input-titulo">Páginas</label>
-        <input class="input" type="number" />
+        <label class="input-titulo">Quantidade</label>
+        <input class="input" type="number" id="quantidadeLivro" />
         <span class="legenda">Apenas números.</span>
       </div>
 
+      <div class="div_input split half space">
+        <label class="input-titulo">Status</label>
+        <select class="select" id="statusLivro">
+          <option value="DISPONIVEL">Disponível</option>
+          <option value="EMPRESTADO">Emprestado</option>
+          <option value="RESERVADO">Reservado</option>
+          <option value="INDISPONIVEL">Indisponível</option>
+        </select>
+      </div>
+
       <div class="addLivro_form-button">
-        <button class="button" type="submit">Atualizar Livro</button>
+        <button class="button" type="submit" id="atualizarLivro">Atualizar Livro</button>
       </div>
     </form>
+
+    <div class="subtitulo" style="margin-top: 44px;">
+      <ul class="subtitulo-menu">
+        <li><a class="subtitulo-text">Livros Disponíveis</a></li>
+      </ul>
+      <div class="line subtitulo"></div>
+    </div>
+
+    <div class="div_input">
+      <div class="addLivro_form-button">
+        <button type="button" id="btnListarLivros" class="button">
+          Listar Todos os Livros
+        </button>
+      </div>
+      <div id="listaLivros" class="lista-table"></div>
+    </div>
   </main>
 
   <script src="./assets/js/main.js"></script>
+  <script src="./dev/js/att-livro.js"></script>
 </body>
 
 </html>
