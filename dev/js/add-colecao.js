@@ -43,7 +43,7 @@ export default function addCategoria() {
       if (button) { button.textContent = 'Carregando...'; button.disabled = true; }
 
       try {
-        const response = await fetch('https://biblioteca-etec-abh-2.onrender.com//categoria', {
+        const response = await fetch('https://biblioteca-etec-abh-2.onrender.com/categoria', {
           method: 'GET',
           headers: { 'Authorization': `Bearer ${currentToken}` }
         });
@@ -99,7 +99,7 @@ export default function addCategoria() {
       if (!confirm('Tem certeza que deseja deletar esta categoria?')) return;
 
       try {
-        const response = await fetch(`https://biblioteca-etec-abh-2.onrender.com//categoria/${idCategoria}`, {
+        const response = await fetch(`https://biblioteca-etec-abh-2.onrender.com/categoria/${idCategoria}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${currentToken}` }
         });
@@ -138,7 +138,7 @@ export default function addCategoria() {
         const dadosCategoria = { nome: document.getElementById('nomeCategoria').value.trim() };
 
         try {
-          const response = await fetch('https://biblioteca-etec-abh-2.onrender.com//categoria', {
+          const response = await fetch('https://biblioteca-etec-abh-2.onrender.com/categoria', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

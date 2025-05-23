@@ -17,7 +17,7 @@ export default function login() {
       if (submitButton) submitButton.disabled = true;
 
       try {
-        const response = await fetch("https://biblioteca-etec-abh-2.onrender.com//auth/login", {
+        const response = await fetch("https://biblioteca-etec-abh-2.onrender.com/auth/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ login: loginInput, password: passwordInput })

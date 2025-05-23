@@ -25,52 +25,112 @@
             </div>
 
             <div class="input-group password-group">
-              <input type="password" placeholder="Confirme a senha" />
+              <input type="password" id="register-confirm-password" placeholder="Confirme a senha" required />
             </div>
 
             <button type="submit" class="login-button">Cadastrar</button>
 
             <p class="register">
               Já possui uma conta?
-              <a href="#login-section" class="register-link">Faça Login</a>
-            </p>
+              <a href="login.html" class="register-link">Faça Login</a> 
+              </p>
           </form>
         </div>
       </div>
     </div>
   </main>
-  <script src="./assets/js/cadastro.js"></script>
-  <script>
+
+<script>
     const registerForm = document.getElementById("register-form");
-    
-    registerForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
 
-      const login = document.getElementById("register-login").value;
-      const password = document.getElementById("register-password").value;
+    if (registerForm) {
+      registerForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-      try {
-        const response = await fetch("http://localhost:8090/auth/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            login: login,
-            password: password,
-            userRole: "USER"
-          })
-        });
+        const loginInput = document.getElementById("register-login");
+        const passwordInput = document.getElementById("register-password");
+        const confirmPasswordInput = document.getElementById("register-confirm-password");
 
-        const data = await response.text();
-        alert("Cadastro realizado com sucesso!");
-        console.log("Cadastro:", data);
-      } catch (error) {
-        console.error("Erro no cadastro:", error);
-        alert("Erro ao cadastrar.");
-      }
-    });
+        if (!loginInput || !passwordInput || !confirmPasswordInput) {
+            alert("Erro no formulário. Tente recarregar a página.");
+            return;
+        }
+
+        const login = loginInput.value.trim();
+        const password = passwordInput.value.trim();
+        const confirmPassword = confirmPasswordInput.value.trim();
+
+        if (!login || !password || !confirmPassword) {
+            alert("Por favor, preencha todos os campos.");
+            return;
+        }
+        if (password !== confirmPassword) {
+          alert("As senhas não conferem!");
+          return;
+        }
+
+        const submitButton = registerForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton ? submitButton.textContent : "Cadastrar";
+        if (submitButton) {
+          submitButton.disabled = true;
+          submitButton.textContent = "Cadastrando...";
+        }
+
+        try {
+          const response = await fetch("https://biblioteca-etec-abh-2.onrender.com/auth/register", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              login: login,
+              password: password,
+              userRole: "USER" 
+            })
+          });
+
+          if (response.ok) {
+            let data;
+            const contentType = response.headers.get("content-type");
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+                data = await response.json(); 
+            } else {
+                data = await response.text(); 
+            }
+            
+            alert("Cadastro realizado com sucesso!");
+            console.log("Cadastro bem-sucedido:", data);
+            registerForm.reset(); 
+            // window.location.href = 'login.html'; 
+          } else {
+            const errorBodyText = await response.text();
+            let interpretableErrorMessage = errorBodyText; 
+
+            try {
+                const jsonError = JSON.parse(errorBodyText);
+                interpretableErrorMessage = jsonError.message || jsonError.error || JSON.stringify(jsonError);
+            } catch (e_json) {
+                console.warn("A mensagem de erro do servidor não é um JSON válido ou está vazia. Usando texto original:", errorBodyText);
+            }
+
+            const finalErrorMessage = `Erro ${response.status}: ${interpretableErrorMessage || response.statusText}`;
+            alert(`Erro ao cadastrar: ${finalErrorMessage}`);
+            console.error("Erro no cadastro - Detalhes:", { status: response.status, body: interpretableErrorMessage });
+          }
+
+        } catch (error) { 
+          console.error("Erro crítico na requisição de cadastro (ex: rede):", error);
+          alert("Erro ao tentar cadastrar. Verifique sua conexão ou tente mais tarde.");
+        } finally {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+          }
+        }
+      });
+    } else {
+        console.error("Formulário de registro #register-form não encontrado!");
+    }
   </script>
 </body>
-
 </html>

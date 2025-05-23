@@ -21,7 +21,7 @@ export default function importCadastroLivros() {
       if (listaDiv) listaDiv.innerHTML = 'Carregando livros...';
 
       try {
-        const response = await fetch('https://biblioteca-etec-abh-2.onrender.com//categoria', {
+        const response = await fetch('https://biblioteca-etec-abh-2.onrender.com/categoria', {
           headers: { Authorization: `Bearer ${token}` }
         });
 
@@ -96,7 +96,7 @@ export default function importCadastroLivros() {
       if (!confirm('Tem certeza que deseja deletar este livro?')) return;
 
       try {
-        const response = await fetch(`https://biblioteca-etec-abh-2.onrender.com//livro/${id}`, {
+        const response = await fetch(`https://biblioteca-etec-abh-2.onrender.com/livro/${id}`, {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${token}` }
         });
@@ -125,7 +125,7 @@ export default function importCadastroLivros() {
       const livroForm = document.getElementById('livroForm');
 
       if (categoriaSelect) {
-        fetch('https://biblioteca-etec-abh-2.onrender.com//categoria', {
+        fetch('https://biblioteca-etec-abh-2.onrender.com/categoria', {
           headers: { Authorization: `Bearer ${token}` }
         })
           .then(response => {
@@ -189,7 +189,7 @@ export default function importCadastroLivros() {
             if (livroData.codigo.length > 13) throw new Error('O código do livro não pode ter mais que 13 caracteres');
             if (isNaN(livroData.quantidade) || livroData.quantidade < 1) throw new Error('A quantidade deve ser um número maior que zero');
 
-            const response = await fetch('https://biblioteca-etec-abh-2.onrender.com//livro', {
+            const response = await fetch('https://biblioteca-etec-abh-2.onrender.com/livro', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',

@@ -1,7 +1,7 @@
 
 export default function importAtualizacaoLivros() {
   return new Promise((resolve) => {
-    const API_BASE_URL = 'https://biblioteca-etec-abh-2.onrender.com/';
+    const API_BASE_URL = 'https://biblioteca-etec-abh-2.onrender.com';
 
     let todosLivros = [];
 
