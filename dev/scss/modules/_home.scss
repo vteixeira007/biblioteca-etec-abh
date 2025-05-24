@@ -19,28 +19,11 @@ main {
   }
 }
 
-.home-menu_icon {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 25px;
-  margin-bottom: 1rem;
-  @include type('title-xs');
-  color: $gray-c9;
-
-  &::before {
-    content: ' ';
-    display: block;
-    background-image: url('data:image/svg+xml,<svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24.6195 23.585L18.4564 17.1755C20.0409 15.2918 20.9091 12.9218 20.9091 10.4545C20.9091 4.69 16.2191 0 10.4545 0C4.69 0 0 4.69 0 10.4545C0 16.2191 4.69 20.9091 10.4545 20.9091C12.6186 20.9091 14.6809 20.2564 16.4441 19.0173L22.6536 25.4755C22.9132 25.745 23.2623 25.8936 23.6364 25.8936C23.9905 25.8936 24.3264 25.7582 24.5814 25.5127C25.1236 24.9918 25.1405 24.1273 24.6195 23.585ZM10.4545 2.72727C14.7155 2.72727 18.1818 6.19364 18.1818 10.4545C18.1818 14.7155 14.7155 18.1818 10.4545 18.1818C6.19364 18.1818 2.72727 14.7155 2.72727 10.4545C2.72727 6.19364 6.19364 2.72727 10.4545 2.72727Z" fill="%23261A00"/></svg>');
-    width: 25px;
-    height: 26px;
-  }
-}
-
 .home-pesquisa {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  position: relative;
   gap: 15px;
 
   @include d(m) {
@@ -48,24 +31,58 @@ main {
     align-items: flex-start;
   }
 
+  .home-menu_icon {
+    display: flex;
+    position: absolute;
+    inset: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    @include type('title-xs');
+    width: 45px;
+    padding-top: 2px;
+
+     @include d(m) {
+      top: 50%;
+      transform: translateY(-70%);
+      padding-top: 0;
+     }
+
+    &::before {
+      content: ' ';
+      display: block;
+      background-image: url('data:image/svg+xml,<svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M24.6195 23.585L18.4564 17.1755C20.0409 15.2918 20.9091 12.9218 20.9091 10.4545C20.9091 4.69 16.2191 0 10.4545 0C4.69 0 0 4.69 0 10.4545C0 16.2191 4.69 20.9091 10.4545 20.9091C12.6186 20.9091 14.6809 20.2564 16.4441 19.0173L22.6536 25.4755C22.9132 25.745 23.2623 25.8936 23.6364 25.8936C23.9905 25.8936 24.3264 25.7582 24.5814 25.5127C25.1236 24.9918 25.1405 24.1273 24.6195 23.585ZM10.4545 2.72727C14.7155 2.72727 18.1818 6.19364 18.1818 10.4545C18.1818 14.7155 14.7155 18.1818 10.4545 18.1818C6.19364 18.1818 2.72727 14.7155 2.72727 10.4545C2.72727 6.19364 6.19364 2.72727 10.4545 2.72727Z" fill="%23261A00"/></svg>');
+      width: 25px;
+      height: 26px;
+      margin-left: 20px;
+    }
+  }
+
   &_input {
-    background: $gray-c3;
     width: 60%;
     height: 64px;
     @include type('title-md');
     font-size: 26px;
     padding: 0 1.25rem;
-    border: none;
+    padding-left: 60px;
+    border: 1px solid $gray-c2;
     border-radius: 5px;
+    transition: all 0.3s ease;
+
+    &[type='search']::-webkit-search-cancel-button {
+      -webkit-appearance: none;
+      display: none;
+    }
 
     &:focus {
       outline: none;
       border: 1px solid $gray-c4;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      background: $gray-c1;
     }
 
     @include d(m) {
       padding: 1rem;
+      padding-left: 60px;
       width: 100%;
     }
   }
@@ -84,7 +101,7 @@ main {
     display: flex;
 
     @include d(m) {
-    justify-content: end;
+      justify-content: end;
     }
   }
 
@@ -202,6 +219,10 @@ main {
     @include d(m) {
       justify-content: space-around;
     }
+
+    &:last-child {
+      margin-bottom: 30px;
+    }
   }
 
   &_livro {
@@ -212,11 +233,11 @@ main {
     padding: 0.5rem 2rem 0 2rem;
     margin-top: 32px;
     transition: all 0.3s ease-in-out;
+    width: 200px;
 
     &:hover {
-      background: rgba(255, 226, 167, 0.2);
+      background: transparent;
       transform: translateY(-4px);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     }
 
     @include d(m) {
@@ -228,12 +249,15 @@ main {
       }
     }
 
-
     &-titulo {
       @include type('text-regular');
       color: $gray-c9;
       font-weight: 600;
       margin-bottom: 6px;
+      text-overflow: ellipsis;
+      max-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     &-descricao {
@@ -291,7 +315,7 @@ main {
 }
 
 .home-content_capa:hover .overlay {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.15);
 }
 
 .home-content_capa:hover .overlay img {
